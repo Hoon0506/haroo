@@ -4,14 +4,29 @@
 
 <mapper namespace="com.haroo.mapper.BoardMapper">
 	<cache />
-	
+
 	<insert id="insertBoard" parameterType="BoardVO">
 		insert into board(
-			bd_no, bd_title, bd_contents, bd_writer, bd_regdate, bd_hitcount, em_no
-		) values(
-			bd_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0, ${emNo}
+		bd_no, bd_title, bd_contents, bd_writer, bd_regdate, bd_hitcount, em_no
+		)
+		values(
+		bd_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0, ${emNo}
 		)
 	</insert>
-	
 
+	<select id="listBoard" resultType="BoardVO">
+		select bd_no as bdNo, bd_title as title,
+			bd_contents as contents, bd_writer as writer, bd_regdate as regdate, 
+			bd_hitcount as hitcount, em_no as emNo
+		from board
+
+		order by bd_no desc
+	</select>
+	
+	<select id="detailBoard" parameterType="int" resultType="BoardVO">
+		select bd_no as bdNo, bd_title as title,
+			bd_contents as contents, bd_writer as writer, bd_regdate as regdate, 
+			bd_hitcount as hitcount, em_no as emNo
+			from board where bd_no=#{bdNo}
+	</select>
 </mapper>

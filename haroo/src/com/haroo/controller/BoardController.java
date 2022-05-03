@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
+import com.haroo.action.board.DetailAction;
 import com.haroo.action.board.InsertAction;
 import com.haroo.action.board.InsertFormAction;
+import com.haroo.action.board.ListAction;
 
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
@@ -43,6 +45,20 @@ public class BoardController extends HttpServlet {
 
 		} else if (command.equals("insertAction.do")) {
 			action = new InsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("listAction.do")) {
+			action = new ListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("detailAction.do")) {
+			action = new DetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

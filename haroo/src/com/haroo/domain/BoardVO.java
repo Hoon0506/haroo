@@ -79,6 +79,8 @@ public class BoardVO implements Serializable {
 		this.hitcount = hitcount;
 		this.emNo = emNo;
 	}
+
+	
 	
 	
 	
