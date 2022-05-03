@@ -19,8 +19,9 @@ public class BoardService {
 		
 		BoardVO board = new BoardVO();
 		board.setTitle(request.getParameter("title"));
-		board.setWriter(request.getParameter("writer"));
+		board.setWriter("±è¼­À±");
 		board.setContents(request.getParameter("contents"));
+		board.setEmNo(19362300);
 		return dao.insertBoard(board);
 	}
 }

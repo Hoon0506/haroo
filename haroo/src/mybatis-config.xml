@@ -5,7 +5,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="kosta.model.Board" alias="Board"/>
+		<typeAlias type="com.haroo.domain.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
 	<environments default="development">

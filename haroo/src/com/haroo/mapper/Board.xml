@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kosta.mapper.BoardMapper">
+<mapper namespace="com.haroo.mapper.BoardMapper">
 	<cache />
 	
-	<insert id="insertBoard" parameterType="Board">
+	<insert id="insertBoard" parameterType="BoardVO">
 		insert into board(
 			bd_no, bd_title, bd_contents, bd_writer, bd_regdate, bd_hitcount, em_no
 		) values(
-			bd_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0, #{emno}
+			bd_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0, ${emNo}
 		)
 	</insert>
 	
