@@ -3,22 +3,24 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class ExpenseListVO implements Serializable {
-  private int elNo;
-  private int apNo;
-  private String elItem;
-  private int elQuantity;
-  private int elPrice;
-  private String elTotal;
+  private int elNo; // 품의목록번호
+  private int apNo; // 결재번호
+  private String elItem; // 품목
+  private int elQuantity; // 수량
+  private int elPrice; // 가격
+  private String elCost; // 소계
+  private String elTotal; // 총금액
   
   public ExpenseListVO() {}
 
-  public ExpenseListVO(int elNo, int apNo, String elItem, int elQuantity, int elPrice, String elTotal) {
+  public ExpenseListVO(int elNo, int apNo, String elItem, int elQuantity, int elPrice, String elCost, String elTotal) {
     super();
     this.elNo = elNo;
     this.apNo = apNo;
     this.elItem = elItem;
     this.elQuantity = elQuantity;
     this.elPrice = elPrice;
+    this.elCost = elCost;
     this.elTotal = elTotal;
   }
 
@@ -62,6 +64,14 @@ public class ExpenseListVO implements Serializable {
     this.elPrice = elPrice;
   }
 
+  public String getElCost() {
+    return elCost;
+  }
+
+  public void setElCost(String elCost) {
+    this.elCost = elCost;
+  }
+
   public String getElTotal() {
     return elTotal;
   }
@@ -69,6 +79,6 @@ public class ExpenseListVO implements Serializable {
   public void setElTotal(String elTotal) {
     this.elTotal = elTotal;
   }
-  
+
   
 }

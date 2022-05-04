@@ -15,7 +15,7 @@
 <body>
   <div class="ap-container">
     <h3 class="ap-form-title">품의서</h3>
-    <form class="ap-form" action="report" method="post">
+    <form class="ap-form" action="" method="post">
       <input type="hidden" name="foNo" value="2" />
       <div class="ap-form-container">
         <div class="ap-form-input">
@@ -35,23 +35,23 @@
               <th>단가</th>
               <th>소계</th>
             </tr>
-            <tr class="ap-el">
+            <tr class="ap-el ap-toggle ap-hidden">
               <td class="item"><input class="ap-form-text-3" type="text" name="elItem1"/></td>
               <td class="ap-quantity"><input class="ap-form-text-3" type="text" name="elQuantity1" placeholder="숫자만"/></td>
               <td class="ap-price"><input class="ap-form-text-3" type="text" name="elPrice1" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" readOnly/></td>
+              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost1" readOnly/></td>
             </tr>
-            <tr class="ap-el">
+            <tr class="ap-el ap-toggle ap-hidden">
               <td class="item"><input class="ap-form-text-3" type="text" name="elItem2"/></td>
               <td class="ap-quantity"><input class="ap-form-text-3" type="text" name="elQuantity2" placeholder="숫자만"/></td>
               <td class="ap-price"><input class="ap-form-text-3" type="text" name="elPrice2" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" readOnly/></td>
+              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost2" readOnly/></td>
             </tr>
-            <tr class="ap-el">
+            <tr class="ap-el ap-toggle ap-hidden">
               <td class="item"><input class="ap-form-text-3" type="text" name="elItem3"/></td>
               <td class="ap-quantity"><input class="ap-form-text-3" type="text" name="elQuantity3" placeholder="숫자만"/></td>
               <td class="ap-price"><input class="ap-form-text-3" type="text" name="elPrice3" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" readOnly/></td>
+              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost3" readOnly/></td>
             </tr>
             <tr>
               <td></td>
@@ -83,6 +83,7 @@
       </div>
     </form>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/haroo/js/approval.js"></script>
 </body>
 </html>

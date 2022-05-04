@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+  
+	<typeAliases>
+		<typeAlias type="com.haroo.domain.ApprovalVO" alias="ApprovalVO"/>
+		<typeAlias type="com.haroo.domain.ApprovalLineVO" alias="ApprovalLineVO"/>
+		<typeAlias type="com.haroo.domain.LeaveVO" alias="LeaveVO"/>
+		<typeAlias type="com.haroo.domain.ExpenseListVO" alias="ExpenseListVO"/>
+		<typeAlias type="com.haroo.domain.ApLineEmpVO" alias="ApLineEmpVO"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="JNDI">
+			  <property name="data_source" value="java:comp/env/jdbc/oracle"/>
+			</dataSource>
+		</environment>		
+	</environments>
+	
+	<mappers>
+		<mapper resource="com/haroo/mapper/Approval.xml"/>
+	</mappers>
+	
+</configuration>

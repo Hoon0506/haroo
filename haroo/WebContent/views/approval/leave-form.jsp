@@ -15,7 +15,7 @@
 <body>
   <div class="ap-container">
     <h3 class="ap-form-title">휴가신청서</h3>
-    <form class="ap-form" action="report" method="post">
+    <form class="ap-form" action="" method="post">
       <input type="hidden" name="foNo" value="3" />
       <input type="hidden" name="daNo" value="${daNo }" />
       <div class="ap-form-container">
@@ -38,11 +38,11 @@
 
           <div class="ap-form-input">
             <label class="ap-form-label">휴가시작일</label>
-            <input class="ap-form-text-2" type="text" name="leStart" placeholder="예)2022/11/01"/>
+            <input class="ap-form-text-2" type="text" name="leStart" placeholder="예)2022-11-01"/>
           </div>
           <div class="ap-form-input">
             <label class="ap-form-label">휴가종료일</label>
-            <input class="ap-form-text-2" type="text" name="leEnd" placeholder="예)2022/11/01" />
+            <input class="ap-form-text-2" type="text" name="leEnd" placeholder="예)2022-11-01" />
           </div>
           <div class="ap-form-input">
           <label class="ap-form-label">내용</label>
@@ -65,6 +65,7 @@
       </div>
     </form>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/haroo/js/approval.js"></script>
 </body>
 </html>

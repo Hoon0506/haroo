@@ -3,11 +3,10 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class ApLineEmpVO implements Serializable {
-  private int emNo;
-  private String emName;
-  private String poName;
-  private String deName;
-  private int deNo;
+  private int emNo; // 사원번호
+  private String emName; // 사원이름 
+  private String poName; // 직책이름
+  private String deName; // 부서이름
   
   public ApLineEmpVO() {}
 
@@ -17,7 +16,6 @@ public class ApLineEmpVO implements Serializable {
     this.emName = emName;
     this.poName = poName;
     this.deName = deName;
-    this.deNo = deNo;
   }
 
   public int getEmNo() {
@@ -52,14 +50,5 @@ public class ApLineEmpVO implements Serializable {
     this.deName = deName;
   }
 
-  public int getDeNo() {
-    return deNo;
-  }
-
-  public void setDeNo(int deNo) {
-    this.deNo = deNo;
-  }
-  
-  
   
 }

@@ -17,7 +17,9 @@ import com.haroo.action.approval.FormListAction;
 import com.haroo.action.approval.LineAction;
 import com.haroo.action.approval.MainAction;
 import com.haroo.action.approval.PostReportAction;
+import com.haroo.action.approval.PostTakebackAction;
 import com.haroo.action.approval.ProcessAction;
+import com.haroo.action.approval.ProcessListAction;
 
 @WebServlet("/ap/*")
 public class ApprovalController extends HttpServlet {
@@ -60,7 +62,7 @@ public class ApprovalController extends HttpServlet {
         } catch (Exception e) {
           e.printStackTrace();
         }
-      } else if(id.equals("line")) {
+      } else if(id.equals("line")) { // 결재선 선택창
         action = new LineAction();
         try {
           forward = action.execute(request, response);
@@ -76,15 +78,44 @@ public class ApprovalController extends HttpServlet {
           e.printStackTrace();
         }
       } 
-    } else if(command.contains("process")) {
+    } else if(command.contains("process")) { // 상신-진행문서
       if(id.equals("process")) {
+        action = new ProcessListAction();
+        request.setAttribute("status", 0); // process는 진행문서기 때문에 진행 status 0 저장해서 넘겨줌
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
         action = new ProcessAction();
+        request.setAttribute("id", id);
+        
         try {
           forward = action.execute(request, response);
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
+    } else if(command.contains("takeback")) { // 상신취소문서
+      if(id.equals("takeback")) {
+        action = new ProcessListAction();
+        request.setAttribute("status", -1); // process는 진행문서기 때문에 진행 status 0 저장해서 넘겨줌
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
+        action = new ProcessAction();
+        request.setAttribute("id", id);
+        
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }  
     }
     
     if(forward != null) {
@@ -107,12 +138,23 @@ public class ApprovalController extends HttpServlet {
     Action action = null;
     ActionForward forward = null;
     
-    if(command.equals("form/report")) {
-      action = new PostReportAction();
-      try {
-        forward = action.execute(request, response);
-      } catch (Exception e) {
-        e.printStackTrace();
+    if(command.contains("form")) { // 양식
+      if(id.matches("^[0-9]+$")) { // 상신
+        action = new PostReportAction();
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    } else if(command.contains("process")) { // 진행중문서
+      if(id.matches("^[0-9]+$")) { // 상신취소
+        action = new PostTakebackAction();
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     }
     

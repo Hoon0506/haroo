@@ -3,16 +3,17 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class LeaveVO implements Serializable {
-  private int apNo;
-  private int foNo;
-  private int emNo;
-  private String leTitle;
-  private int leKind;
-  private String leStart;
-  private String leEnd;
-  private String leDate;
-  private String leStatus;
-  private int daNo;
+  private int apNo; // 결재번호
+  private int foNo; // 양식번호
+  private int emNo; // 사원번호
+  private String leTitle; // 제목
+  private int leKind; // 휴가종류
+  private String leStart; // 휴가시작일
+  private String leEnd; // 휴가종료일
+  private String leDate; // 신청날짜
+  private String leStatus; // 승인여부
+  private int daNo; // 휴가번호
+  private int leDays; // 휴가일수
   
   public LeaveVO() {}
 
@@ -110,6 +111,15 @@ public class LeaveVO implements Serializable {
   public void setDaNo(int daNo) {
     this.daNo = daNo;
   }
+
+  public int getLeDays() {
+    return leDays;
+  }
+
+  public void setLeDays(int leDays) {
+    this.leDays = leDays;
+  }
+  
   
   
 }

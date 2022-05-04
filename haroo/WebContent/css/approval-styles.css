@@ -78,7 +78,7 @@
 	margin-left: 50px;
 }
 
-a.ap-alist-name, a.ap-selected-name {
+a.ap-alist-name, a.ap-selected-name, a.ap-list-title {
 	text-decoration: none;
 	color: gray;
 }

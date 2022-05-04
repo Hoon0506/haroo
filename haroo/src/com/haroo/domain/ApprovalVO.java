@@ -1,6 +1,7 @@
 package com.haroo.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ApprovalVO implements Serializable {
   private int apNo; // 전자결재번호
@@ -11,11 +12,16 @@ public class ApprovalVO implements Serializable {
   private String apDate; // 상신날짜
   private int apPublic; // 공개여부
   private int apStatus; // 결재상태
+  private String foKind; // 양식종류
+  private String emName; // 기안자 이름
+  private LeaveVO leave; // 휴가신청
+  private List<ExpenseListVO> expense; // 품의목록
+  private List<ApprovalLineVO> apLine; // 결재선 목록
   
   public ApprovalVO() {}
 
   public ApprovalVO(int apNo, int foNo, int emNo, String apTitle, String apContent, String apDate, int apPublic,
-      int apStatus) {
+      int apStatus, String foKind, String emName) {
     super();
     this.apNo = apNo;
     this.foNo = foNo;
@@ -25,6 +31,8 @@ public class ApprovalVO implements Serializable {
     this.apDate = apDate;
     this.apPublic = apPublic;
     this.apStatus = apStatus;
+    this.foKind = foKind;
+    this.emName = emName;
   }
 
   public int getApNo() {
@@ -90,5 +98,47 @@ public class ApprovalVO implements Serializable {
   public void setApStatus(int apStatus) {
     this.apStatus = apStatus;
   }
+
+  public String getFoKind() {
+    return foKind;
+  }
+
+  public void setFoKind(String foKind) {
+    this.foKind = foKind;
+  }
+
+  public String getEmName() {
+    return emName;
+  }
+
+  public void setEmName(String emName) {
+    this.emName = emName;
+  }
+
+  public LeaveVO getLeave() {
+    return leave;
+  }
+
+  public void setLeave(LeaveVO leave) {
+    this.leave = leave;
+  }
+
+  public List<ExpenseListVO> getExpense() {
+    return expense;
+  }
+
+  public void setExpense(List<ExpenseListVO> expense) {
+    this.expense = expense;
+  }
+
+  public List<ApprovalLineVO> getApLine() {
+    return apLine;
+  }
+
+  public void setApLine(List<ApprovalLineVO> apLine) {
+    this.apLine = apLine;
+  }
+  
+  
   
 }

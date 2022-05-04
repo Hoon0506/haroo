@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
-import com.haroo.domain.ApLineEmpVO;
+import com.haroo.domain.ApprovalVO;
 import com.haroo.service.ApprovalService;
 
-public class LineAction implements Action {
+public class ProcessListAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
@@ -18,11 +18,11 @@ public class LineAction implements Action {
     ActionForward forward = new ActionForward();
     ApprovalService service = ApprovalService.getInstance();
     
-    List<ApLineEmpVO> list = service.listLineEmployeeService(request);
+    List<ApprovalVO> list = service.listApprovalService(request);
     
     request.setAttribute("list", list);
-    
-    forward.setPath("/views/approval/employee-list.jsp");
+
+    forward.setPath("/views/approval/approval-list.jsp");
     forward.setRedirect(false);
     
     return forward;

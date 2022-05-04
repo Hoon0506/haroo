@@ -19,14 +19,14 @@
 	 <!-- 휴가신청서 저장 -->
   <insert id="insertLeave" parameterType="LeaveVO" >
     INSERT INTO leave
-      VALUES(#{apNo}, #{foNo}, #{emNo}, #{leTitle}, #{leKind}, TO_DATE(#{leStart}, 'YYYY/MM/DD'), 
-      TO_DATE(#{leEnd}, 'YYYY/MM/DD'), SYSDATE, 0, #{daNo})
+      VALUES(#{apNo}, #{foNo}, #{emNo}, #{leTitle}, #{leKind}, TO_DATE(#{leStart}, 'YYYY-MM-DD'), 
+      TO_DATE(#{leEnd}, 'YYYY-MM-DD'), SYSDATE, 0, #{daNo})
   </insert>
   
   <!-- 품의목록 저장 -->
   <insert id="insertExpenseList" parameterType="ExpenseListVO">
     INSERT INTO expense_list
-      VALUES(#{elNo}, #{apNo}, #{elItem}, #{elQuantity}, #{elPrice}, #{elTotal})
+      VALUES(#{elNo}, #{apNo}, #{elItem}, #{elQuantity}, #{elPrice}, #{elCost}, #{elTotal})
   </insert>
 	
 	<!-- 결재선 저장 -->
@@ -35,17 +35,83 @@
 	    VALUES(#{apNo}, #{alNo}, #{alOrder}, 0, null, null)
 	</insert>
 	
-	<!-- 상신-진행 문서 리스트 불러오기 -->
-	<select id="listProcess" parameterType="int" resultType="ApprovalVO">
-	  SELECT * FROM approval WHERE em_no = #{emNo} AND ap_status = 0
+	<!-- 상신 문서 리스트 불러오기  TO_CHAR(ap_date, 'YYYY/MM/DD') AS ap_date,-->
+	<select id="listApproval" parameterType="int" resultType="ApprovalVO">
+	  SELECT ap_no, ap_title, ap_date, ap_public, ap_status, fo_kind, em_name
+      FROM approval ap JOIN approval_form af
+      ON ap.fo_no = af.fo_no
+      JOIN employee e
+      ON ap.em_no = e.em_no
+      WHERE ap.em_no=#{emNo}
+      <choose>
+        <when test="apStatus == 0">
+          AND ap_status = 0
+        </when>
+        <when test="apStatus gt 0">
+          AND ap_status <![CDATA[>]]> 0
+        </when>
+        <otherwise>
+          AND ap_status <![CDATA[<]]> 0
+        </otherwise>
+      </choose>
+      ORDER BY ap_date DESC
 	</select>
 	
-	<!-- 결재선 사원 리스트 불러오기 -->
+	<!-- 1 문서 내용 불러오기 -->
+	<select id="detailApproval" parameterType="int" resultType="ApprovalVO">
+	  SELECT ap_no, ap.fo_no, ap_title, ap_content, ap_date, ap_public, ap_status, fo_kind, em_name
+      FROM approval ap JOIN approval_form af
+      ON ap.fo_no = af.fo_no
+      JOIN employee e
+      ON ap.em_no = e.em_no
+      WHERE ap_no = #{apNo}
+	</select>
+	
+	<!-- 2 해당 문서 결재선 불러오기 -->
+	<select id="detailApLine" parameterType="int" resultType="ApprovalLineVO">
+	  SELECT ap_no, em_no AS al_no, al_order, al_status, al_date, al_comment, em_name, po_name, de_name 
+	    FROM approval_line al JOIN employee e
+	      ON al.al_no = e.em_no
+	      JOIN position p
+        ON e.po_no = p.po_no JOIN department d 
+        ON e.de_no = d.de_no
+        WHERE ap_no = #{apNo}
+        order by al_order
+	</select>
+	
+	<!-- 3 해당 문서 휴가내역 불러오기 -->
+	<select id="detailLeave" parameterType="int" resultType="LeaveVO">
+	  SELECT ap_no, fo_no, em_no, le_title, le_kind, TO_CHAR(le_start, 'YYYY/MM/DD') AS le_start, 
+	    TO_CHAR(le_end, 'YYYY/MM/DD') AS le_end, da_no, 
+	    (TO_DATE(le_end,'YYYY-MM-DD') - TO_DATE(le_start,'YYYY-MM-DD')+1) AS le_days
+	    FROM leave WHERE ap_no = #{apNo}
+	</select>
+	
+	<!-- 4 해당 문서 품의목록 불러오기 -->
+	<select id="detailExpenseList" parameterType="int" resultType="ExpenseListVO">
+	  SELECT * FROM expense_list WHERE ap_no = #{apNp} ORDER BY el_no
+	</select>
+	
+	<!-- 상신취소 -->
+	<update id="takebackApproval" parameterType="int">
+	  UPDATE approval SET ap_status = -1, ap_public = 1 WHERE ap_no = #{apNo}
+	</update>
+	
+	<!-- 결재하기 -->
+	<update id="approvalReport" parameterType="ApprovalLineVO">
+	  UPDATE approval_line 
+	    SET al_status = #{al_status}, al_date = sysdate, al_comment = #{alComment}
+	    WHERE ap_no = #{ap_no} AND al_no = #{alNo}
+	</update>
+	
+	<!-- 결재선 사원 선택 리스트 불러오기 -->
 	<select id="listLineEmployee" resultType="ApLineEmpVO">
 	  SELECT em_no, em_name, po_name, de_name, e.po_no FROM employee e JOIN position p
 	  ON e.po_no = p.po_no JOIN department d 
 	  ON e.de_no = d.de_no
 	  order by de_name, po_no
 	</select>
+	
+	
 
 </mapper>

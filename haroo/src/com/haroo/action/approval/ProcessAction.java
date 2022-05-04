@@ -1,7 +1,5 @@
 package com.haroo.action.approval;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,13 +14,17 @@ public class ProcessAction implements Action {
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
       throws Exception {
     ActionForward forward = new ActionForward();
+    ApprovalVO approval = null;
     ApprovalService service = ApprovalService.getInstance();
     
-    List<ApprovalVO> list = service.listProcessService(request);
+    // setAttribute로 저장한 값은 getAttribute로 받아야 한다.
+    if(request.getAttribute("id") != null) {
+      approval = service.detailApprovalService(request);
+    }
     
-    request.setAttribute("list", list);
+    request.setAttribute("ap", approval);
     
-    forward.setPath("/views/approval/process-list.jsp");
+    forward.setPath("/views/approval/detail-approval.jsp");
     forward.setRedirect(false);
     
     return forward;

@@ -21,17 +21,49 @@ public class ApprovalService {
     return service;
   }
   
-  // 상신-진행 목록
-  public List<ApprovalVO> listProcessService(HttpServletRequest request) throws Exception{
+  // 상신취소
+  public int takebackApprovalService(HttpServletRequest request) throws Exception {
+    ApprovalDao dao = ApprovalDao.getInstance();
+    
+    int apNo = Integer.parseInt(request.getParameter("apNo"));
+    
+    return dao.takebackApproval(apNo);
+  }
+  
+  // 상신-문서 내용
+  public ApprovalVO detailApprovalService(HttpServletRequest request) throws Exception {
+    ApprovalVO approval = null;
+    ApprovalDao dao = ApprovalDao.getInstance();
+    
+    int apNo = Integer.parseInt((String)request.getAttribute("id")); // url로 전달된 결재번호
+    
+    approval = dao.detailApproval(apNo); // 결재문서
+    
+    approval.setApLine(dao.detailApLine(apNo)); // 결재선
+    
+    if(approval.getFoNo() == 2) {
+      approval.setExpense(dao.detailExpenseList(apNo)); // 품의목록
+    } else if(approval.getFoNo() == 3) {
+      approval.setLeave(dao.detailLeave(apNo)); // 휴가
+    }
+    
+    
+    return approval;
+  }
+  
+  // 상신-문서 목록
+  public List<ApprovalVO> listApprovalService(HttpServletRequest request) throws Exception{
     ApprovalDao dao = ApprovalDao.getInstance();
     List<ApprovalVO> list = null;
     
     // 세션에 저장된 사원 번호 불러오기
     HttpSession session = request.getSession();
     
+    int apStatus = (int)request.getAttribute("status"); // 상태 저장(url에 따라 구분)
+    
     if(session.getAttribute("emNo") != null) {
       int emNo = (int)session.getAttribute("emNo");
-      list = dao.listProcess(emNo);
+      list = dao.listApproval(emNo, apStatus);
     }
     
     return list;
@@ -77,27 +109,30 @@ public class ApprovalService {
       expense.setApNo(apNo); // 결재문서번호
       expense.setElTotal(request.getParameter("elTotal")); // 총금액
 
-      if(request.getParameter("elItem1") != null) { // item이 존재할 때
+      if(!(request.getParameter("elItem1").equals(""))) { // item이 존재할 때
         expense.setElNo(1); // 품목번호
         expense.setElItem(request.getParameter("elItem1")); // 품목
         expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity1"))); // 수량
         expense.setElPrice(Integer.parseInt(request.getParameter("elPrice1"))); // 가격
+        expense.setElCost(request.getParameter("elCost1"));
         
         re = dao.insertExpenseList(expense);
       }
-      if(request.getParameter("elItem2") != null) {
+      if(!(request.getParameter("elItem2").equals(""))) {
         expense.setElNo(2);
         expense.setElItem(request.getParameter("elItem2"));
         expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity2")));
         expense.setElPrice(Integer.parseInt(request.getParameter("elPrice2")));
+        expense.setElCost(request.getParameter("elCost2"));
         
         re = dao.insertExpenseList(expense);
       }
-      if(request.getParameter("elItem3") != null) {
+      if(!(request.getParameter("elItem3").equals(""))) {
         expense.setElNo(3);
         expense.setElItem(request.getParameter("elItem3"));
         expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity3")));
         expense.setElPrice(Integer.parseInt(request.getParameter("elPrice3")));
+        expense.setElCost(request.getParameter("elCost3"));
         
         re = dao.insertExpenseList(expense);
       }

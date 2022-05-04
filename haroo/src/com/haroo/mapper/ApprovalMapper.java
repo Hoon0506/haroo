@@ -2,6 +2,8 @@ package com.haroo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.haroo.domain.ApLineEmpVO;
 import com.haroo.domain.ApprovalLineVO;
 import com.haroo.domain.ApprovalVO;
@@ -13,7 +15,11 @@ public interface ApprovalMapper {
   public int insertApprovalLine(ApprovalLineVO apLine); // 결재선 저장
   public int insertLeave(LeaveVO leave); // 휴가신청 저장
   public int insertExpenseList(ExpenseListVO expense); // 품의목록 저장
-  public List<ApprovalVO> listProcess(int emNo); // 상신-진행 목록
+  public List<ApprovalVO> listApproval(@Param("emNo") int emNo, @Param("apStatus") int apStatus); // 상신-진행 목록
   public List<ApLineEmpVO> listLineEmployee(); // 결재선 선택 창 사원 목록
-  
+  public ApprovalVO detailApproval(int apNo); // 결재문서 내용 보기
+  public List<ApprovalLineVO> detailApLine(int apNo); // 해당 결재 결재선 불러오기
+  public LeaveVO detailLeave(int apNo); // 휴가신청서 내용 불러오기
+  public List<ExpenseListVO> detailExpenseList(int apNo); // 품의목록 불러오기
+  public int takebackApproval(int apNo); // 상신취소
 }

@@ -7,19 +7,20 @@ import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
 import com.haroo.service.ApprovalService;
 
-public class PostReportAction implements Action {
+public class PostTakebackAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     ActionForward forward = new ActionForward();
     ApprovalService service = ApprovalService.getInstance();
     
-    service.postReportService(request);
+    service.takebackApprovalService(request);
     
-    forward.setPath("/haroo/ap/main");
+    forward.setPath("/haroo/ap/process");
     forward.setRedirect(true);
     
     return forward;
+    
   }
 
 }

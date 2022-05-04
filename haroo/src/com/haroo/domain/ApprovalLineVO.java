@@ -9,6 +9,9 @@ public class ApprovalLineVO implements Serializable {
   private int alStatus; // 결재상태
   private String alDate; // 결재일
   private String alComment; // 결재의견
+  private String emName; // 이름
+  private String poName; // 직책
+  private String deName; // 부서
   
   public ApprovalLineVO() {}
 
@@ -76,6 +79,31 @@ public class ApprovalLineVO implements Serializable {
   public void setAlComment(String alComment) {
     this.alComment = alComment;
   }
+
+  public String getEmName() {
+    return emName;
+  }
+
+  public void setEmName(String emName) {
+    this.emName = emName;
+  }
+
+  public String getPoName() {
+    return poName;
+  }
+
+  public void setPoName(String poName) {
+    this.poName = poName;
+  }
+
+  public String getDeName() {
+    return deName;
+  }
+
+  public void setDeName(String deName) {
+    this.deName = deName;
+  }
+
   
   
 }

@@ -15,7 +15,7 @@
 <body>
   <div class="ap-container">
     <h3 class="ap-form-title">기안서</h3>
-    <form class="ap-form" action="report" method="post">
+    <form class="ap-form" action="" method="post">
       <input type="hidden" name="foNo" value="1" />
       <div class="ap-form-container">
         <div class="ap-form-input">

@@ -38,14 +38,34 @@ public class ApprovalDao {
     return new SqlSessionFactoryBuilder().build(in);
   }
   
-  // 상신-진행목록
-  public List<ApprovalVO> listProcess(int emNo) {
-    List<ApprovalVO> list = null;
+  // 결재문서 내용
+  public ApprovalVO detailApproval(int apNo) {
+    ApprovalVO approval = null;
     
     SqlSession sqlSession = getSqlsessionFactory().openSession();
     
     try {
-      list = sqlSession.getMapper(ApprovalMapper.class).listProcess(emNo);
+      approval = sqlSession.getMapper(ApprovalMapper.class).detailApproval(apNo);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return approval;
+  }
+  
+  // 해당 결재 문서 결재선 목록
+  public List<ApprovalLineVO> detailApLine(int apNo) {
+    List<ApprovalLineVO> list = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      list = sqlSession.getMapper(ApprovalMapper.class).detailApLine(apNo);
       
     } catch (Exception e) {
       e.printStackTrace();
@@ -56,6 +76,89 @@ public class ApprovalDao {
     }
     
     return list;
+  }
+  //휴가신청서 내용 불러오기
+  public LeaveVO detailLeave(int apNo) {
+    LeaveVO leave = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      leave = sqlSession.getMapper(ApprovalMapper.class).detailLeave(apNo);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return leave;
+  }
+  
+  //품의목록 불러오기
+  public List<ExpenseListVO> detailExpenseList(int apNo) {
+    List<ExpenseListVO> list = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      list = sqlSession.getMapper(ApprovalMapper.class).detailExpenseList(apNo);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return list;
+  }
+  
+  // 상신-문서 목록
+  public List<ApprovalVO> listApproval(int emNo, int apStatus) { // 로그인 사원, 상태에 따라 분류를 위해 파라미터 설정
+    List<ApprovalVO> list = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      list = sqlSession.getMapper(ApprovalMapper.class).listApproval(emNo, apStatus);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return list;
+  }
+  
+  // 상신취소
+  public int takebackApproval(int apNo) {
+    int re = -1;
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      re = sqlSession.getMapper(ApprovalMapper.class).takebackApproval(apNo);
+      
+      if(re>0) {
+        sqlSession.commit();
+      } else {
+        sqlSession.rollback();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+
+    return re;
   }
   
   // 품의목록 저장
