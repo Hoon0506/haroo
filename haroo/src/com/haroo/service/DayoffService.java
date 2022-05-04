@@ -22,20 +22,22 @@ public class DayoffService {
 		//2. 승인여부 값 수정 (휴가 테이블)	
 		//3. 휴가 일수 값 계산
 	
-		DayoffVO dayoff = null;
+		DayoffVO dayoff = new DayoffVO();
 		
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("emNo") != null) {
 		      int emNo = (int)session.getAttribute("emNo");
-		      dao.updateUseDayoff(emNo); //사용일수
-		      dao.updateRemainderDayoff(emNo); //잔여일수
+		      
+		      dayoff.setDaCnt(dao.updateUse(emNo)); //사용일수
+		      dayoff.setDaRemainder(dao.updateRemainder(emNo)); //잔여일수
 		      dayoff = dao.listDayoff(emNo);
 		    }
 		
 		return dayoff;
 		//return null;
 	}
+	
 }
 	
 	

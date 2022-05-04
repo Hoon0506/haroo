@@ -46,12 +46,12 @@ private static DayoffDao dao = new DayoffDao();
 	}
 	
 	//사용일수
-	public int updateUseDayoff (int emNo) {
+	public int updateUse (int emNo) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		int re = -1;
 		
 		try {
-			re = sqlSession.getMapper(DayoffMapper.class).updateUseDayoff(emNo);
+			re = sqlSession.getMapper(DayoffMapper.class).updateUse(emNo);
 			if (re > 0) {
 				sqlSession.commit();
 			} else {
@@ -66,12 +66,12 @@ private static DayoffDao dao = new DayoffDao();
 	}
 	
 	//잔여일수
-	public int updateRemainderDayoff (int emNo) {
+	public int updateRemainder (int emNo) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		int re = -1;
 		
 		try {
-			re = sqlSession.getMapper(DayoffMapper.class).updateRemainderDayoff(emNo);
+			re = sqlSession.getMapper(DayoffMapper.class).updateRemainder(emNo);
 			if (re > 0) {
 				sqlSession.commit();
 			} else {
