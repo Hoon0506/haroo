@@ -1,6 +1,8 @@
 package com.haroo.domain;
 
-public class Attendance {
+import java.io.Serializable;
+
+public class AttendanceVO implements Serializable {
 	private int atNo;
 	private String atDate;
 	private String atName;
@@ -13,10 +15,10 @@ public class Attendance {
 	private int atRight;	
 	private int emNo;
 	
-	public Attendance() {}
+	public AttendanceVO() {}
 
-	public Attendance(int atNo, String atDate, String atName, String atDname, String atStart, String atEnd, int atState,
-			int atCnt, int atNote, int atRight, int emNo) {
+	public AttendanceVO(int atNo, String atDate, String atName, String atDname, String atStart, String atEnd,
+			int atState, int atCnt, int atNote, int atRight, int emNo) {
 		super();
 		this.atNo = atNo;
 		this.atDate = atDate;

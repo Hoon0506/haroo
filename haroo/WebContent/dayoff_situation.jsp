@@ -77,9 +77,10 @@
 				</li>
 				<li class="mb-1">
 
-					<input class="btn btn-toggle align-items-center rounded collapsed"
+					<a class="btn btn-toggle align-items-center rounded collapsed"
 						data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-						aria-expanded="false" type="submit" value="휴가현황" href="/haroo/dayoff/list?emNo=${dayoff.emNo}">
+						aria-expanded="false" role="button" href="/haroo/dayoff/list">휴가현황</a>
+					<input type="hidden" name="emNo" value="${dayoff.emNo }" />
 				</li>
 
 				<li class="border-top my-3"></li>
@@ -100,9 +101,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th scope="row">${dayoff.daTotal }15</th>
-						<td>${dayoff.daCnt }1</td>
-						<td>${dayoff.daRemainder }14</td>
+						<th scope="row">${dayoff.daTotal }</th>
+						<td>${dayoff.daCnt }</td>
+						<td>${dayoff.daRemainder }</td>
 					</tr>
 				</tbody>
 			</table>

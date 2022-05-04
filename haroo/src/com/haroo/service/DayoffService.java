@@ -1,6 +1,9 @@
 package com.haroo.service;
 
-import com.haroo.domain.Dayoff;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.haroo.domain.DayoffVO;
 import com.haroo.repository.DayoffDao;
 
 public class DayoffService {
@@ -14,8 +17,24 @@ public class DayoffService {
 	}
 	
 	//휴가현황 출력
-	public Dayoff listDayoff (int emNo) throws Exception {
-		return dao.listDayoff(emNo);
+	public DayoffVO listDayoffService (HttpServletRequest request) throws Exception {
+		//1. 승인여부 값 가져오기 (휴가신청 테이블) 	
+		//2. 승인여부 값 수정 (휴가 테이블)	
+		//3. 휴가 일수 값 계산
+	
+		DayoffVO dayoff = null;
+		
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("emNo") != null) {
+		      int emNo = (int)session.getAttribute("emNo");
+		      dao.updateUseDayoff(emNo); //사용일수
+		      dao.updateRemainderDayoff(emNo); //잔여일수
+		      dayoff = dao.listDayoff(emNo);
+		    }
+		
+		return dayoff;
+		//return null;
 	}
 }
 	

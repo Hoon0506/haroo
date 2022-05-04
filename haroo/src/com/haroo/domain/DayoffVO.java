@@ -1,6 +1,8 @@
 package com.haroo.domain;
 
-public class Dayoff {
+import java.io.Serializable;
+
+public class DayoffVO implements Serializable {
 	private int daNo;
 	private String daName;
 	private int daTotal;
@@ -10,9 +12,9 @@ public class Dayoff {
 	private int daApproval;
 	private int emNo;
 	
-	public Dayoff() {}
+	public DayoffVO() {}
 
-	public Dayoff(int daNo, String daName, int daTotal, int daCnt, int daRemainder, String daHdate, int daApproval,
+	public DayoffVO(int daNo, String daName, int daTotal, int daCnt, int daRemainder, String daHdate, int daApproval,
 			int emNo) {
 		super();
 		this.daNo = daNo;
@@ -88,5 +90,4 @@ public class Dayoff {
 	public void setEmNo(int emNo) {
 		this.emNo = emNo;
 	}
-
 }

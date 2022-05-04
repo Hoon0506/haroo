@@ -4,11 +4,11 @@
 
 
 
-<mapper namespace="kosta.mapper.DayoffMapper">
+<mapper namespace="com.haroo.mapper.DayoffMapper">
 	<cache />
 	
 	<!-- 이렇게 맞춰 놓으면 밑에서 AS 안 써도 됨 -->
-	<resultMap type="Dayoff" id="dayoffResult">
+	<resultMap type="DayoffVO" id="dayoffResult">
 		<result property="daNo" column="da_no" />
 		<result property="daName" column="da_name" />
 		<result property="daTotal" column="da_total" />
@@ -21,9 +21,25 @@
 	</resultMap>
 	
 	<!-- 쿼리문 작성 -->
-	<select id="listDayoff" parameterType="int" resultType="Dayoff" resultMap="dayoffResult">
-		select * from dayoff where em_no = #{em_no}
+	<!-- 휴가현황 전체 -->
+	<select id="listDayoff" parameterType="int" resultType="DayoffVO" resultMap="dayoffResult">
+		select * from dayoff where em_no = #{emNo}
 	</select>
+	
+	<!-- 사용일수 -->
+	<update id="updateUseDayoff" parameterType="int" >
+		update dayoff set da_cnt = (
+			select SUM(TO_DATE(le_end, 'YYYY-MM-DD') - TO_DATE(le_start, 'YYYY-MM-DD') + 1) 
+        	from leave, dayoff 
+        	where leave.da_no = dayoff.da_no and leave.le_status = 1
+    		)
+    	where em_no = #{emNo}
+	</update>
+	
+	<!-- 잔여일수 -->
+	<update id="updateRemainderDayoff" parameterType="int" >
+		update dayoff set da_remainder = (da_total - da_cnt) where em_no = #{emNo}
+	</update>
 	
 	
 </mapper>

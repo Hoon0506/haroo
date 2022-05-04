@@ -2,10 +2,11 @@ package com.haroo.action.dayoff;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
-import com.haroo.domain.Dayoff;
+import com.haroo.domain.DayoffVO;
 import com.haroo.service.DayoffService;
 
 public class ListAction implements Action {
@@ -15,8 +16,11 @@ public class ListAction implements Action {
 		DayoffService service = DayoffService.getInstance();
 		ActionForward forward = new ActionForward();
 		
-		int emNo = Integer.parseInt((String)request.getAttribute("emNo"));
-		Dayoff dayoff = service.listDayoff(emNo);
+		HttpSession session = request.getSession();
+	    session.setAttribute("emNo", 45424411);
+	    session.setAttribute("daName", "백민주");
+		
+		DayoffVO dayoff = service.listDayoffService(request);
 		request.setAttribute("dayoff", dayoff);
 		
 		forward.setPath("/dayoff_situation.jsp");

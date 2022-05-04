@@ -37,7 +37,6 @@ public class DayoffController extends HttpServlet {
 		if (command.equals("list")) { // 휴가현황 보기
 			action = new ListAction();
 			try {
-				//request.setAttribute("emNo", command);
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

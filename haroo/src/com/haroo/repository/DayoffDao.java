@@ -1,12 +1,13 @@
 package com.haroo.repository;
 
 import java.io.InputStream;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.haroo.domain.Dayoff;
+import com.haroo.domain.DayoffVO;
 import com.haroo.mapper.DayoffMapper;
 
 public class DayoffDao {
@@ -30,9 +31,9 @@ private static DayoffDao dao = new DayoffDao();
 	}
 	
 	//휴가현황 출력
-	public Dayoff listDayoff (int emNo) {
+	public DayoffVO listDayoff (int emNo) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		Dayoff dayoff = null;
+		DayoffVO dayoff = null;
 		
 		try {
 			dayoff = sqlSession.getMapper(DayoffMapper.class).listDayoff(emNo);
@@ -44,6 +45,45 @@ private static DayoffDao dao = new DayoffDao();
 		return dayoff;
 	}
 	
+	//사용일수
+	public int updateUseDayoff (int emNo) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		int re = -1;
+		
+		try {
+			re = sqlSession.getMapper(DayoffMapper.class).updateUseDayoff(emNo);
+			if (re > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return re;
+	}
+	
+	//잔여일수
+	public int updateRemainderDayoff (int emNo) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		int re = -1;
+		
+		try {
+			re = sqlSession.getMapper(DayoffMapper.class).updateRemainderDayoff(emNo);
+			if (re > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return re;
+	}
 	
 
 }
