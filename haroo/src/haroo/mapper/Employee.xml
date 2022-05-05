@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="haroo.mapper.EmployeeMapper">
+    <cache/>
+    <select id="loginEmployee" parameterType="EmployeeVO" resultType="EmployeeVO">
+        select *
+        from employee
+        where em_no = #{em_no}
+        and em_pw = #{em_pw}
+    </select>
+    <update id="updateEmployee" parameterType="EmployeeVO">
+        update employee
+        set em_phone = #{em_phone},
+            em_email = #{em_email},
+            em_pw = #{em_pw}
+        where em_no = #{em_no}
+    </update>
+</mapper>
