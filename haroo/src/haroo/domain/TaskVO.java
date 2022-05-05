@@ -1,6 +1,8 @@
 package haroo.domain;
 
-public class TaskVO {
+import java.io.Serializable;
+
+public class TaskVO implements Serializable {
     private int no;
     private String title;
     private String place;
