@@ -1,7 +1,7 @@
 package haroo.action.login;
 
-import haroo.action.task.Action;
-import haroo.action.task.ActionForward;
+import haroo.action.Action;
+import haroo.action.ActionForward;
 import haroo.domain.EmployeeVO;
 import haroo.service.EmployeeService;
 

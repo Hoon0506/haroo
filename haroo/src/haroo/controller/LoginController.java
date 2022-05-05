@@ -1,7 +1,7 @@
 package haroo.controller;
 
-import haroo.action.task.Action;
-import haroo.action.task.ActionForward;
+import haroo.action.Action;
+import haroo.action.ActionForward;
 import haroo.action.login.LoginAction;
 import haroo.action.login.LoginFormAction;
 
