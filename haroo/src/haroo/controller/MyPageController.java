@@ -2,8 +2,8 @@ package haroo.controller;
 
 import haroo.action.mypage.MyPageAction;
 import haroo.action.mypage.MyPageFormAction;
-import haroo.action.task.Action;
-import haroo.action.task.ActionForward;
+import haroo.action.Action;
+import haroo.action.ActionForward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
