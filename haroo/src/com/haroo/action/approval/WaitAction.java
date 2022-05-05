@@ -8,7 +8,7 @@ import com.haroo.action.ActionForward;
 import com.haroo.domain.ApprovalVO;
 import com.haroo.service.ApprovalService;
 
-public class ProcessAction implements Action {
+public class WaitAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
@@ -24,7 +24,7 @@ public class ProcessAction implements Action {
     
     request.setAttribute("ap", approval);
     
-    forward.setPath("/views/approval/approval-detail.jsp");
+    forward.setPath("/views/approval/receive-detail.jsp");
     forward.setRedirect(false);
     
     return forward;

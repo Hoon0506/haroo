@@ -67,6 +67,7 @@
 
 .ap-form-radio-label {
 	margin-right: 10px;
+	margin-left: 5px;
 }
 
 #ap-alist-selected-sticky {
@@ -101,4 +102,12 @@ ol.ap-al-list {
 
 ol.ap-al-list li {
   padding-bottom: 5px;
+}
+
+div.ap-line-sign-form {
+	margin-top: 10px;
+}
+
+span.ap-text-area{
+	margin-left:10px;
 }

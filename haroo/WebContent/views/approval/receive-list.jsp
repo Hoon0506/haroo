@@ -26,39 +26,36 @@
       <tbody>
         <c:forEach var="ap" items="${list }">
           <c:choose>
-          <c:when test="${ap.apStatus == 0 }">
+          <c:when test="${ap.alStatus == 0 }">
           <tr>
             <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="process/${ap.apNo }">${ap.apTitle }</a></td>
+            <td><a class="ap-list-title" href="wait/${ap.apNo }">${ap.apTitle }</a></td>
             <td>${ap.emName }</td>
             <td>${ap.apDate }</td>
             <td>진행중</td>
           </tr>
           </c:when>
-          <c:when test="${ap.apStatus > 0 }">
+          <c:when test="${ap.alStatus > 0 }">
           <tr>
             <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="done/${ap.apNo }">${ap.apTitle }</a></td>
+            <td><a class="ap-list-title" href="sign/${ap.apNo }">${ap.apTitle }</a></td>
             <td>${ap.emName }</td>
             <td>${ap.apDate }</td>
-            <c:if test="${ap.apStatus == 1 }">
-              <td>승인</td>
-            </c:if>
-            <c:if test="${ap.apStatus == 2 }">
-              <td>반려</td>
-            </c:if>
-          </tr>
-          </c:when>
-          <c:when test="${ap.apStatus == -1 }">
-          <tr>
-            <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="takeback/${ap.apNo }">${ap.apTitle }</a></td>
-            <td>${ap.emName }</td>
-            <td>${ap.apDate }</td>
-            <td>취소</td>
+            <c:choose>
+              <c:when test="${ap.apStatus == 1 }">
+                <td>승인</td>
+              </c:when>
+              <c:when test="${ap.apStatus == 2 }">
+                <td>반려</td>
+              </c:when>
+              <c:otherwise>
+                <td>진행중</td>
+              </c:otherwise>
+            </c:choose>
           </tr>
           </c:when>
           </c:choose>
+        
         </c:forEach>
       </tbody>
     </table>

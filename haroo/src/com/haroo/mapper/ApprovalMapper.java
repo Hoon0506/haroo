@@ -22,4 +22,7 @@ public interface ApprovalMapper {
   public LeaveVO detailLeave(int apNo); // 휴가신청서 내용 불러오기
   public List<ExpenseListVO> detailExpenseList(int apNo); // 품의목록 불러오기
   public int takebackApproval(int apNo); // 상신취소
+  public List<ApprovalVO> receiveApproval(@Param("emNo") int emNo, @Param("alStatus") int alStatus); // 수신 목록
+  public int approvalReport(ApprovalLineVO apLine); // 결재하기
+  public int updateApprovalStatus(ApprovalLineVO apLine); // 결재상태확인
 }

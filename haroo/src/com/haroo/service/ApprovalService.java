@@ -30,7 +30,36 @@ public class ApprovalService {
     return dao.takebackApproval(apNo);
   }
   
-  // 상신-문서 내용
+  // 결재하기
+  public int signApprovalService(HttpServletRequest request) throws Exception {
+    ApprovalDao dao = ApprovalDao.getInstance();
+    ApprovalLineVO apLine = new ApprovalLineVO();
+    
+    int re = -1;
+    
+    request.setCharacterEncoding("UTF-8");
+    int apNo = Integer.parseInt(request.getParameter("apNo"));
+    int alNo = Integer.parseInt(request.getParameter("alNo"));
+    int alStatus = Integer.parseInt(request.getParameter("alStatus"));
+    String alComment = request.getParameter("alComment");
+    
+    apLine.setApNo(apNo); // 결재번호
+    apLine.setAlNo(alNo); // 사원번호
+    apLine.setAlStatus(alStatus); // 승인여부
+    apLine.setAlComment(alComment); // 의견
+    
+    re = dao.approvalReport(apLine);
+    
+    if(re != -1) {
+     re = dao.updateApprovalStatus(apLine);
+    }
+    
+    return re;
+  }
+  
+  
+  
+  // 문서 내용
   public ApprovalVO detailApprovalService(HttpServletRequest request) throws Exception {
     ApprovalVO approval = null;
     ApprovalDao dao = ApprovalDao.getInstance();
@@ -49,6 +78,24 @@ public class ApprovalService {
     
     
     return approval;
+  }
+  
+  //수신-문서 목록
+  public List<ApprovalVO> receiveApprovalService(HttpServletRequest request) throws Exception{
+    ApprovalDao dao = ApprovalDao.getInstance();
+    List<ApprovalVO> list = null;
+   
+    // 세션에 저장된 사원 번호 불러오기
+    HttpSession session = request.getSession();
+   
+    int alStatus = (int)request.getAttribute("status"); // 상태 저장(url에 따라 구분)
+   
+    if(session.getAttribute("emNo") != null) {
+      int emNo = (int)session.getAttribute("emNo");
+      list = dao.receiveApproval(emNo, alStatus);
+    }
+    
+    return list;
   }
   
   // 상신-문서 목록

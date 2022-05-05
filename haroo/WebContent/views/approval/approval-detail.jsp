@@ -34,19 +34,18 @@
                 <tr>
                   <c:forEach var="apLine" items="${ap.apLine }">
                     <td class="text-center">
-                      <button class="ap-line-button ap-form-btn">
+                      
                       <c:choose>
                         <c:when test="${apLine.alStatus == 0 }">
-                          진행중
+                          <button class="ap-form-btn">진행중</button>
                         </c:when>
                         <c:when test="${apLine.alStatus == 1 }">
-                          승인
+                          <button class="ap-line-button ap-form-btn">승인</button>
                         </c:when>
                         <c:when test="${apLine.alStatus == 2 }">
-                          반려
+                          <button class="ap-line-button ap-form-btn">반려</button>
                         </c:when>
                       </c:choose>
-                      </button>
                     </td>
                   </c:forEach>
                 </tr>
@@ -165,8 +164,8 @@
     </c:if>
     <c:if test="${ap.apStatus == -1 }">
       <div class="ap-form-btns">
-      <form action="" method="post">
-        <input type="hidden" name="approvalVO" value="${ap }" />
+      <form action="/haroo/ap/re" method="post">
+        <input type="hidden" name="approval" value="${ap }" />
         <button class="ap-form-btn">재상신</button>
       </form>
       </div>

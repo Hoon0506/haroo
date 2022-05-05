@@ -17,6 +17,7 @@ public class ApprovalVO implements Serializable {
   private LeaveVO leave; // 휴가신청
   private List<ExpenseListVO> expense; // 품의목록
   private List<ApprovalLineVO> apLine; // 결재선 목록
+  private int alStatus;
   
   public ApprovalVO() {}
 
@@ -138,6 +139,15 @@ public class ApprovalVO implements Serializable {
   public void setApLine(List<ApprovalLineVO> apLine) {
     this.apLine = apLine;
   }
+
+  public int getAlStatus() {
+    return alStatus;
+  }
+
+  public void setAlStatus(int alStatus) {
+    this.alStatus = alStatus;
+  }
+  
   
   
   

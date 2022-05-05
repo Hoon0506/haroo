@@ -18,8 +18,11 @@ import com.haroo.action.approval.LineAction;
 import com.haroo.action.approval.MainAction;
 import com.haroo.action.approval.PostReportAction;
 import com.haroo.action.approval.PostTakebackAction;
+import com.haroo.action.approval.PostWaitAction;
 import com.haroo.action.approval.ProcessAction;
 import com.haroo.action.approval.ProcessListAction;
+import com.haroo.action.approval.WaitAction;
+import com.haroo.action.approval.WaitListAction;
 
 @WebServlet("/ap/*")
 public class ApprovalController extends HttpServlet {
@@ -100,7 +103,7 @@ public class ApprovalController extends HttpServlet {
     } else if(command.contains("takeback")) { // 상신취소문서
       if(id.equals("takeback")) {
         action = new ProcessListAction();
-        request.setAttribute("status", -1); // process는 진행문서기 때문에 진행 status 0 저장해서 넘겨줌
+        request.setAttribute("status", -1); // 취소 status -1 저장해서 넘겨줌
         try {
           forward = action.execute(request, response);
         } catch (Exception e) {
@@ -108,6 +111,63 @@ public class ApprovalController extends HttpServlet {
         }
       } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
         action = new ProcessAction();
+        request.setAttribute("id", id);
+        
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }  
+    } else if(command.contains("done")) { // 상신완료문서
+      if(id.equals("done")) {
+        action = new ProcessListAction();
+        request.setAttribute("status", 1); // 완료된 문서 status > 0
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
+        action = new ProcessAction();
+        request.setAttribute("id", id);
+        
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }  
+    } else if(command.contains("wait")) { // 수신-미결재
+      if(id.equals("wait")) {
+        action = new WaitListAction();
+        request.setAttribute("status", 0); // 미결재문서 == 0
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
+        action = new WaitAction();
+        request.setAttribute("id", id);
+        
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }  
+    } else if(command.contains("sign")) { // 수신-결재
+      if(id.equals("sign")) {
+        action = new WaitListAction();
+        request.setAttribute("status", 1); // 완료문서 > 0
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서
+        action = new WaitAction();
         request.setAttribute("id", id);
         
         try {
@@ -156,6 +216,17 @@ public class ApprovalController extends HttpServlet {
           e.printStackTrace();
         }
       }
+    } else if(command.contains("wait")) { // 수신-미결재 -> 결재하기
+      if(id.matches("^[0-9]+$")) { // 번호에 해당하는 문서 결재
+        action = new PostWaitAction();
+        request.setAttribute("id", id);
+        
+        try {
+          forward = action.execute(request, response);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }  
     }
     
     

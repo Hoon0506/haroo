@@ -3,6 +3,7 @@ package com.haroo.repository;
 import java.io.InputStream;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,6 +37,54 @@ public class ApprovalDao {
     }
     
     return new SqlSessionFactoryBuilder().build(in);
+  }
+  
+  // 결재 상태 확인 변경
+  public int updateApprovalStatus(ApprovalLineVO apLine) {
+    int re = -1;
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      re = sqlSession.getMapper(ApprovalMapper.class).updateApprovalStatus(apLine);
+      
+      if(re>0) {
+        sqlSession.commit();
+      } else {
+        sqlSession.rollback();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+
+    return re;
+  }
+  
+  // 결재하기
+  public int approvalReport(ApprovalLineVO apLine) {
+    int re = -1;
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      re = sqlSession.getMapper(ApprovalMapper.class).approvalReport(apLine);
+      
+      if(re>0) {
+        sqlSession.commit();
+      } else {
+        sqlSession.rollback();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+
+    return re;
   }
   
   // 결재문서 내용
@@ -116,6 +165,26 @@ public class ApprovalDao {
     
     return list;
   }
+  
+  // 수신-문서 목록
+  public List<ApprovalVO> receiveApproval(int emNo, int alStatus) { // 로그인 사원, 상태에 따라 분류를 위해 파라미터 설정
+   List<ApprovalVO> list = null;
+   
+   SqlSession sqlSession = getSqlsessionFactory().openSession();
+   
+   try {
+     list = sqlSession.getMapper(ApprovalMapper.class).receiveApproval(emNo, alStatus);
+     
+   } catch (Exception e) {
+     e.printStackTrace();
+   } finally {
+     if(sqlSession != null) {
+       sqlSession.close();
+     }
+   }
+   
+   return list;
+ }
   
   // 상신-문서 목록
   public List<ApprovalVO> listApproval(int emNo, int apStatus) { // 로그인 사원, 상태에 따라 분류를 위해 파라미터 설정
