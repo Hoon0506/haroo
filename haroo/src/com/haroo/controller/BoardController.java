@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
+import com.haroo.action.board.DeleteAction;
 import com.haroo.action.board.DetailAction;
 import com.haroo.action.board.InsertAction;
 import com.haroo.action.board.InsertFormAction;
 import com.haroo.action.board.ListAction;
+import com.haroo.action.board.UpdateAction;
+import com.haroo.action.board.UpdateFormAction;
+import com.haroo.action.board.insertReplyAction;
 
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
@@ -59,6 +63,34 @@ public class BoardController extends HttpServlet {
 			}
 		} else if(command.equals("detailAction.do")) {
 			action = new DetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("updateForm.do")) {
+			action = new UpdateFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("updateAction.do")) {
+			action = new UpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("deleteAction.do")) {
+			action = new DeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("insertReplyAction.do")) {
+			action = new insertReplyAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
