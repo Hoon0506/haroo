@@ -50,7 +50,7 @@
         <li class="nav-item"><a class="nav-link active"
                                 aria-current="page" href="#">인사정보</a></li>
         <li class="nav-item"><a class="nav-link" href="#">근태조회</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">캘린더</a></li>
+        <li class="nav-item"><a class="nav-link" href="task">캘린더</a></li>
         <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
         <li class="nav-item"><a class="nav-link" href="#">설문조사</a></li>
         <li class="nav-item"><a class="nav-link" href="#">전자결재</a></li>
