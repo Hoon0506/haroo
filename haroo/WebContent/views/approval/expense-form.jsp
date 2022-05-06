@@ -26,11 +26,13 @@
         </tr>
         <tr>
           <th class="text-center" scope="row">기안자</th>
-          <td><input type="hidden" name="emNo" value="${emNo }" />${emName }</td>
+          <td><input type="hidden" name="emNo" value="${employeeVO.em_no }" />${employeeVO.em_name }</td>
         </tr>
         <tr>
           <th class="text-center" scope="row">제목</th>
-          <td><input class="form-control" type="text" name="apTitle"/></td>
+          <td><div class="input-group input-group-sm">
+            <input class="form-control" type="text" name="apTitle"/>
+          </div></td>
         </tr>
         <tr>
           <td colspan="2">
@@ -44,49 +46,77 @@
                 </tr>
                 <tr class="ap-el">
                   <td class="item">
-                    <input class="form-control" type="text" name="elItem1"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elItem1"/>
+                    </div>
                   </td>
                   <td class="ap-quantity">
-                    <input class="form-control" type="number" name="elQuantity1" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elQuantity1" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-price">
-                    <input class="form-control" type="number" name="elPrice1" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elPrice1" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-cost">
-                    <input class="form-control" type="text" name="elCost1" readOnly/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elCost1" readOnly/>
+                    </div>
                   </td>
                 </tr> 
                 <tr class="ap-el">
                   <td class="item">
-                    <input class="form-control" type="text" name="elItem2"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elItem2"/>
+                    </div>
                   </td>
                   <td class="ap-quantity">
-                    <input class="form-control" type="number" name="elQuantity2" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elQuantity2" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-price">
-                    <input class="form-control" type="number" name="elPrice2" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elPrice2" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-cost">
-                    <input class="form-control" type="text" name="elCost2" readOnly/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elCost2" readOnly/>
+                    </div>
                   </td>
                 </tr>
                 <tr class="ap-el">
                   <td class="item">
-                    <input class="form-control" type="text" name="elItem3"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elItem3"/>
+                    </div>
                   </td>
                   <td class="ap-quantity">
-                    <input class="form-control" type="number" name="elQuantity3" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elQuantity3" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-price">
-                    <input class="form-control" type="number" name="elPrice3" placeholder="숫자만"/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elPrice3" placeholder="숫자만"/>
+                    </div>
                   </td>
                   <td class="ap-cost">
-                    <input class="form-control" type="text" name="elCost3" readOnly/>
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elCost3" readOnly/>
+                    </div>
                   </td>
                 </tr>
                 <tr>
                   <th class="text-center">합계</th>
-                  <td class="ap-total" colspan="3"><input class="form-control" name="elTotal" type="text" readOnly/></td>
+                  <td class="ap-total" colspan="3">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" name="elTotal" type="text" readOnly/>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -99,7 +129,7 @@
         <tr>
           <th class="text-center" scope="row">결재선</th>
           <td>
-            <button class="btn btn-outline-secondary ap-al-select">결재선 선택</button>
+            <button class="btn btn-outline-secondary btn-sm ap-al-select">결재선 선택</button>
             <div class="ap-line-sign-form" id="ap-list-selected"></div>
           </td>
         </tr>
@@ -112,8 +142,8 @@
         </tr>
       </tbody>   
       </table> 
-      <div class="text-center">
-        <div class="btn-group" role="group">
+      <div class="text-end">
+        <div class="btn-group-sm" role="group">
           <button class="btn btn-outline-secondary" type="submit">상신하기</button>
           <button class="btn btn-outline-secondary ap-form-reset" type="reset">다시작성</button>
         </div>

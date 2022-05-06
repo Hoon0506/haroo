@@ -25,11 +25,13 @@
         </tr>
         <tr>
           <th scope="row">기안자</th>
-          <td><input type="hidden" name="emNo" value="${emNo }" />${emName }</td>
+          <td><input type="hidden" name="emNo" value="${employeeVO.em_no }" />${employeeVO.em_name }</td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td><input class="form-control" type="text" name="apTitle"/></td>
+          <td><div class="input-group input-group-sm">
+            <input class="form-control" type="text" name="apTitle"/>
+          </div></td>
         </tr>
         <tr>
           <th scope="row">내용</th>
@@ -38,7 +40,7 @@
         <tr>
           <th scope="row">결재선</th>
           <td>
-            <button class="btn btn-outline-secondary ap-al-select">결재선 선택</button>
+            <button class="btn btn-outline-secondary btn-sm ap-al-select">결재선 선택</button>
             <div class="ap-line-sign-form" id="ap-list-selected"></div>
           </td>
         </tr>
@@ -51,8 +53,8 @@
         </tr>
       </tbody>   
       </table> 
-      <div class="text-center">
-        <div class="btn-group" role="group">
+      <div class="text-end">
+        <div class="btn-group-sm" role="group">
           <button class="btn btn-outline-secondary" type="submit">상신하기</button>
           <button class="btn btn-outline-secondary ap-form-reset" type="reset">다시작성</button>
         </div>

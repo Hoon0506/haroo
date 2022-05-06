@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.haroo.domain.ApLineEmpVO;
 import com.haroo.domain.ApprovalLineVO;
 import com.haroo.domain.ApprovalVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.ExpenseListVO;
 import com.haroo.domain.LeaveVO;
 import com.haroo.repository.ApprovalDao;
@@ -20,6 +21,7 @@ public class ApprovalService {
   public static ApprovalService getInstance() {
     return service;
   }
+ 
   
   // 상신취소
   public int takebackApprovalService(HttpServletRequest request) throws Exception {
@@ -90,8 +92,9 @@ public class ApprovalService {
    
     int alStatus = (int)request.getAttribute("status"); // 상태 저장(url에 따라 구분)
    
-    if(session.getAttribute("emNo") != null) {
-      int emNo = (int)session.getAttribute("emNo");
+    if(session.getAttribute("employeeVO") != null) {
+      EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+      int emNo = employee.getEm_no();
       list = dao.receiveApproval(emNo, alStatus);
     }
     
@@ -108,8 +111,9 @@ public class ApprovalService {
     
     int apStatus = (int)request.getAttribute("status"); // 상태 저장(url에 따라 구분)
     
-    if(session.getAttribute("emNo") != null) {
-      int emNo = (int)session.getAttribute("emNo");
+    if(session.getAttribute("employeeVO") != null) {
+      EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+      int emNo = employee.getEm_no();
       list = dao.listApproval(emNo, apStatus);
     }
     
@@ -221,5 +225,14 @@ public class ApprovalService {
     
     return list;
   }
-
+  
+  // 휴가번호 가져오기
+  public int getDaNoService(HttpServletRequest request) throws Exception {
+    ApprovalDao dao = ApprovalDao.getInstance();
+    
+    HttpSession session = request.getSession();
+    EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+    
+    return dao.getDaNo(employee);
+  }
 }

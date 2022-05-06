@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.haroo.domain.ApLineEmpVO;
 import com.haroo.domain.ApprovalLineVO;
 import com.haroo.domain.ApprovalVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.ExpenseListVO;
 import com.haroo.domain.LeaveVO;
 import com.haroo.mapper.ApprovalMapper;
@@ -344,5 +345,23 @@ public class ApprovalDao {
     }
     
     return list;
+  }
+  
+  // 휴가번호 가져오기
+  public int getDaNo(EmployeeVO employee) {
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    int daNo = 0;
+    
+    try {
+      daNo = sqlSession.getMapper(ApprovalMapper.class).getDaNo(employee);
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return daNo;
   }
 }

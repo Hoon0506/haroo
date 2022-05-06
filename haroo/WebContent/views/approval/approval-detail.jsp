@@ -39,11 +39,11 @@
                   <c:forEach var="apLine" items="${ap.apLine }">
                     <td class="text-center">
                       <c:choose>
-                        <c:when test="${apLine.alStatus == 0 }">
-                          <button class="btn btn-outline-secondary">진행중</button>
+                        <c:when test="${apLine.alStatus == 0  and ap.apStatus == 0 }">
+                          <button class="btn btn-outline-secondary btn-sm">진행중</button>
                         </c:when>
                         <c:when test="${apLine.alStatus == 1 }">
-                          <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
                             승인
                           </button>
                           <div class="collapse" id="al-detail-${apLine.alOrder }">
@@ -56,7 +56,7 @@
                           </div>
                         </c:when>
                         <c:when test="${apLine.alStatus == 2 }">
-                          <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                          <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
                             반려
                           </button>
                           <div class="collapse" id="al-detail-${apLine.alOrder }">
@@ -164,17 +164,17 @@
         </tr>
       </tbody>
     </table>
-      <div class="text-center">
+      <div class="text-end">
         <c:if test="${ap.apStatus == 0 }">
           <form action="" method="post">
             <input type="hidden" name="apNo" value="${ap.apNo }" />
-            <button class="btn btn-outline-secondary">상신취소</button>
+            <button class="btn btn-outline-secondary btn-sm">상신취소</button>
           </form>
         </c:if>
         <c:if test="${ap.apStatus == -1 }">
           <form action="/haroo/ap/re" method="post">
             <input type="hidden" name="approval" value="${ap }" />
-            <button class="btn btn-outline-secondary">재상신</button>
+            <button class="btn btn-outline-secondary btn-sm">재상신</button>
           </form>
         </c:if>
        </div>

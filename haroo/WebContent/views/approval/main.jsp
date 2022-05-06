@@ -45,8 +45,8 @@
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+                <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_no}님 환영합니다 :)</button>
+                <button type="button" class="btn btn-warning"><a href="/haroo/mypage">마이 페이지</a></button>
         </div>
       </div>
     </div>
@@ -56,8 +56,8 @@
       <li class="nav-item"><a class="nav-link active"
         aria-current="page" href="#">인사정보</a></li>
       <li class="nav-item"><a class="nav-link" href="#">근태조회</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">캘린더</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+      <li class="nav-item"><a class="nav-link" href="/haroo/task">캘린더</a></li>
+      <li class="nav-item"><a class="nav-link" href="/haroo/board/listAction.do">게시판</a></li>
       <li class="nav-item"><a class="nav-link" href="#">설문조사</a></li>
       <li class="nav-item"><a class="nav-link" href="/haroo/ap/main">전자결재</a></li>
       <li class="nav-item"><a class="nav-link" href="#">채팅</a>
@@ -161,7 +161,7 @@
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <p class="col-md-4 mb-0 text-muted">&copy; 2021 Company, Inc</p>
 
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+    <a href="/haroo/main" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <h3>haroo</h3>
     </a>
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.haroo.domain.ApLineEmpVO;
 import com.haroo.domain.ApprovalLineVO;
 import com.haroo.domain.ApprovalVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.ExpenseListVO;
 import com.haroo.domain.LeaveVO;
 
@@ -25,4 +26,5 @@ public interface ApprovalMapper {
   public List<ApprovalVO> receiveApproval(@Param("emNo") int emNo, @Param("alStatus") int alStatus); // 수신 목록
   public int approvalReport(ApprovalLineVO apLine); // 결재하기
   public int updateApprovalStatus(ApprovalLineVO apLine); // 결재상태확인
+  public int getDaNo(EmployeeVO employee); // 휴가번호 가져오기
 }

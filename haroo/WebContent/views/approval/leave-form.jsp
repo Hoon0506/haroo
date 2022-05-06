@@ -26,11 +26,13 @@
         </tr>
         <tr>
           <th scope="row">신청자</th>
-          <td><input type="hidden" name="emNo" value="${emNo }" />${emName }</td>
+          <td><input type="hidden" name="emNo" value="${employeeVO.em_no }" />${employeeVO.em_name }</td>
         </tr>
         <tr>
           <th scope="row">제목</th>
-          <td><input class="form-control" type="text" name="apTitle"/></td>
+          <td><div class="input-group input-group-sm">
+            <input class="form-control" type="text" name="apTitle"/>
+          </div></td>
         </tr>
         <tr>
           <th scope="row">휴가종류</th>
@@ -60,11 +62,11 @@
         <tr>
           <th scope="row">휴가일정</th>
           <td>
-            <div class="input-group">
+            <div class="input-group input-group-sm">
               <span class="input-group-text">시작일</span>
-              <input type="text" class="form-control" name="leStart" placeholder="예)2022-11-01">
+              <input type="text" class="form-control" pattern="^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$" name="leStart" placeholder="예)2022-11-01">
               <span class="input-group-text">종료일</span>
-              <input type="text" class="form-control" name="leEnd" placeholder="예)2022-11-01">
+              <input type="text" class="form-control" pattern="^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$" name="leEnd" placeholder="예)2022-11-01">
             </div>
           </td>
         </tr>
@@ -75,7 +77,7 @@
         <tr>
           <th scope="row">결재선</th>
           <td>
-            <button class="btn btn-outline-secondary ap-al-select">결재선 선택</button>
+            <button class="btn btn-outline-secondary btn-sm ap-al-select">결재선 선택</button>
             <div class="ap-line-sign-form" id="ap-list-selected"></div>
           </td>
         </tr>
@@ -94,8 +96,8 @@
         </tr>
       </tbody>   
       </table> 
-      <div class="text-center">
-        <div class="btn-group" role="group">
+      <div class="text-end">
+        <div class="btn-group-sm" role="group">
           <button class="btn btn-outline-secondary" type="submit">상신하기</button>
           <button class="btn btn-outline-secondary ap-form-reset" type="reset">다시작성</button>
         </div>

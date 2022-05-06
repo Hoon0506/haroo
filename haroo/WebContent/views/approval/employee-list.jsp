@@ -20,8 +20,9 @@
         <c:forEach var="em" items="${list}">
           <li class="ap-alist-name">
           <a class="ap-alist-name" href="#">
-            ${em.deName } - ${em.emName }(${em.poName })
+            ${em.deName } - ${em.emName } ${em.poName }
             <input type="hidden" class="ap-hidden-emNo" value="${em.emNo }" />
+            <input type="hidden" class="ap-hidden-deName" value="${em.deName }">
           </a>
           </li>
         </c:forEach>

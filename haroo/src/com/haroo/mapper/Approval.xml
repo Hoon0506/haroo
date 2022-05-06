@@ -170,11 +170,11 @@
       <choose>
         <when test="alStatus == 0">
           AND al_status = 0
-          AND (1 = ALL(SELECT b.al_status
-                    FROM (SELECT al_order, ap_no FROM approval_line WHERE al_no = ${emNo}) a 
+          AND (ap.ap_no IN (SELECT a.ap_no
+                    FROM (SELECT al_order, ap_no FROM approval_line WHERE al_no = #{emNo}) a 
                     JOIN approval_line b
                     ON a.ap_no = b.ap_no
-                    WHERE b.al_order <![CDATA[<]]> a.al_order)
+                    WHERE b.al_order <![CDATA[=]]> a.al_order-1 AND b.al_status = 1)
           OR al_order = 1)
         </when>
         <when test="alStatus gt 0">
@@ -195,7 +195,9 @@
   <update id="updateApprovalStatus" parameterType="ApprovalLineVO">
     UPDATE approval SET ap_status = ${alStatus}
     WHERE ap_no = #{apNo} 
-    AND 0 <![CDATA[<]]> ALL(SELECT al_status FROM approval_line WHERE ap_no = #{apNo})
+    <if test="alStatus == 1">
+      AND 1 = ALL(SELECT al_status FROM approval_line WHERE ap_no = #{apNo})
+    </if>
   </update>
 	
 	<!-- 결재선 사원 선택 리스트 불러오기 -->
@@ -205,6 +207,9 @@
 	  ON e.de_no = d.de_no
 	  order by de_name, po_no
 	</select>
-	
 
+  <!-- 휴가번호 가져오기 -->
+  <select id="getDaNo" resultType="int" parameterType="employeeVO">
+    SELECT da_no AS daNo FROM dayoff WHERE em_no = #{em_no}
+  </select>
 </mapper>

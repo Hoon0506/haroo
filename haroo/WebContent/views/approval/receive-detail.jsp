@@ -39,17 +39,17 @@
                     <td >
                       <c:choose>
                         <c:when test="${apLine.alStatus == 0}">
-                          <c:if test="${apLine.alNo == emNo }">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#al-sign-form" aria-expanded="false" aria-controls="collapseExample">
+                          <c:if test="${apLine.alNo == employeeVO.em_no }">
+                            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-sign-form" aria-expanded="false" aria-controls="collapseExample">
                               결재하기
                             </button>
                           </c:if>
-                          <c:if test="${apLine.alNo != emNo }">
-                            <button class="btn btn-outline-secondary">진행중</button>
+                          <c:if test="${apLine.alNo != employeeVO.em_no and ap.apStatus == 0}">
+                            <button class="btn btn-outline-secondary btn-sm">진행중</button>
                           </c:if>
                         </c:when>
                         <c:when test="${apLine.alStatus == 1 }">
-                          <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
                             승인
                           </button>
                           <div class="collapse" id="al-detail-${apLine.alOrder }">
@@ -62,7 +62,7 @@
                           </div>
                         </c:when>
                         <c:when test="${apLine.alStatus == 2 }">
-                          <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                          <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
                             반려
                           </button>
                           <div class="collapse" id="al-detail-${apLine.alOrder }">
@@ -82,8 +82,8 @@
             <div class="collapse ap-line-sign-form" id="al-sign-form">
               <form action="" method="post">
                 <input type="hidden" name="apNo" value="${ap.apNo }" />
-                <input type="hidden" name="alNo" value="${emNo }" />
-              <div class="input-group">
+                <input type="hidden" name="alNo" value="${employeeVO.em_no }" />
+              <div class="input-group input-group-sm">
                 <div class="input-group-text">
                   <input class="form-check-input mt-0" type="radio" name="alStatus" value="1">
                   <span class="ap-form-radio-label">승인</span>
@@ -93,7 +93,7 @@
                   <span class="ap-form-radio-label">반려</span>
                 </div>
                 <input type="text" class="form-control" name="alComment" placeholder="의견">
-                <button class="btn btn-outline-secondary">완료</button>
+                <button class="btn btn-outline-secondary btn-sm">완료</button>
               </div>
               </form>
             </div>
