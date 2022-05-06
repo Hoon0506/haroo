@@ -111,3 +111,16 @@ div.ap-line-sign-form {
 span.ap-text-area{
 	margin-left:10px;
 }
+
+.ap-line-date{
+	font-size: 0.8em;
+	color: gray;
+}
+
+.text-center {
+	vertical-align : middle;
+}
+
+.ap-line-table-1 {
+	width: 20px;
+}

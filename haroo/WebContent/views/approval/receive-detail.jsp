@@ -27,6 +27,9 @@
             <table class="table mb-0 table-bordered">
               <tbody>
                 <tr>
+                  <th class="text-center ap-line-table-1" rowspan="3">결재</th>
+                </tr>
+                <tr>
                   <c:forEach var="apLine" items="${ap.apLine }">
                     <th class="text-center">${apLine.emName} ${apLine.poName}(${apLine.deName })</th>
                   </c:forEach>
@@ -37,39 +40,46 @@
                       <c:choose>
                         <c:when test="${apLine.alStatus == 0}">
                           <c:if test="${apLine.alNo == emNo }">
-                            <button class="ap-form-btn ap-line-sign">결재하기</button>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#al-sign-form" aria-expanded="false" aria-controls="collapseExample">
+                              결재하기
+                            </button>
                           </c:if>
                           <c:if test="${apLine.alNo != emNo }">
-                            <button class="ap-form-btn">진행중</button>
+                            <button class="btn btn-outline-secondary">진행중</button>
                           </c:if>
                         </c:when>
                         <c:when test="${apLine.alStatus == 1 }">
-                          <button class="ap-line-button ap-form-btn">승인</button>
+                          <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            승인
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
                         </c:when>
                         <c:when test="${apLine.alStatus == 2 }">
-                          <button class="ap-line-button ap-form-btn">반려</button>
+                          <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            반려
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
                         </c:when>
                       </c:choose>
                     </td>
                   </c:forEach>
-                </tr>
-                <tr class="ap-toggle ap-hidden">
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <c:if test="${apLine.alDate != null }">
-                      <td class="text-center">${apLine.alDate }</td>
-                    </c:if>
-                  </c:forEach>
-                </tr>
-                <tr class="ap-toggle ap-hidden">
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <c:if test="${apLine.alComment != null }">
-                      <td class="text-center">${apLine.alComment}</td>
-                    </c:if>
-                  </c:forEach>
-                </tr>
               </tbody>
             </table>
-            <div class="ap-line-sign-form ap-hidden">
+            <div class="collapse ap-line-sign-form" id="al-sign-form">
               <form action="" method="post">
                 <input type="hidden" name="apNo" value="${ap.apNo }" />
                 <input type="hidden" name="alNo" value="${emNo }" />

@@ -79,16 +79,21 @@ $(document).on('click', '.ap-selected-name', function(event){
   $(this).remove();
 });
 
-let insertAlList = '<ol class="ap-al-list">';
+let insertAlList = '<table class="table mb-0 table-bordered"><tbody><tr>';
+
 // 선택한 결재선 저장
 $(document).on('click', '#ap-alist-selected-sticky .ap-form-btn', function(event){
   $('.ap-selected-name').each(function(index){
-    insertAlList += '<li>'+$(this).text();
+    insertAlList += '<td>'+(index+1)+'. '+$(this).text();
     insertAlList += '<input type="hidden" name="alNo'+(index+1)+'" value="'+$(this).find('.ap-hidden-emNo').val()+'"/>'
-    insertAlList += '</li>'
+    insertAlList += '</td>'
   })
-  insertAlList += '</ol>'
+  insertAlList += '</tr></tbody></table>'
   $(opener.document).find('#ap-list-selected').html(insertAlList);
   window.close();
 })
 
+// form reset 될 때 선택한 결재선 삭제
+$('.ap-form-reset').click(function(){
+  $('#ap-list-selected').empty();
+});
