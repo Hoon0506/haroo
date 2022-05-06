@@ -8,6 +8,8 @@
 		<typeAlias type="com.haroo.domain.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.haroo.domain.SearchVO" alias="SearchVO"/>
 		<typeAlias type="com.haroo.domain.ReplyVO" alias="ReplyVO"/>
+		<typeAlias type="com.haroo.domain.EmployeeVO" alias="EmployeeVO"/>
+		<typeAlias type="com.haroo.domain.TaskVO" alias="TaskVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -21,6 +23,8 @@
 	
 	<mappers>
 		<mapper resource="com/haroo/mapper/Board.xml"/>
+		<mapper resource="com/haroo/mapper/Employee.xml"/>
+		<mapper resource="com/haroo/mapper/Task.xml"/>
 	</mappers>
 	
 </configuration>
