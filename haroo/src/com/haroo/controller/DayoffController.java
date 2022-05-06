@@ -24,19 +24,18 @@ public class DayoffController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// uri �떇蹂�
+		// uri 식별
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length() + 8);
-		System.out.println(requestURI);
+
 		System.out.println(command);
-		
+
 		Action action = null;
 		ActionForward forward = null;
-		System.out.println("list작동전");
-		if (command.equals("list")) { // �쑕媛��쁽�솴 蹂닿린
+
+		if (command.equals("list")) { // 휴가현황 보기
 			action = new ListAction();
-			System.out.println("list작동");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -44,7 +43,7 @@ public class DayoffController extends HttpServlet {
 			}
 		}
 
-		// �럹�씠吏� �씠�룞
+		// 페이지 이동
 		if (forward != null) {
 			if (forward.isRedirect()) { // redirect
 				response.sendRedirect(forward.getPath());

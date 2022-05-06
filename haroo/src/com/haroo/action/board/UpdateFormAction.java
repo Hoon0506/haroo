@@ -20,7 +20,7 @@ public class UpdateFormAction implements Action {
 		
 		request.setAttribute("board", board);
 		
-		forward.setPath("/updateForm.jsp");
+		forward.setPath("/update_form.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

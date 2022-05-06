@@ -26,15 +26,14 @@ public class BoardController extends HttpServlet {
 
 	public BoardController() {
 		super();
-
 	}
-
+	
 	public void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String requestURI = request.getRequestURI().trim(); // /haroo/board/list.do trim : °ø¹éÁ¦°Å
+		String requestURI = request.getRequestURI().trim(); // /haroo/board/list.do trim : ê³µë°±ì œê±°
 		String contextPath = request.getContextPath(); // /haroo
-		String command = requestURI.substring(contextPath.length() + 7); // list.do¸¸³ª¿À°Ô ÇÏ·Á°í
-		System.out.println(command);// list.do¸¸³ª¿È
+		String command = requestURI.substring(contextPath.length() + 7); // list.doë§Œë‚˜ì˜¤ê²Œ í•˜ë ¤ê³ 
+		System.out.println(command);// list.doë§Œë‚˜ì˜´
 
 		Action action = null;
 		ActionForward forward = null;
@@ -98,7 +97,7 @@ public class BoardController extends HttpServlet {
 			}
 		}
 
-		// forwardÀÇ °ªÀÌ µé¾î°£ °æ¿ì
+		// forwardì˜ ê°’ì´ ë“¤ì–´ê°„ ê²½ìš°
 		if (forward != null) {
 			if (forward.isRedirect()) {// redirect
 				response.sendRedirect(forward.getPath());

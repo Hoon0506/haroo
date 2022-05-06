@@ -24,7 +24,7 @@ public class BoardService {
 
 		BoardVO board = new BoardVO();
 		board.setTitle(request.getParameter("title"));
-		board.setWriter("±è¼­À±");
+		board.setWriter("ï¿½è¼­ï¿½ï¿½");
 		board.setContents(request.getParameter("contents"));
 		board.setEmNo(19362300);
 		return dao.insertBoard(board);
@@ -33,17 +33,17 @@ public class BoardService {
 	public List<BoardVO> listBoardService(HttpServletRequest request) throws Exception {
 		SearchVO search = new SearchVO();
 		HttpSession session = request.getSession();
-		if (request.getParameter("area") != null) { // Ã¼Å©¹Ú½º°¡ Ã¼Å©µÈ °æ¿ì
+		if (request.getParameter("area") != null) { // ì²´í¬ë°•ìŠ¤ê°€ ì²´í¬ëœ ê²½ìš°
 			session.removeAttribute("search");
 
 			search.setArea(request.getParameterValues("area"));
 			search.setSearchKey("%" + request.getParameter("searchKey") + "%");
 			session.setAttribute("search", search);
-		} // Ã¼Å©ÇØÁ¦ ÈÄ °Ë»ö ¹öÆ°¸¸ Å¬¸¯
+		} // ì²´í¬í•´ì œ í›„ ê²€ìƒ‰ ë²„íŠ¼ë§Œ í´ë¦­
 		else if (request.getParameter("area") == null && request.getParameter("pageNum") == null) {
 			session.removeAttribute("search");
 		}
-		// ¼¼¼Ç¿¡ °Ë»ö Á¤º¸°¡ ÀÖ´Â °æ¿ì
+		// ì„¸ì…˜ì— ê²€ìƒ‰ ì •ë³´ê°€ ìˆëŠ” ê²½ìš°
 		if (session.getAttribute("search") != null) {
 			search = (SearchVO) session.getAttribute("search");
 		}
@@ -77,10 +77,10 @@ public class BoardService {
 
 	public int insertReplyService(HttpServletRequest request) throws Exception {
 		ReplyVO reply = new ReplyVO();
-		request.setCharacterEncoding("utf-8"); // ÇÑ±Û±úÁü ¹æÁö
-		reply.setReWriter("±è¼­À±");
+		request.setCharacterEncoding("utf-8"); // í•œê¸€ê¹¨ì§ ë°©ì§€
+		reply.setReWriter("ê¹€ì„œìœ¤");
 		reply.setReContents(request.getParameter("reContents"));
-		reply.setBdNo(Integer.parseInt(request.getParameter("bdNo"))); // getParameter °ªÀº StringÀ¸·Î ¿À±â¿¡ Á¤¼ö·Î º¯È¯ÇØ¾ßÇÑ´Ù.
+		reply.setBdNo(Integer.parseInt(request.getParameter("bdNo"))); // getParameter ê°’ì€ Stringìœ¼ë¡œ ì˜¤ê¸°ì— ì •ìˆ˜ë¡œ ë³€í™˜í•´ì•¼í•œë‹¤.
 
 		return dao.insertReply(reply);
 	}// end insertReplyService
