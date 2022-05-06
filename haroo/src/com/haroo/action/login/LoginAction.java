@@ -26,7 +26,8 @@ public class LoginAction implements Action {
             actionForward.setRedirect(false);
             httpSession.setAttribute("employeeVO", employeeVO);
         } else {
-            actionForward.setPath("/login");
+            actionForward.setPath("/haroo/login");
+            System.out.println("로그인에러");
             actionForward.setRedirect(true);
         }
 

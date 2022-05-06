@@ -5,7 +5,7 @@
     <title>Haroo - 로그인</title>
 </head>
 <body>
-<form action="main" method="post">
+<form action="/haroo/main" method="post">
     아이디 : <input type="text" name="em_no"><br>
     패스워드 : <input type="password" name="em_pw"><br>
     <input type="submit" value="로그인">

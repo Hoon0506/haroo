@@ -4,27 +4,45 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+<!-- 	<settings> -->
+<!-- 		<setting name="mapUnderscoreToCamelCase" value="true" /> -->
+<!-- 	</settings> -->
 	<typeAliases>
-		<typeAlias type="com.haroo.domain.BoardVO" alias="BoardVO"/>
-		<typeAlias type="com.haroo.domain.SearchVO" alias="SearchVO"/>
-		<typeAlias type="com.haroo.domain.ReplyVO" alias="ReplyVO"/>
-		<typeAlias type="com.haroo.domain.EmployeeVO" alias="EmployeeVO"/>
-		<typeAlias type="com.haroo.domain.TaskVO" alias="TaskVO"/>
+		<typeAlias type="com.haroo.domain.BoardVO" alias="BoardVO" />
+		<typeAlias type="com.haroo.domain.SearchVO" alias="SearchVO" />
+		<typeAlias type="com.haroo.domain.ReplyVO" alias="ReplyVO" />
+		<!-- 홍기 -->
+		<typeAlias type="com.haroo.domain.EmployeeVO" alias="EmployeeVO" />
+		<typeAlias type="com.haroo.domain.TaskVO" alias="TaskVO" />
+		<!-- 자은 -->
+		<typeAlias type="com.haroo.domain.ApprovalVO"
+			alias="ApprovalVO" />
+		<typeAlias type="com.haroo.domain.ApprovalLineVO"
+			alias="ApprovalLineVO" />
+		<typeAlias type="com.haroo.domain.LeaveVO" alias="LeaveVO" />
+		<typeAlias type="com.haroo.domain.ExpenseListVO"
+			alias="ExpenseListVO" />
+		<typeAlias type="com.haroo.domain.ApLineEmpVO"
+			alias="ApLineEmpVO" />
 	</typeAliases>
-	
+
 	<environments default="development">
 		<environment id="development">
-			<transactionManager type="JDBC"/>
+			<transactionManager type="JDBC" />
 			<dataSource type="JNDI">
-				<property name="data_source" value="java:comp/env/jdbc/oracle"/>
+				<property name="data_source"
+					value="java:comp/env/jdbc/oracle" />
 			</dataSource>
-		</environment>		
+		</environment>
 	</environments>
-	
+
 	<mappers>
-		<mapper resource="com/haroo/mapper/Board.xml"/>
-		<mapper resource="com/haroo/mapper/Employee.xml"/>
-		<mapper resource="com/haroo/mapper/Task.xml"/>
+		<mapper resource="com/haroo/mapper/Board.xml" />
+		<!-- 홍기 -->
+		<mapper resource="com/haroo/mapper/Employee.xml" />
+		<mapper resource="com/haroo/mapper/Task.xml" />
+		<!-- 자은 -->
+		<mapper resource="com/haroo/mapper/Approval.xml" />
 	</mappers>
-	
+
 </configuration>
