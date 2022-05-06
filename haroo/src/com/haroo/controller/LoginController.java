@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/login")) action = new LoginFormAction();
+        if (requestURI.equals("/haroo/login")) action = new LoginFormAction();
         try {
             actionForward = action.execute(request, response);
 
@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/main")) action = new LoginAction();
+        if (requestURI.equals("/haroo/main")) action = new LoginAction();
         try {
             actionForward = action.execute(request, response);
 

@@ -9,7 +9,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/mypage/update-information" method="post">
+<form action="/haroo/mypage/update-information" method="post">
     <input type="hidden" name="em_no" value="${employeeVO.getEm_no()}">
     사원번호 : <%=employeeVO.getEm_no()%><br>
     직책번호 : <%=employeeVO.getPo_no()%><br>

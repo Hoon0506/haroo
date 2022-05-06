@@ -28,7 +28,7 @@ public class TaskController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/task")) action = new TaskFormAction();
+        if (requestURI.equals("/haroo/task")) action = new TaskFormAction();
         try {
             actionForward = action.execute(request, response);
         } catch (Exception e) {

@@ -28,7 +28,7 @@ public class MyPageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/mypage")) action = new MyPageFormAction();
+        if (requestURI.equals("/haroo/mypage")) action = new MyPageFormAction();
         try {
             actionForward = action.execute(request, response);
 
@@ -50,7 +50,7 @@ public class MyPageController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/mypage/update-information")) action = new MyPageAction();
+        if (requestURI.equals("/haroo/mypage/update-information")) action = new MyPageAction();
 
         try {
             actionForward = action.execute(request, response);
