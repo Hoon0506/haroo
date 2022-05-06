@@ -51,9 +51,9 @@
                                 aria-current="page" href="#">인사정보</a></li>
         <li class="nav-item"><a class="nav-link" href="#">근태조회</a></li>
         <li class="nav-item"><a class="nav-link" href="task">캘린더</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+        <li class="nav-item"><a class="nav-link" href="/haroo/board/listAction.do">게시판</a></li>
         <li class="nav-item"><a class="nav-link" href="#">설문조사</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">전자결재</a></li>
+        <li class="nav-item"><a class="nav-link" href="/haroo/ap/main">전자결재</a></li>
         <li class="nav-item"><a class="nav-link disabled">채팅</a>
         </li>
     </ul>

@@ -21,7 +21,7 @@
 
     휴대전화 : <input type="text" name="em_phone" value="${employeeVO.getEm_phone()}"><br>
     이메일 : <input type="text" name="em_email" value="${employeeVO.getEm_email()}"><br>
-    비밀번호 : <input type="password" name="em_pw" value="${employeeVO.getEm_pw()}>"><br>
+    비밀번호 : <input type="password" name="em_pw" value="${employeeVO.getEm_pw()}"><br>
     <input type="submit" value="수정하기">
 </form>
 </body>

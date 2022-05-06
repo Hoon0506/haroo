@@ -24,6 +24,9 @@
 			alias="ExpenseListVO" />
 		<typeAlias type="com.haroo.domain.ApLineEmpVO"
 			alias="ApLineEmpVO" />
+		<!-- 주영 -->
+		<typeAlias type="com.haroo.domain.AttendanceVO" alias="AttendanceVO"/>
+		<typeAlias type="com.haroo.domain.DayoffVO" alias="DayoffVO"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -43,6 +46,9 @@
 		<mapper resource="com/haroo/mapper/Task.xml" />
 		<!-- 자은 -->
 		<mapper resource="com/haroo/mapper/Approval.xml" />
+		<!-- 주영 -->
+		<mapper resource="com/haroo/mapper/Attendance.xml"/>
+		<mapper resource="com/haroo/mapper/Dayoff.xml"/>
 	</mappers>
 
 </configuration>
