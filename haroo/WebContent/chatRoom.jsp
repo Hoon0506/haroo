@@ -518,6 +518,9 @@
 	              </span>
 	            </div>
 	          </div>
+	          <form action="download.jsp" method="post" enctype="multipart/form-data">	
+	        	파일: <input type="file"	name="file"><br>
+	        	<input type="submit" value="업로드"><br>
 	        </div>
 	      </div>
 	

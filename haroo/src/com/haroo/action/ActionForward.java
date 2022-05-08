@@ -3,8 +3,15 @@ package com.haroo.action;
 public class ActionForward {
 	private boolean isRedirect;
 	private String path;
-	
-	public ActionForward() {}
+
+	public ActionForward() {
+	}
+
+	public ActionForward(boolean isRedirect, String path) {
+		super();
+		this.isRedirect = isRedirect;
+		this.path = path;
+	}
 
 	public boolean isRedirect() {
 		return isRedirect;
@@ -21,6 +28,4 @@ public class ActionForward {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	
 }

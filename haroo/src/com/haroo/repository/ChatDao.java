@@ -1,4 +1,4 @@
-package com.haroo.model;
+package com.haroo.repository;
 
 import java.io.InputStream;
 
@@ -7,10 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class ChatDAO {
-	private static ChatDAO dao = new ChatDAO();
+import com.haroo.domain.FileVO;
+
+public class ChatDao {
+	private static ChatDao dao = new ChatDao();
 	
-	public static ChatDAO getInstance() {
+	public static ChatDao getInstance() {
 		return dao;
 	}
 	
@@ -27,5 +29,13 @@ public class ChatDAO {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 
+	private int chatBoard(ChatDao chat) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		return 0;
+	}
 
+	public int uploadFile(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

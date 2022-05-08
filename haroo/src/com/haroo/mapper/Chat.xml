@@ -6,13 +6,13 @@
 <mapper namespace="com.haroo.mappeer.ChatMapper">
 	<cache />
 	
-	<insert id="insertChat" parameterType="Chat">
+	<select id="insertChat" parameterType="Chat">
 		insert into chat(
-		seq, chatName, chatTime, chatFrom, chatTo
+		chatNo, chatName, chatTime, chatFrom, chatTo
 		)values(
 		ch_seq.nextval, #{chatName}, #{chatTime}, #{chatFrom}, #{chatTo}
 		)
 
-	</insert>
+	</select>
 	
 </mapper>
