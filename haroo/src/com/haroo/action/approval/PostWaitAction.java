@@ -16,7 +16,7 @@ public class PostWaitAction implements Action {
     
     service.signApprovalService(request);
     
-    forward.setPath("/haroo/ap/wait");
+    forward.setPath("/haroo/ap/main");
     forward.setRedirect(true);
     
     return forward;

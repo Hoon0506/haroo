@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>문서보기</title>
-<!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <!-- editor -->
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-  <link rel="stylesheet" href="/haroo/css/approval-styles.css" />
+<script type="text/javascript">
+window.onload = function() {
+  const apRefreshPath = sessionStorage.getItem('apRefreshPath');
+  if(apRefreshPath != null && apRefreshPath != '/haroo/ap/main') {
+    location.href = '/haroo/ap/main';
+  }
+}
+</script>
 </head>
 <body>
   <div class="ap-form-container">
@@ -80,7 +80,7 @@
               </tbody>
             </table>
             <div class="collapse ap-line-sign-form" id="al-sign-form">
-              <form action="" method="post">
+              <form action="/haroo/ap/wait/${ap.apNo }" method="post">
                 <input type="hidden" name="apNo" value="${ap.apNo }" />
                 <input type="hidden" name="alNo" value="${employeeVO.em_no }" />
               <div class="input-group input-group-sm">
@@ -138,14 +138,14 @@
             <td>${ap.leave.leStart } - ${ap.leave.leEnd } (${ap.leave.leDays }일 간)</td>
           </tr>
         </c:if>
-        <tr>
-          <th class="text-center" scope="row" colspan="2">내용</th>
-        </tr>
         <c:if test="${ap.expense != null }">
         <tr>
            <td colspan="2">
             <table class="table mb-0 table-bordered">
               <tbody>
+                <tr>
+                  <th class="text-center" scope="row" colspan="4">품의목록</th>
+                </tr>
                 <tr>
                   <th class="text-center">품목</th>
                   <th class="text-center">수량</th>
@@ -162,7 +162,7 @@
                 <c:set var="total" value="${ex.elTotal }"></c:set>
               </c:forEach>  
                 <tr>
-                  <td class="text-center" colspan="2">합계</td>
+                  <th class="text-center" colspan="2">합계</th>
                   <td class="text-center" colspan="2">${total }</td>
                 </tr>
               </tbody>
@@ -170,6 +170,9 @@
           </td>
         </tr>
         </c:if>
+        <tr>
+          <th class="text-center" scope="row" colspan="2">내용</th>
+        </tr>
         <tr>
           <td colspan="2">${ap.apContent }</td>
         </tr>
@@ -187,7 +190,5 @@
       </tbody>
     </table>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/haroo/js/approval.js"></script>
 </body>
 </html>

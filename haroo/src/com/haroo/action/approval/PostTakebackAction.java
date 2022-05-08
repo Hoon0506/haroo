@@ -16,7 +16,7 @@ public class PostTakebackAction implements Action {
     
     service.takebackApprovalService(request);
     
-    forward.setPath("/haroo/ap/process");
+    forward.setPath("/haroo/ap/main");
     forward.setRedirect(true);
     
     return forward;
