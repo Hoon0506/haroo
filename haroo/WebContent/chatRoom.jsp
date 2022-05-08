@@ -9,7 +9,22 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet"	href="css/custom.css">
-	<script src="chatRoom.js" type="text/javascript"></script>
+	<!-- <script src="chatRoom.js" type="text/javascript"></script> -->
+	<script type="text/javascript">
+	$(function(){
+	    $(".heading-compose").click(function() {
+	      $(".side-two").css({
+	        "left": "0"
+	      });
+	    });
+
+	    $(".newMessage-back").click(function() {
+	      $(".side-two").css({
+	        "left": "-100%"
+	      });
+	    });
+	})
+	</script>
 	
 </head>
 <body>

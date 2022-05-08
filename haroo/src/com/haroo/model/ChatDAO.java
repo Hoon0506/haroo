@@ -27,8 +27,5 @@ public class ChatDAO {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 
-	private int chatBoard(ChatDAO chat) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		
-	}
+
 }

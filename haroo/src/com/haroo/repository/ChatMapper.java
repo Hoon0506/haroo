@@ -1,6 +1,6 @@
-package com.haroo.mapper;
+package com.haroo.repository;
 
-import com.haroo.model.ChatVO;
+import com.haroo.domain.ChatVO;
 
 public interface ChatMapper {
 	int insertChat(ChatVO chat);

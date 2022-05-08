@@ -1,4 +1,4 @@
-package com.haroo.model;
+package com.haroo.domain;
 
 import java.io.Serializable;
 
