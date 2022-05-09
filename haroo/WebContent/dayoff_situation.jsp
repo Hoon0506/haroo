@@ -71,9 +71,10 @@
 			</a>
 			<ul class="list-unstyled ps-0">
 				<li class="mb-1">
-					<button class="btn btn-toggle align-items-center rounded collapsed"
+					<a class="btn btn-toggle align-items-center rounded collapsed"
 						data-bs-toggle="collapse" data-bs-target="#home-collapse"
-						aria-expanded="false">근태현황</button>
+						aria-expanded="false" role="button" href="/haroo/attendance/status">근태현황</a>
+					<input type="hidden" name="emNo" value="${dayoff.emNo }" />
 				</li>
 				<li class="mb-1">
 

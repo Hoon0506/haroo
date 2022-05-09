@@ -32,7 +32,7 @@ public class DayoffService {
 		      dayoff.setDaCnt(dao.updateUse(emNo)); //사용일수
 		      dayoff.setDaRemainder(dao.updateRemainder(emNo)); //잔여일수
 		      dayoff = dao.listDayoff(emNo);
-		    }
+		}
 		
 		return dayoff;
 		//return null;

@@ -1,8 +1,5 @@
 package com.haroo.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class ActionForward {
 	private boolean isRedirect;
 	private String path;
