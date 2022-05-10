@@ -17,7 +17,7 @@ public class MyPageAction implements Action {
 
         employeeService.updateEmployeeService(request, response);
 
-        actionForward.setPath("/mypage");
+        actionForward.setPath("/haroo/mypage");
         actionForward.setRedirect(true);
 
         return actionForward;

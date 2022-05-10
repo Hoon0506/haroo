@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haroo.mapper.BoardMapper">
+	<cache />
+
+	<insert id="insertBoard" parameterType="BoardVO">
+		insert into board(
+		bd_no, bd_title, bd_contents, bd_writer, bd_regdate, bd_hitcount, em_no
+		)
+		values(
+		bd_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0, ${emNo}
+		)
+	</insert>
+
+	<select id="listBoard" parameterType="SearchVO" resultType="BoardVO">
+		select bd_no as bdNo, bd_title as title,
+			bd_contents as contents, bd_writer as writer, bd_regdate as regdate, 
+			bd_hitcount as hitcount, em_no as emNo
+		from board
+		<if test="area != null">
+			<where>
+				<foreach collection="area" item="item" separator="OR"
+					open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+		order by bd_no desc
+	</select>
+	
+	<select id="detailBoard" parameterType="int" resultType="BoardVO">
+		select bd_no as bdNo, bd_title as title,
+			bd_contents as contents, bd_writer as writer, bd_regdate as regdate, 
+			bd_hitcount as hitcount, em_no as emNo
+			from board where bd_no=#{bdNo}
+	</select>
+	
+	<update id="updateBoard" parameterType="BoardVO">
+		update board set
+		bd_title=#{title}, bd_contents=#{contents} where bd_no=#{bdNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where bd_no=#{bdNo}
+	</delete>
+	
+	<select id="countBoard" parameterType="SearchVO" resultType="int">
+		select count(*) from board
+		<if test="area != null">
+			<where>
+				<!-- where (title LIKE %JSP% OR writer LIKE %JSP)-->
+				<foreach collection="area" item="item" separator="OR"
+					open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insertReply" parameterType="ReplyVO">
+		insert into reply
+			 values(re_seq.nextval, #{bdNo}, #{reWriter}, #{reContents}, sysdate)
+	</insert>
+	
+	<select id="listReply" parameterType="int" resultType="ReplyVO">
+		select re_no as reNo, bd_no as bdNo, re_contents as reContents, re_writer as reWriter, re_regdate as reRegdate
+		from reply where bd_no=#{bdNo}
+	</select>
+</mapper>

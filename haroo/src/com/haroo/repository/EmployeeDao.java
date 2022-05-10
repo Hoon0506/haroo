@@ -1,12 +1,18 @@
 package com.haroo.repository;
+<<<<<<< HEAD:haroo/src/com/haroo/repository/EmployeeDao.java
 
 import com.haroo.domain.EmployeeVO;
 import com.haroo.mapper.EmployeeMapper;
+=======
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a:haroo/src/haroo/repository/EmployeeDao.java
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.haroo.domain.EmployeeVO;
+import com.haroo.mapper.EmployeeMapper;
 
 import java.io.InputStream;
 
@@ -31,7 +37,7 @@ public class EmployeeDao {
         return new SqlSessionFactoryBuilder().build(inputStream);
     }
 
-    //ì‚¬ì› ê°€ì ¸ì˜¤ê¸°
+    //?‚¬?› ê°?? ¸?˜¤ê¸?
     public EmployeeVO loginEmployee(EmployeeVO employeeVO) {
         SqlSession sqlSession = getSqlSessionFactory().openSession();
 
@@ -49,7 +55,7 @@ public class EmployeeDao {
         return finalEmployeeVO;
     }
 
-    //ì‚¬ì› ë§ˆì´í˜ì´ì§€ ìˆ˜ì •
+    //?‚¬?› ë§ˆì´?˜?´ì§? ?ˆ˜? •
     public int updateEmployee(EmployeeVO employeeVO) {
         SqlSession sqlSession = getSqlSessionFactory().openSession();
         int result = 0;

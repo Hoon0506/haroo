@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//êµ¬í˜„ ì¤‘
+//êµ¬í˜„ ì¤?
 //@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
@@ -26,7 +26,7 @@ public class AuthenticationFilter implements Filter {
             httpServletResponse.sendRedirect("/login");
         }
 
-        System.out.println("í•„í„° ì‹¤í–‰");
+        System.out.println("?•„?„° ?‹¤?–‰");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

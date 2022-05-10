@@ -38,6 +38,7 @@
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 <body class="text-center">
 <main class="form-signin">
     <form action="main" method="post">
@@ -58,5 +59,13 @@
     </form>
 </main>
 
+=======
+<body>
+<form action="/haroo/main" method="post">
+    아이디 : <input type="text" name="em_no"><br>
+    패스워드 : <input type="password" name="em_pw"><br>
+    <input type="submit" value="로그인">
+</form>
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
 </body>
 </html>

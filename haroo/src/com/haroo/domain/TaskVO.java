@@ -3,6 +3,7 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class TaskVO implements Serializable {
+<<<<<<< HEAD
     private int id;
     private String groupId;
     private String title;
@@ -41,6 +42,38 @@ public class TaskVO implements Serializable {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+=======
+    private int no;
+    private String title;
+    private String place;
+    private String friends;
+    private String start;
+    private String end;
+    private String time;
+    private String contents;
+    private int emNo;
+
+    public TaskVO() {}
+
+    public TaskVO(int no, String title, String place, String friends, String start, String end, String time, String contents, int emNo) {
+        this.no = no;
+        this.title = title;
+        this.place = place;
+        this.friends = friends;
+        this.start = start;
+        this.end = end;
+        this.time = time;
+        this.contents = contents;
+        this.emNo = emNo;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
     }
 
     public String getTitle() {
@@ -51,6 +84,7 @@ public class TaskVO implements Serializable {
         this.title = title;
     }
 
+<<<<<<< HEAD
     public String getWriter() {
         return writer;
     }
@@ -65,6 +99,22 @@ public class TaskVO implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+=======
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getFriends() {
+        return friends;
+    }
+
+    public void setFriends(String friends) {
+        this.friends = friends;
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
     }
 
     public String getStart() {
@@ -83,6 +133,7 @@ public class TaskVO implements Serializable {
         this.end = end;
     }
 
+<<<<<<< HEAD
     public boolean isAllday() {
         return allday;
     }
@@ -131,5 +182,29 @@ public class TaskVO implements Serializable {
                 ", borderColor='" + borderColor + '\'' +
                 ", em_no=" + em_no +
                 '}';
+=======
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public int getEmNo() {
+        return emNo;
+    }
+
+    public void setEmNo(int emNo) {
+        this.emNo = emNo;
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
     }
 }

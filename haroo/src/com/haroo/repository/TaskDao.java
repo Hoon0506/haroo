@@ -1,5 +1,6 @@
 package com.haroo.repository;
 
+<<<<<<< HEAD
 import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.TaskVO;
 import com.haroo.mapper.EmployeeMapper;
@@ -70,4 +71,7 @@ public class TaskDao {
 
         return result;
     }
+=======
+public class TaskDao {
+>>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
 }
