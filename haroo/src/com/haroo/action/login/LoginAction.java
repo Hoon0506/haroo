@@ -1,9 +1,9 @@
-package haroo.action.login;
+package com.haroo.action.login;
 
-import haroo.action.Action;
-import haroo.action.ActionForward;
-import haroo.domain.EmployeeVO;
-import haroo.service.EmployeeService;
+import com.haroo.action.Action;
+import com.haroo.action.ActionForward;
+import com.haroo.domain.EmployeeVO;
+import com.haroo.service.EmployeeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

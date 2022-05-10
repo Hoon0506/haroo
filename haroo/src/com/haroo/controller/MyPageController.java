@@ -1,9 +1,9 @@
-package haroo.controller;
+package com.haroo.controller;
 
-import haroo.action.Action;
-import haroo.action.ActionForward;
-import haroo.action.login.LoginAction;
-import haroo.action.login.LoginFormAction;
+import com.haroo.action.mypage.MyPageAction;
+import com.haroo.action.mypage.MyPageFormAction;
+import com.haroo.action.Action;
+import com.haroo.action.ActionForward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,20 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet({"/login", "/main"})
-public class LoginController extends HttpServlet {
+@WebServlet("/mypage/*")
+public class MyPageController extends HttpServlet {
+
     private Action action;
     private ActionForward actionForward;
 
-    public LoginController() {
+    public MyPageController() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/login")) action = new LoginFormAction();
+        if (requestURI.equals("/mypage")) action = new MyPageFormAction();
         try {
             actionForward = action.execute(request, response);
 
@@ -48,7 +48,8 @@ public class LoginController extends HttpServlet {
 
         String requestURI = request.getRequestURI();
 
-        if (requestURI.equals("/main")) action = new LoginAction();
+        if (requestURI.equals("/mypage/update-information")) action = new MyPageAction();
+
         try {
             actionForward = action.execute(request, response);
 

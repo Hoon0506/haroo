@@ -1,12 +1,11 @@
-package haroo.service;
+package com.haroo.service;
 
-import haroo.domain.EmployeeVO;
-import haroo.repository.EmployeeDao;
+import com.haroo.domain.EmployeeVO;
+import com.haroo.repository.EmployeeDao;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class EmployeeService extends HttpServlet {
 

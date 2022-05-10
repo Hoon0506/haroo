@@ -1,6 +1,6 @@
-package haroo.mapper;
+package com.haroo.mapper;
 
-import haroo.domain.EmployeeVO;
+import com.haroo.domain.EmployeeVO;
 
 public interface EmployeeMapper {
     EmployeeVO loginEmployee(EmployeeVO employeeVO);

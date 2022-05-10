@@ -5,8 +5,8 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="haroo.domain.EmployeeVO" alias="EmployeeVO"/>
-		<typeAlias type="haroo.domain.TaskVO" alias="TaskVO"/>
+		<typeAlias type="com.haroo.domain.EmployeeVO" alias="EmployeeVO"/>
+		<typeAlias type="com.haroo.domain.TaskVO" alias="TaskVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -19,8 +19,8 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="haroo/mapper/Employee.xml"/>
-		<mapper resource="haroo/mapper/Task.xml"/>
+		<mapper resource="com.haroo/mapper/Employee.xml"/>
+		<mapper resource="com.haroo/mapper/Task.xml"/>
 	</mappers>
 	
 </configuration>

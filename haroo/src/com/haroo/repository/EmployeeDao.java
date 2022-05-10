@@ -1,7 +1,7 @@
-package haroo.repository;
+package com.haroo.repository;
 
-import haroo.domain.EmployeeVO;
-import haroo.mapper.EmployeeMapper;
+import com.haroo.domain.EmployeeVO;
+import com.haroo.mapper.EmployeeMapper;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

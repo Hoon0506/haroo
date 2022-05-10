@@ -1,4 +1,4 @@
-package haroo.domain;
+package com.haroo.domain;
 
 import java.io.Serializable;
 

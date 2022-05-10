@@ -39,7 +39,7 @@
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_no}님 환영합니다 :)</button>
+                <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_name}님 환영합니다 :)</button>
                 <button type="button" class="btn btn-warning"><a href="mypage">마이 페이지</a></button>
             </div>
         </div>
@@ -64,12 +64,15 @@
 
     <div class="p-3 bg-white" style="width: 280px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-            <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+            <svg class="bi me-2" width="30" height="24">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
             <span class="fs-5 fw-semibold">Collapsible</span>
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#home-collapse" aria-expanded="false">
                     Home
                 </button>
                 <div class="collapse" id="home-collapse" style="">
@@ -81,7 +84,8 @@
                 </div>
             </li>
             <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
                     Dashboard
                 </button>
                 <div class="collapse" id="dashboard-collapse" style="">
@@ -94,7 +98,8 @@
                 </div>
             </li>
             <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#orders-collapse" aria-expanded="false">
                     Orders
                 </button>
                 <div class="collapse" id="orders-collapse" style="">
@@ -108,7 +113,8 @@
             </li>
             <li class="border-top my-3"></li>
             <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#account-collapse" aria-expanded="false">
                     Account
                 </button>
                 <div class="collapse" id="account-collapse" style="">
@@ -162,8 +168,9 @@
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted">&copy; 2021 Company, Inc</p>
 
-        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <h3>haroo</h3>
+        <a href="/"
+           class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <h3>com.haroo</h3>
         </a>
 
         <ul class="nav col-md-4 justify-content-end">
