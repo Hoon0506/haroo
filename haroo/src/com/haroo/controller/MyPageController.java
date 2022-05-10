@@ -1,10 +1,7 @@
 package com.haroo.controller;
 
-<<<<<<< HEAD:haroo/src/com/haroo/controller/MyPageController.java
 import com.haroo.action.mypage.MyPageAction;
 import com.haroo.action.mypage.MyPageFormAction;
-=======
->>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a:haroo/src/haroo/controller/MyPageController.java
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
 
@@ -14,10 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.haroo.action.mypage.MyPageAction;
-import com.haroo.action.mypage.MyPageFormAction;
-
 import java.io.IOException;
 
 @WebServlet("/mypage/*")
