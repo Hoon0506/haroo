@@ -2,13 +2,8 @@ package com.haroo.action.task;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
-<<<<<<< HEAD:haroo/src/com/haroo/action/task/TaskFormAction.java
 import com.haroo.domain.TaskVO;
 import com.haroo.service.TaskService;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-=======
->>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a:haroo/src/haroo/action/task/TaskFormAction.java
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

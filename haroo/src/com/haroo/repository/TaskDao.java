@@ -1,9 +1,6 @@
 package com.haroo.repository;
 
-<<<<<<< HEAD
-import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.TaskVO;
-import com.haroo.mapper.EmployeeMapper;
 import com.haroo.mapper.TaskMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -41,7 +38,7 @@ public class TaskDao {
         List<TaskVO> taskVOList = null;
 
         try {
-            taskVOList = sqlSession.selectList("haroo.mapper.TaskMapper.getTaskList", em_no);
+            taskVOList = sqlSession.selectList("com.haroo.mapper.TaskMapper.getTaskList", em_no);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,7 +68,4 @@ public class TaskDao {
 
         return result;
     }
-=======
-public class TaskDao {
->>>>>>> cc8be617ba2be86f7e24b1a8a45710aa8b502c6a
 }
