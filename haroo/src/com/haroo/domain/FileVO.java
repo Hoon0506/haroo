@@ -1,58 +1,62 @@
 package com.haroo.domain;
 
-public class FileVO {
-	private String contentsNo;
-	private String contentsName;
-	private String contentsRealName;
-	private int contentsSize;
+import java.io.Serializable;
+
+public class FileVO implements Serializable {
+	private int co_no;
+	private String co_name;
+	private int co_size;
+	private String co_realname;
 	
 	public FileVO() {}
-	
-	public FileVO(String contentsNo, String contentsName, String contentsRealName, int contentssize) {
+
+	public FileVO(int co_no, String co_name, int co_size, String co_realname) {
 		super();
-		this.contentsNo = contentsNo;
-		this.contentsName = contentsName;
-		this.contentsRealName = contentsRealName;
-		this.contentsSize = contentsSize;
+		this.co_no = co_no;
+		this.co_name = co_name;
+		this.co_size = co_size;
+		this.co_realname = co_realname;
 	}
 
-	public String getContentsNo() {
-		return contentsNo;
+	public int getCo_no() {
+		return co_no;
 	}
 
-	public void setContentsNo(String contentsNo) {
-		this.contentsNo = contentsNo;
+	public void setCo_no(int co_no) {
+		this.co_no = co_no;
 	}
 
-	public String getContentsName() {
-		return contentsName;
+	public String getCo_name() {
+		return co_name;
 	}
 
-	public void setContentsName(String contentsName) {
-		this.contentsName = contentsName;
+	public void setCo_name(String co_name) {
+		this.co_name = co_name;
 	}
 
-	public String getContentsRealName() {
-		return contentsRealName;
+	public int getCo_size() {
+		return co_size;
 	}
 
-	public void setContentsRealName(String contentsRealName) {
-		this.contentsRealName = contentsRealName;
+	public void setCo_size(int co_size) {
+		this.co_size = co_size;
 	}
 
-	public int getContentssize() {
-		return contentsSize;
+	public String getCo_realname() {
+		return co_realname;
 	}
 
-	public void setContentssize(int contentssize) {
-		this.contentsSize = contentsSize;
+	public void setCo_realname(String co_realname) {
+		this.co_realname = co_realname;
 	}
 
 	@Override
 	public String toString() {
-		return "FileVO [contentsNo=" + contentsNo + ", contentsName=" + contentsName + ", contentsRealName="
-				+ contentsRealName + ", contentsSize=" + contentsSize + "]";
+		return "FileVO [co_no=" + co_no + ", co_name=" + co_name + ", co_size=" + co_size + ", co_realname="
+				+ co_realname + "]";
 	}
 	
 	
+	
+
 }

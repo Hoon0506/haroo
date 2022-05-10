@@ -4,10 +4,17 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.haroo.domain.ChatVO;
+import com.haroo.domain.FileVO;
+import com.haroo.mapper.BoardMapper;
+import com.haroo.mapper.ChatMapper;
 
 public class FileDAO {
 	private Connection conn;
@@ -31,17 +38,42 @@ public class FileDAO {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 	
-	public int upload(String contentsName, String contentsRealName) {
-		String sql = "INSERT INTO FILE VALUES (?, ?)";
-		 try {
-			 PreparedStatement pstmt = conn.prepareStatement(sql);
-			 ResultSet rs = null;
-			 pstmt.setString(1, contentsName);
-			 pstmt.setString(2, contentsRealName);
-			return pstmt.executeUpdate();
+	
+	
+	public List<FileVO> listFileVO() {
+		SqlSession sqlSession = getSqlSessionFactory().openSession(); 
+		List<FileVO> list = null;
+		try {
+			list = sqlSession.getMapper(ChatMapper.class).listFile();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
 		}
-		 return -1;
+		
+		return list;
+	}
+	
+	public int uploadFile(FileVO fileVO) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		int re = -1;
+		
+		try {
+			re = sqlSession.getMapper(ChatMapper.class).uploadFile(fileVO);
+			if(re>0) {
+				sqlSession.commit();
+			}else {
+				sqlSession.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return re;
 	}
 }
