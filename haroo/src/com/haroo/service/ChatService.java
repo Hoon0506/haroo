@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.haroo.domain.FileVO;
 import com.haroo.repository.ChatDao;
-import com.haroo.repository.FileDAO;
+import com.haroo.repository.FileDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -15,11 +15,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ChatService {
 	private static ChatService service = new ChatService();
 	private static ChatDao dao;
-	private static FileDAO dao2;
+	private static FileDao dao2;
 	
 	public static ChatService getInstance() {
 		dao = ChatDao.getInstance();
-		dao2 = FileDAO.getInstance();
+		dao2 = FileDao.getInstance();
 		return service;
 	}
 	

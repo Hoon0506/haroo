@@ -16,12 +16,12 @@ import com.haroo.domain.FileVO;
 import com.haroo.mapper.BoardMapper;
 import com.haroo.mapper.ChatMapper;
 
-public class FileDAO {
+public class FileDao {
 	private Connection conn;
 	
-	private static FileDAO dao = new FileDAO();
+	private static FileDao dao = new FileDao();
 	
-	public static FileDAO getInstance() {
+	public static FileDao getInstance() {
 		return dao;
 	}
 	
