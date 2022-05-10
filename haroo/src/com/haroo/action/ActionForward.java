@@ -1,4 +1,4 @@
-package haroo.action;
+package com.haroo.action;
 
 public class ActionForward {
     private boolean isRedirect;//Dispatcher vs Redirect

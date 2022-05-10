@@ -1,4 +1,4 @@
-package haroo.action;
+package com.haroo.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
