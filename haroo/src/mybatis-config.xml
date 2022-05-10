@@ -4,22 +4,59 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<typeAliases>
-		<typeAlias type="com.haroo.domain.DepartmentVO" alias="DepartmentVO" />
-	</typeAliases>
+<!--  <settings> -->
+<!--    <setting name="mapUnderscoreToCamelCase" value="true" /> -->
+<!--  </settings> -->
+  <typeAliases>
+    <typeAlias type="com.haroo.domain.BoardVO" alias="BoardVO" />
+    <typeAlias type="com.haroo.domain.SearchVO" alias="SearchVO" />
+    <typeAlias type="com.haroo.domain.ReplyVO" alias="ReplyVO" />
+    <!-- 홍기 -->
+    <typeAlias type="com.haroo.domain.EmployeeVO" alias="EmployeeVO" />
+    <typeAlias type="com.haroo.domain.TaskVO" alias="TaskVO" />
+    <!-- 자은 -->
+    <typeAlias type="com.haroo.domain.ApprovalVO"
+      alias="ApprovalVO" />
+    <typeAlias type="com.haroo.domain.ApprovalLineVO"
+      alias="ApprovalLineVO" />
+    <typeAlias type="com.haroo.domain.LeaveVO" alias="LeaveVO" />
+    <typeAlias type="com.haroo.domain.ExpenseListVO"
+      alias="ExpenseListVO" />
+    <typeAlias type="com.haroo.domain.ApLineEmpVO"
+      alias="ApLineEmpVO" />
+    <!-- 주영 -->
+    <typeAlias type="com.haroo.domain.AttendanceVO" alias="AttendanceVO"/>
+    <typeAlias type="com.haroo.domain.DayoffVO" alias="DayoffVO"/>
+    <!-- 지윤 -->
+    <typeAlias type="com.haroo.domain.DepartmentVO" alias="DepartmentVO" />
+    <!-- 재성 -->
+	<typeAlias type="com.haroo.domain.ChatVO" alias="ChatVO"/>
+	<typeAlias type="com.haroo.domain.FileVO" alias="FileVO"/>
+  </typeAliases>
 
-	<environments default="development">
-		<environment id="development">
-			<transactionManager type="JDBC" />
-			<dataSource type="JNDI">
-				<property name="data_source"
-					value="java:comp/env/jdbc/oracle" />
-			</dataSource>
-		</environment>
-	</environments>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="JNDI">
+        <property name="data_source"
+          value="java:comp/env/jdbc/oracle" />
+      </dataSource>
+    </environment>
+  </environments>
 
-	<mappers>
-		<mapper resource="com/haroo/mapper/Department.xml" />
-	</mappers>
-
+  <mappers>
+    <mapper resource="com/haroo/mapper/Board.xml" />
+    <!-- 홍기 -->
+    <mapper resource="com/haroo/mapper/Employee.xml" />
+    <mapper resource="com/haroo/mapper/Task.xml" />
+    <!-- 자은 -->
+    <mapper resource="com/haroo/mapper/Approval.xml" />
+    <!-- 주영 -->
+    <mapper resource="com/haroo/mapper/Attendance.xml"/>
+    <mapper resource="com/haroo/mapper/Dayoff.xml"/>
+    <!-- 지윤 -->
+    <mapper resource="com/haroo/mapper/Department.xml" />
+    <!-- 재성 -->
+	<mapper resource="com/haroo/mapper/Chat.xml"/>
+  </mappers>
 </configuration>

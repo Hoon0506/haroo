@@ -1,0 +1,126 @@
+.ap-form-text, .ap-form-text-2, .ap-form-text-3 {
+	padding: 5px 5px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.ap-form-text {
+	width: 600px;
+  margin-right: 33px;
+}
+
+.ap-form-text-2 {
+	width: 200px;
+}
+
+.ap-form-text-3 {
+  width: 136px;
+}
+
+.ap-form-table tr {
+	height: 50px;
+}
+
+.ap-form-btns{
+	width: 170px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.ap-form-btn {
+	height: 28px;
+	width: 80px;
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+  border-radius: 7px;
+  transition-duration: 0.4s;
+}
+
+.ap-form-btn:hover {
+  background-color: gray;
+  color: white;
+}
+
+.ap-form-input {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.ap-form-label {
+	width: 100px;
+}
+
+.ap-form-select {
+	margin-right: 10px;
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid gray;
+	border-radius: 3px;
+}
+
+.ap-form-radio-label {
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+#ap-alist-selected-sticky {
+	position: sticky;
+  top: 100px;
+  right: 800px;
+}
+.ap-alist-select {
+	margin-left: 50px;
+}
+
+a.ap-alist-name, a.ap-selected-name, a.ap-list-title {
+	text-decoration: none;
+	color: gray;
+}
+
+li.ap-alist-name {
+	padding-top: 10px;
+}
+
+.ap-alist-container {
+	display: flex;
+}
+
+.ap-alist-container div {
+  width: 250px;
+}
+
+ol.ap-al-list {
+	margin: 0;
+}
+
+ol.ap-al-list li {
+  padding-bottom: 5px;
+}
+
+div.ap-line-sign-form {
+	margin-top: 10px;
+}
+
+span.ap-text-area{
+	margin-left:10px;
+}
+
+.ap-line-date{
+	font-size: 0.8em;
+	color: gray;
+}
+
+.text-center {
+	vertical-align : middle;
+}
+
+.ap-line-table-1 {
+	width: 20px;
+}
+
+.ap-hover:hover{
+	background-color: #f8f9fa;
+}

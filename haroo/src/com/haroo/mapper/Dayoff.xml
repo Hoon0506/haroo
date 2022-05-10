@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.haroo.mapper.DayoffMapper">
+	<cache />
+	
+	<!-- 이렇게 맞춰 놓으면 밑에서 AS 안 써도 됨 -->
+	<resultMap type="DayoffVO" id="dayoffResult">
+		<result property="daNo" column="da_no" />
+		<result property="daName" column="da_name" />
+		<result property="daTotal" column="da_total" />
+		<result property="daCnt" column="da_cnt" />
+		<result property="daRemainder" column="da_remainder" />
+		<result property="daHdate" column="da_hdate" />
+		<result property="daApproval" column="da_approval" />
+		<result property="emNo" column="em_no" />
+	
+	</resultMap>
+	
+	<!-- 쿼리문 작성 -->
+	<!-- 휴가현황 전체 -->
+	<select id="listDayoff" parameterType="int" resultType="DayoffVO" resultMap="dayoffResult">
+		select * from dayoff where em_no = #{emNo}
+	</select>
+	
+	<!-- 사용일수 -->
+	<update id="updateUse" parameterType="int" >
+		update dayoff set da_cnt = (
+			select 
+    		case when leave.le_status = 0 then 0
+		 	when leave.le_status = 1 then SUM(le_end - le_start) + 1 
+         	else da_cnt 
+         	end 
+    	from leave, dayoff 
+    	where leave.da_no = dayoff.da_no and leave.em_no = #{emNo} group by da_cnt, le_status 
+    	)
+    	where exists (select 
+    		case when leave.le_status = 0 then 0
+		 	when leave.le_status = 1 then SUM(le_end - le_start) + 1 
+         	else da_cnt 
+         	end 
+    	from leave, dayoff 
+    	where leave.da_no = dayoff.da_no and leave.em_no = #{emNo} group by da_cnt, le_status)
+	</update> 
+	
+	<!-- <update id="updateUse" parameterType="int" >
+		update dayoff set da_cnt = (
+			select 
+    case when leave.le_status = 0 then 0
+		 when leave.le_status = 1 then SUM(TO_DATE(le_end, 'YYYY-MM-DD') - TO_DATE(le_start, 'YYYY-MM-DD')) + 1 
+         else da_cnt 
+         end 
+    from leave, dayoff 
+    where leave.da_no = dayoff.da_no group by da_cnt, le_status
+    		)
+    	where em_no = #{emNo}
+	</update> -->
+	
+	<!-- 잔여일수 -->
+	<update id="updateRemainder" parameterType="int" >
+		update dayoff set da_remainder = (da_total - da_cnt) where em_no = #{emNo}
+	</update>
+	
+	
+</mapper>
