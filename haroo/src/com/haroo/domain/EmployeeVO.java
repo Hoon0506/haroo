@@ -3,6 +3,7 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class EmployeeVO implements Serializable {
+
 	private int em_no;// 사원 번호
 	private int po_no;// 직책 번호
 	private int de_no;// 부서 번호
@@ -120,4 +121,5 @@ public class EmployeeVO implements Serializable {
 	public void setEm_name(String em_name) {
 		this.em_name = em_name;
 	}
+
 }

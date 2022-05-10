@@ -3,16 +3,36 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.haroo.mappeer.ChatMapper">
+<mapper namespace="com.haroo.mapper.ChatMapper">
 	<cache />
 	
-	<insert id="insertChat" parameterType="Chat">
+	<select id="insertChat" parameterType="ChatVO">
 		insert into chat(
-		seq, chatName, chatTime, chatFrom, chatTo
+		chatNo, chatName, chatTime, chatFrom, chatTo
 		)values(
-		ch_seq.nextval, #{chatName}, #{chatTime}, #{chatFrom}, #{chatTo}
+		co_seq.nextval, #{chatName}, #{chatTime}, #{chatFrom}, #{chatTo}
 		)
 
+	</select>
+	
+	<insert id="uploadFile" parameterType="FileVO">
+		insert into contents(
+		co_no, co_name)
+			values(
+			co_seq.nextval, #{co_name})
 	</insert>
 	
+	<select id="listFile"  resultType="FileVO">
+		select * from contents
+		<!-- <if test="area != null">
+			<where>
+				where (title LIKE %JSP% OR writer LIKE %JSP)
+				<foreach collection="area" item="item" separator="OR"
+					open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if> -->
+		order by co_no desc
+	</select>
 </mapper>

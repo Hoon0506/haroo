@@ -29,6 +29,9 @@
     <typeAlias type="com.haroo.domain.DayoffVO" alias="DayoffVO"/>
     <!-- 지윤 -->
     <typeAlias type="com.haroo.domain.DepartmentVO" alias="DepartmentVO" />
+    <!-- 재성 -->
+	<typeAlias type="com.haroo.domain.ChatVO" alias="ChatVO"/>
+	<typeAlias type="com.haroo.domain.FileVO" alias="FileVO"/>
   </typeAliases>
 
   <environments default="development">
@@ -53,6 +56,7 @@
     <mapper resource="com/haroo/mapper/Dayoff.xml"/>
     <!-- 지윤 -->
     <mapper resource="com/haroo/mapper/Department.xml" />
+    <!-- 재성 -->
+	<mapper resource="com/haroo/mapper/Chat.xml"/>
   </mappers>
-
 </configuration>

@@ -3,37 +3,37 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class ChatVO implements Serializable{
-	private int seq;
-	private String chatName;
+	private int chatNo;
+	private String chatContents;
 	private int chatTime;
 	private String chatFrom;
 	private String chatTo;
 	
 	public ChatVO() {}
 
-	public ChatVO(int chatNumber, String chatName, int chatTime, String chatFrom, String chatTo) {
+	public ChatVO(int chatNo, String chatContents, int chatTime, String chatFrom, String chatTo) {
 		super();
-		this.seq = seq;
-		this.chatName = chatName;
+		this.chatNo = chatNo;
+		this.chatContents = chatContents;
 		this.chatTime = chatTime;
 		this.chatFrom = chatFrom;
 		this.chatTo = chatTo;
 	}
 
-	public int getChatNumber() {
-		return seq;
+	public int getChatNo() {
+		return chatNo;
 	}
 
-	public void setChatNumber(int chatNumber) {
-		this.seq = chatNumber;
+	public void setChatNo(int chatNo) {
+		this.chatNo = chatNo;
 	}
 
-	public String getChatName() {
-		return chatName;
+	public String getChatContents() {
+		return chatContents;
 	}
 
-	public void setChatName(String chatName) {
-		this.chatName = chatName;
+	public void setChatContents(String chatContents) {
+		this.chatContents = chatContents;
 	}
 
 	public int getChatTime() {
@@ -62,9 +62,10 @@ public class ChatVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ChatDAO [seq=" + seq + ", seq=" + seq + ", chatTime=" + chatTime + ", chatFrom="
+		return "ChatVO [chatNo=" + chatNo + ", chatContents=" + chatContents + ", chatTime=" + chatTime + ", chatFrom="
 				+ chatFrom + ", chatTo=" + chatTo + "]";
 	}
-	
+
 	
 }
+	
