@@ -41,8 +41,9 @@
 
 <body class="text-center">
 <main class="form-signin">
+	<img class="mb-4" src="/haroo/img/haroo-main.png" alt="" width="144" height="100">
     <form action="main" method="post">
-        <img class="mb-4" src="/img/haroo-main.PNG" alt="" width="144" height="100">
+        
         <h1 class="h3 mb-3 fw-normal">Please Sign-in</h1>
 
         <div class="form-floating">
