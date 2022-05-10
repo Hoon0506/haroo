@@ -10,7 +10,7 @@ import com.haroo.domain.SearchVO;
 
 public interface BoardMapper {
 	int insertBoard(BoardVO board);
-	List<BoardVO> listBoard(SearchVO search);
+	List<BoardVO> listBoard(SearchVO search, RowBounds row);
 	BoardVO detailBoard(int bdNo);
 	int updateBoard(BoardVO board);
 	int deleteBoard(int bdNo);

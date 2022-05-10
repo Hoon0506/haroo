@@ -50,7 +50,7 @@
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_no}님 환영합니다 :)</button>
+                <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_name}님 환영합니다 :)</button>
                 <button type="button" class="btn btn-warning"><a href="mypage">마이 페이지</a></button>
             </div>
         </div>

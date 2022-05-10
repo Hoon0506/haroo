@@ -50,7 +50,6 @@
 		select count(*) from board
 		<if test="area != null">
 			<where>
-				<!-- where (title LIKE %JSP% OR writer LIKE %JSP)-->
 				<foreach collection="area" item="item" separator="OR"
 					open="(" close=")">
 					${item} LIKE #{searchKey}
@@ -59,11 +58,13 @@
 		</if>
 	</select>
 	
+	<!-- 	댓글입력 -->
 	<insert id="insertReply" parameterType="ReplyVO">
 		insert into reply
-			 values(re_seq.nextval, #{bdNo}, #{reWriter}, #{reContents}, sysdate)
+			 values(re_seq.nextval, #{bdNo}, #{reContents}, #{reWriter}, sysdate)
 	</insert>
 	
+	<!-- 	댓글목록 -->
 	<select id="listReply" parameterType="int" resultType="ReplyVO">
 		select re_no as reNo, bd_no as bdNo, re_contents as reContents, re_writer as reWriter, re_regdate as reRegdate
 		from reply where bd_no=#{bdNo}
