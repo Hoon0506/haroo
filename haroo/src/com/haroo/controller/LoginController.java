@@ -1,5 +1,7 @@
 package com.haroo.controller;
 
+import com.haroo.action.login.LoginAction;
+import com.haroo.action.login.LoginFormAction;
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
 
@@ -9,10 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.haroo.action.login.LoginAction;
-import com.haroo.action.login.LoginFormAction;
-
 import java.io.IOException;
 
 @WebServlet({"/login", "/main"})

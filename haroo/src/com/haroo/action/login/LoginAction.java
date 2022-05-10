@@ -2,13 +2,12 @@ package com.haroo.action.login;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
-import com.haroo.domain.EmployeeVO;
+import com.haroo.domain.*;
+import com.haroo.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.haroo.service.EmployeeService;
 
 public class LoginAction implements Action {
 

@@ -2,29 +2,22 @@
 package com.haroo.action;
 
 public class ActionForward {
-	private boolean isRedirect;
-	private String path;
+    private boolean isRedirect;//Dispatcher vs Redirect
+    private String path;//경로
 
-	public ActionForward() {
-	}
+    public ActionForward() {}
 
-	public ActionForward(boolean isRedirect, String path) {
-		super();
-		this.isRedirect = isRedirect;
-		this.path = path;
-	}
+    public boolean isRedirect() {
+        return isRedirect;
+    }
 
-	public boolean isRedirect() {
-		return isRedirect;
-	}
+    public void setRedirect(boolean redirect) {
+        isRedirect = redirect;
+    }
 
-	public void setRedirect(boolean isRedirect) {
-		this.isRedirect = isRedirect;
-	}
-
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
 	public void setPath(String path) {
 		this.path = path;

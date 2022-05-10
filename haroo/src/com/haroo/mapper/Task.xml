@@ -4,5 +4,40 @@
 
 <mapper namespace="com.haroo.mapper.TaskMapper">
     <cache/>
+    <resultMap type="TaskVO" id="TaskMap">
+        <result property="start" column="start1"/>
+        <result property="end" column="end1"/>
+    </resultMap>
 
+    <select id="getTaskList" parameterType="int" resultMap="TaskMap">
+        SELECT id,
+               title,
+               TO_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
+               TO_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
+               ALLDAY,
+               TEXTCOLOR,
+               BACKGROUNDCOLOR,
+               BORDERCOLOR
+        FROM CALENDAR
+        WHERE em_no = #{em_no}
+    </select>
+
+    <insert id="insertTask" parameterType="TaskVO">
+        INSERT INTO CALENDAR
+        VALUES(
+                  calendar_seq.nextval,
+                  #{groupId},
+                  #{title},
+                  #{writer},
+                  #{content},
+                  TO_DATE(#{start}, 'YYYY-MM-DD HH24:MI:SS'),
+                  TO_DATE(#{end}, 'YYYY-MM-DD HH24:MI:SS'),
+                  #{allday},
+                  #{textColor},
+                  #{backgroundColor},
+                  #{borderColor},
+                  #{em_no}
+              )
+
+    </insert>
 </mapper>
