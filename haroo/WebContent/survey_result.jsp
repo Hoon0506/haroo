@@ -23,7 +23,7 @@
         }
     </style>
     <title>TEST</title>
-    <%@ include file="../include/header.jsp"%>
+  <%--   <%@ include file="/include/header.jsp"%> --%>
 </head>
 <body>
 <header class="p-1 bg-light">
@@ -186,7 +186,23 @@
   </div>
   
 <!-- body 영역 -->
+
     <div class="p-3 container-sm">
+    <h2>설문조사 결과</h2>
+	<table class="table">
+		<tr>
+			<th>문항</th>
+			<th>응답수</th>
+			<th>응답비율</th>
+		</tr>
+		<c:forEach var="dto" items="${list}">
+			<tr>
+				<td>${dto.num}</td>
+				<td>${dto.sum_num}</td>
+				<td>${dto.rate}%</td>
+			</tr>
+		</c:forEach>
+	</table>
     </div>
 
 </div>
@@ -211,16 +227,6 @@
         
         
 </script>
-  <h3>[워크샵 설문조사]</h3>
-	<br/>
-	<h3>${dto.question}</h3>
-	<form action="${path}/survey/list.jsp" method=="post">
-		<input type="radio" name="num" value="1" checked> ${dto.ans1} 1. 매우적절<br/>
-		<input type="radio" name="num" value="2" > ${dto.ans2}2.적절.<br/>
-		<input type="radio" name="num" value="3" > ${dto.ans3}3.부적절 <br/>
-		<input type="radio" name="num" value="4" > ${dto.ans4}4.매우부적절. <br/>
-		<input type="hidden" name="survey_num" value="${dto.survey_num}" checked>
-		<input type="submit" value="투표">
-	</form>
+
 </body>
 </html>

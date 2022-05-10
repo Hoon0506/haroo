@@ -3,9 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.haroo.mapper.AttendanceMapper">
+<mapper namespace="com.haroo.mapper.">
 	<select 
-		id="view_question" 
+		parameterType= "int"
+		id ="view_question" 
 		resultType="survey.dto.SurveyDTO"
 	>
 		select * from survey where survey_num=#{survey_num}
