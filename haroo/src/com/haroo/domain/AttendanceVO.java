@@ -3,42 +3,28 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class AttendanceVO implements Serializable {
-	private int atNo;
-	private String atDate;
-	private String atName;
-	private String atDname;
-	private String atStart;
-	private String atEnd;
-	private int atState;
-	private int atCnt;
-	private int atNote;
-	private int atRight;	
-	private int emNo;
+	private String atDate;   //날짜
+	private int emNo;		 //사번
+	private String atStart;  //출근시간
+	private String atEnd;    //퇴근시간
+	private int atState;     //근무상태
+	private int atNote;	    //비고
+	private String emName;  //사원명
+	private String deName;  //부서명
 	
 	public AttendanceVO() {}
 
-	public AttendanceVO(int atNo, String atDate, String atName, String atDname, String atStart, String atEnd,
-			int atState, int atCnt, int atNote, int atRight, int emNo) {
+	public AttendanceVO(String atDate, int emNo, String atStart, String atEnd, int atState, int atNote, String emName,
+			String deName) {
 		super();
-		this.atNo = atNo;
 		this.atDate = atDate;
-		this.atName = atName;
-		this.atDname = atDname;
+		this.emNo = emNo;
 		this.atStart = atStart;
 		this.atEnd = atEnd;
 		this.atState = atState;
-		this.atCnt = atCnt;
 		this.atNote = atNote;
-		this.atRight = atRight;
-		this.emNo = emNo;
-	}
-
-	public int getAtNo() {
-		return atNo;
-	}
-
-	public void setAtNo(int atNo) {
-		this.atNo = atNo;
+		this.emName = emName;
+		this.deName = deName;
 	}
 
 	public String getAtDate() {
@@ -49,20 +35,12 @@ public class AttendanceVO implements Serializable {
 		this.atDate = atDate;
 	}
 
-	public String getAtName() {
-		return atName;
+	public int getEmNo() {
+		return emNo;
 	}
 
-	public void setAtName(String atName) {
-		this.atName = atName;
-	}
-
-	public String getAtDname() {
-		return atDname;
-	}
-
-	public void setAtDname(String atDname) {
-		this.atDname = atDname;
+	public void setEmNo(int emNo) {
+		this.emNo = emNo;
 	}
 
 	public String getAtStart() {
@@ -89,14 +67,6 @@ public class AttendanceVO implements Serializable {
 		this.atState = atState;
 	}
 
-	public int getAtCnt() {
-		return atCnt;
-	}
-
-	public void setAtCnt(int atCnt) {
-		this.atCnt = atCnt;
-	}
-
 	public int getAtNote() {
 		return atNote;
 	}
@@ -105,19 +75,28 @@ public class AttendanceVO implements Serializable {
 		this.atNote = atNote;
 	}
 
-	public int getAtRight() {
-		return atRight;
+	public String getEmName() {
+		return emName;
 	}
 
-	public void setAtRight(int atRight) {
-		this.atRight = atRight;
+	public void setEmName(String emName) {
+		this.emName = emName;
 	}
 
-	public int getEmNo() {
-		return emNo;
+	public String getDeName() {
+		return deName;
 	}
 
-	public void setEmNo(int emNo) {
-		this.emNo = emNo;
+	public void setDeName(String deName) {
+		this.deName = deName;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

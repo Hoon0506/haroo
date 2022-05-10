@@ -4,10 +4,152 @@
 
 
 
-<mapper namespace="kosta.mapper.AttendanceMapper">
+<mapper namespace="com.haroo.mapper.AttendanceMapper">
 	<cache />
 	
+	<!-- 이렇게 맞춰 놓으면 밑에서 AS 안 써도 됨 -->
+	<resultMap type="AttendanceVO" id="attendanceResult">
+		<result property="atDate" column="at_date" />
+		<result property="emNo" column="em_no" />
+		<result property="atStart" column="at_start" />
+		<result property="atEnd" column="at_end" />
+		<result property="atState" column="at_state" />
+		<result property="atNote" column="at_note" />
+		<result property="emName" column="em_name" />
+		<result property="deName" column="de_name" />
+	
+	</resultMap>
+	
 	<!-- 쿼리문 작성 -->
+	
+	<!-- 출근 데이터 입력 -->
+	<insert id="insertStartTime" parameterType="AttendanceVO">
+		<!-- insert into attendance
+			values(to_char(sysdate, 'yyyy-mm-dd'), ${emNo}, sysdate, NULL, NULL, NULL) -->
+			
+			insert into attendance 
+    			select to_char(sysdate, 'yyyy-mm-dd'), ${emNo}, sysdate, NULL, NULL, NULL 
+    			from dual
+    			where not exists (select 1 from attendance where at_date = to_char(sysdate, 'yyyy-mm-dd') and em_no = #{emNo})
+	</insert>
+	
+	
+	<!-- 퇴근 시간 데이터 값 변경 (퇴근시간 값이 null일 경우에만 => is null 사용)-->
+	<update id="updateEndTime" parameterType="int">
+		update attendance 
+    		set at_end = sysdate 
+    		where em_no = #{emNo} and at_date = to_char(sysdate, 'yyyy-mm-dd') and at_end is null and at_state != 4
+	</update>
+	
+	<!-- 외근 데이터 입력 -->
+	<insert id="insertOutside" parameterType="AttendanceVO">
+		insert into attendance
+			select
+				to_char(sysdate, 'yyyy-mm-dd'), ${emNo}, 
+            	TO_date(concat(substr(TO_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'), 1, 10), ' 09:00:00'), 'YYYY-MM-DD HH24:MI:SS'),
+            	TO_date(concat(substr(TO_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'), 1, 10), ' 18:00:00'), 'YYYY-MM-DD HH24:MI:SS'),
+            	3, NULL
+           	from dual
+           	where not exists (select 1 from attendance where at_date = to_char(sysdate, 'yyyy-mm-dd') and em_no = #{emNo})
+	</insert>
+	
+	<!-- 정상/지각 근무 상태 값 변경 -->
+	<update id="updateState" parameterType="int">
+		update attendance set at_state =
+    (select distinct
+    case when at_start <![CDATA[<=]]> TO_date(concat(substr(TO_char(at_date, 'YYYY-MM-DD HH24:MI:SS'), 1, 10), ' 09:00:00'), 'YYYY-MM-DD HH24:MI:SS') then 1
+		 when at_start <![CDATA[>]]> TO_date(concat(substr(TO_char(at_date, 'YYYY-MM-DD HH24:MI:SS'), 1, 10), ' 09:00:00'), 'YYYY-MM-DD HH24:MI:SS') then 2
+         else at_state end 
+    from attendance a
+    where at_date = TO_char(sysdate, 'YYYY-MM-DD') and a.em_no = #{emNo} and at_state is null
+    		)
+    	where at_date = TO_char(sysdate, 'YYYY-MM-DD') and em_no = #{emNo} and at_state is null
+	</update>
+	
+	<!-- 휴가 가는 날은 근무 상태 4로 입력 ..em_no => select문 결과가 null이면 어떡하죠..!-->
+	<insert id="insertDayoff">
+		insert into attendance 
+		select to_char(sysdate, 'yyyy-mm-dd'),
+ 			(select em_no 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS')),
+        	null, null, 4, 
+        	(select le_kind 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS'))
+		from dual 
+		where exists (select em_no 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS'))
+ 	 	
+ 	 	<!-- insert into attendance
+			select
+				to_char(sysdate, 'yyyy-mm-dd'), ${emNo}, NULL, NULL, 4, NULL
+           	from dual
+           	where not exists (
+                select 1 
+                from attendance a, leave l 
+                where l.em_no = a.em_no
+                and l.le_status = 1
+                and at_date BETWEEN TO_DATE(l.le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(l.le_end, 'YYYY-MM-DD HH24:MI:SS')
+                and at_date = TO_char(sysdate, 'YYYY-MM-DD')
+            ) -->  
+          
+	</insert>
+	
+	<!-- 2. 휴가일 때, 비고 값 변경 -->
+	<update id="updateNote" parameterType="int">
+		<!-- update attendance a 
+		set at_note = (
+    		select le_kind
+    		from leave l 
+    			where l.em_no = a.em_no
+    			and l.le_status = 1
+                and a.at_date BETWEEN TO_DATE(l.le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(l.le_end, 'YYYY-MM-DD HH24:MI:SS')
+                and a.at_state = 4
+                and l.em_no = #{emNo})
+		where a.at_state = 4 and a.at_note is null and a.at_date = TO_char(SYSDATE, 'YYYY-MM-DD') and a.em_no = #{emNo} -->
+		merge 
+    into attendance a
+    using leave l
+    on (l.em_no = a.em_no
+    			and l.le_status = 1
+                and a.at_date BETWEEN TO_DATE(l.le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(l.le_end, 'YYYY-MM-DD HH24:MI:SS')
+                and a.at_state = 4
+                and l.em_no = #{emNo})
+    when matched then
+        update set a.at_note = l.le_kind
+	</update>
+
+	<!-- 일별 근태조회 -->	
+	<select id="statusAttendance" parameterType="AttendanceVO" resultType="AttendanceVO" resultMap="attendanceResult">
+		select a.at_date, a.em_no, a.at_start, a.at_end, a.at_state, a.at_note, e.em_name, d.de_name 
+    		from attendance a 
+    			JOIN employee e
+    				ON a.em_no = e.em_no
+				JOIN department d
+					ON e.de_no = d.de_no
+    		where at_date = TO_CHAR(sysdate, 'YYYY-MM-DD')
+    		and d.de_no = (select de_no from employee where em_no = #{emNo})
+    		order by a.em_no
+	</select>
+	
+	<!-- 로그인한 사원의 부서목록 가져오기 -->
+	<select id="listDept" parameterType="int" resultType="AttendanceVO">
+		select e.em_no as emNo, e.em_name as emName, d.de_name as deName
+    		from employee e, department d
+    		where e.de_no = d.de_no
+    		and d.de_no = (select de_no from employee where em_no = #{emNo})
+	</select>
+	
+	<!-- 오늘 날짜 -->
+	<select id="printToday" resultType="String">
+		select TO_char(sysdate, 'YYYY-MM-DD') from dual
+	</select>
+	
 	
 	
 </mapper>

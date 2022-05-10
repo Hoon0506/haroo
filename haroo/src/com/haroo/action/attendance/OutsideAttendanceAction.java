@@ -1,4 +1,4 @@
-package com.haroo.action.dayoff;
+package com.haroo.action.attendance;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,22 +6,20 @@ import javax.servlet.http.HttpSession;
 
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
-import com.haroo.domain.DayoffVO;
-import com.haroo.service.DayoffService;
+import com.haroo.service.AttendanceService;
 
-public class ListAction implements Action {
+public class OutsideAttendanceAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		DayoffService service = DayoffService.getInstance();
+		AttendanceService service = AttendanceService.getInstance();
 		ActionForward forward = new ActionForward();
 		
+	    service.insertOutsideService(request);
 		
-		DayoffVO dayoff = service.listDayoffService(request);
-		request.setAttribute("dayoff", dayoff);
+	    forward.setPath("status");
+		forward.setRedirect(true);
 		
-		forward.setPath("/dayoff_situation.jsp");
-		forward.setRedirect(false);
 		
 		return forward;
 	}
