@@ -22,7 +22,7 @@ public class LoginAction implements Action {
         EmployeeVO employeeVO = employeeService.loginEmployeeService(request, response);
 
         if (employeeVO != null) {
-            actionForward.setPath("/test.jsp");
+            actionForward.setPath("/test-main.jsp");
             actionForward.setRedirect(false);
             httpSession.setAttribute("employeeVO", employeeVO);
         } else {
