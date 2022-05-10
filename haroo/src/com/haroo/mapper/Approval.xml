@@ -199,6 +199,17 @@
       AND 1 = ALL(SELECT al_status FROM approval_line WHERE ap_no = #{apNo})
     </if>
   </update>
+  
+  <!-- 전체문서함 -->
+  <select id="listAllApproval" resultType="ApprovalVO" resultMap="ApprovalMap">
+    SELECT ap_no, ap_title, ap_date, ap_public, ap_status, fo_kind, em_name
+      FROM approval ap JOIN approval_form af
+      ON ap.fo_no = af.fo_no
+      JOIN employee e
+      ON ap.em_no = e.em_no
+      WHERE ap_status = 1 AND ap_public = 1
+      ORDER BY ap_date DESC
+  </select>
 	
 	<!-- 결재선 사원 선택 리스트 불러오기 -->
 	<select id="listLineEmployee" resultType="ApLineEmpVO" resultMap="ApLineEmpMap">

@@ -16,68 +16,13 @@ window.onload = function() {
 </script>
 </head>
 <body>
-  <div class="ap-form-container">
+  <div class="ap-form-container container row">
+    <div class="ap-report-body col-9">
     <table class="table table-bordered">
       <tbody>
         <tr>
           <th class="text-center fs-2" scope="col" colspan="2">${ap.foKind }</th>
         </tr>
-        <tr>
-           <td colspan="2">
-            <table class="table mb-0 table-bordered">
-              <tbody>
-                <tr>
-                  <th class="text-center ap-line-table-1" rowspan="3">결재</th>
-                </tr>
-                <tr>
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <th class="text-center">${apLine.emName} ${apLine.poName}(${apLine.deName })</th>
-                  </c:forEach>
-                </tr>
-                <c:if test="${ap.apStatus >=0 }">
-                <tr>
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <td class="text-center">
-                      <c:choose>
-                        <c:when test="${apLine.alStatus == 0  and ap.apStatus == 0 }">
-                          <button class="btn btn-outline-secondary btn-sm">진행중</button>
-                        </c:when>
-                        <c:when test="${apLine.alStatus == 1 }">
-                          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
-                            승인
-                          </button>
-                          <div class="collapse" id="al-detail-${apLine.alOrder }">
-                            <c:if test="${apLine.alDate != null}">
-                              <div class="ap-line-sign-form">
-                                <div class="ap-line-date">${apLine.alDate }</div>
-                                ${apLine.alComment}
-                              </div>
-                            </c:if>
-                          </div>
-                        </c:when>
-                        <c:when test="${apLine.alStatus == 2 }">
-                          <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
-                            반려
-                          </button>
-                          <div class="collapse" id="al-detail-${apLine.alOrder }">
-                            <c:if test="${apLine.alDate != null}">
-                              <div class="ap-line-sign-form">
-                                <div class="ap-line-date">${apLine.alDate }</div>
-                                ${apLine.alComment}
-                              </div>
-                            </c:if>
-                          </div>
-                        </c:when>
-                      </c:choose>
-                    </td>
-                  </c:forEach>
-                </tr>
-                </c:if>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      
         <tr>
           <th scope="row">제목</th>
           <td>${ap.apTitle }</td>
@@ -167,6 +112,7 @@ window.onload = function() {
         </tr>
       </tbody>
     </table>
+
       <div class="text-end">
         <c:if test="${ap.apStatus == 0 }">
           <form action="/haroo/ap/process/${ap.apNo }" method="post">
@@ -181,6 +127,72 @@ window.onload = function() {
           </form>
         </c:if>
        </div>
+
+    </div>
+    <div class="ap-report-line col-3">
+      <table class="table mb-0 table-bordered">
+              <tbody>
+                <tr>
+                  <th class="text-center ap-line-table-1">결재</th>
+                </tr>
+                  <c:forEach var="apLine" items="${ap.apLine }">
+                  <tr>
+                    <th class="text-center">
+                    <span class="badge rounded-pill bg-light text-dark">${apLine.alOrder }</span>
+                    ${apLine.emName} ${apLine.poName}(${apLine.deName })</th>
+                  </tr>
+                  
+                    <c:if test="${ap.apStatus >=0 }">
+                    
+                      <c:choose>
+                        <c:when test="${apLine.alStatus == 0  and ap.apStatus == 0 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-outline-secondary btn-sm">진행중</button>
+                          </td>
+                         </tr>
+                        </c:when>
+                        <c:when test="${apLine.alStatus == 1 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            승인
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
+                          </td>
+                         </tr>
+                        </c:when>
+                        <c:when test="${apLine.alStatus == 2 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            반려
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
+                          </td>
+                         </tr>
+                        </c:when>
+                      </c:choose>
+                    </c:if>
+                  </c:forEach>
+              </tbody>
+            </table>
+    </div>
+    
   </div>
 </body>
 </html>

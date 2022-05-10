@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,13 @@ window.onload = function() {
 </head>
 <body>
   <!-- 사이드메뉴 제외한 영역 -->
+  <c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
+  <c:choose>
+  <c:when test="${fn:contains(url, 'done')  }"><h3>완료 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'process') }"><h3>진행 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'takeback') }"><h3>취소 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'all') }"><h3>전체 문서</h3></c:when>
+  </c:choose>
     <table class="table table-hover">
       <thead>
         <tr>

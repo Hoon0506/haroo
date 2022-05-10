@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,12 +35,10 @@
     <div class="container">
       <div
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/"
-          class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <a href="/haroo" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
         </a>
 
-        <ul
-          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
@@ -47,6 +46,9 @@
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
         <div class="text-end">
+        <c:if test="${employeeVO == null }">
+          <c:redirect url="/haroo/login" />
+        </c:if>
                 <button type="button" class="btn btn-outline-light me-2">${employeeVO.em_no}님 환영합니다 :)</button>
                 <button type="button" class="btn btn-warning"><a href="/haroo/mypage">마이 페이지</a></button>
         </div>
@@ -55,8 +57,7 @@
   </header>
   <nav>
     <ul class="nav justify-content-center">
-      <li class="nav-item"><a class="nav-link active"
-        aria-current="page" href="#">인사정보</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">인사정보</a></li>
       <li class="nav-item"><a class="nav-link" href="#">근태조회</a></li>
       <li class="nav-item"><a class="nav-link" href="/haroo/task">캘린더</a></li>
       <li class="nav-item"><a class="nav-link" href="/haroo/board/listAction.do">게시판</a></li>
@@ -125,35 +126,75 @@
   
   <!-- 사이드메뉴 제외한 영역 -->
   <div class="p-3 container-sm" id="ap-contents">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">결재문서작성</h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/forms" class="ap-link stretched-link link-secondary">양식선택</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">기안서</h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/form/1" class="ap-link stretched-link link-secondary">작성하기</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">품의서</h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/form/2" class="ap-link stretched-link link-secondary">작성하기</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">휴가신청서</h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/form/3" class="ap-link stretched-link link-secondary">작성하기</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">수신 미결재 문서 <span class="badge rounded-pill bg-secondary">12</span></h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/wait" class="ap-link stretched-link link-secondary">미결재 문서로 이동</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">결재 진행 중인 문서 <span class="badge rounded-pill bg-secondary">12</span></h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/process" class="ap-link stretched-link link-secondary">진행 문서로 이동</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">7일 이상 미결재 문서 <span class="badge rounded-pill bg-danger">12</span></h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/wait" class="ap-link stretched-link link-secondary">미결재 문서로 이동</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card ap-hover">
+      <div class="card-body">
+        <h5 class="card-title">7일 이상 진행 중 문서 <span class="badge rounded-pill bg-danger">12</span></h5>
+        <p class="card-text ap-line-date"><a href="/haroo/ap/process" class="ap-link stretched-link link-secondary">진행 문서로 이동</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    
   </div>
   
   </div>

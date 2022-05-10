@@ -52,10 +52,6 @@
 	width: 100px;
 }
 
-.ap-form-container {
-	width: 900px;
-}
-
 .ap-form-select {
 	margin-right: 10px;
 	width: 80px;
@@ -123,4 +119,8 @@ span.ap-text-area{
 
 .ap-line-table-1 {
 	width: 20px;
+}
+
+.ap-hover:hover{
+	background-color: #f8f9fa;
 }

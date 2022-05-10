@@ -59,8 +59,6 @@ public class ApprovalService {
     return re;
   }
   
-  
-  
   // 문서 내용
   public ApprovalVO detailApprovalService(HttpServletRequest request) throws Exception {
     ApprovalVO approval = null;
@@ -80,6 +78,16 @@ public class ApprovalService {
     
     
     return approval;
+  }
+  
+  // 전체문서목록
+  public List<ApprovalVO> allApprovalService(HttpServletRequest request) throws Exception{
+    ApprovalDao dao = ApprovalDao.getInstance();
+    List<ApprovalVO> list = null;
+    
+    list = dao.listAllApproval();
+    
+    return list;
   }
   
   //수신-문서 목록
@@ -134,6 +142,9 @@ public class ApprovalService {
     int emNo = Integer.parseInt(request.getParameter("emNo")); // 사원번호
     int apPublic = Integer.parseInt(request.getParameter("apPublic")); // 공개여부
     
+    if(request.getParameter("apTitle") == null) {
+      return re;
+    }
     approval.setFoNo(foNo); // 문서양식
     approval.setEmNo(emNo); // 사원번호
     approval.setApTitle(request.getParameter("apTitle")); // 제목
@@ -159,31 +170,17 @@ public class ApprovalService {
     } else if(foNo == 2 && re > 0) { // 양식이 품의서(2) 일 때
       expense.setApNo(apNo); // 결재문서번호
       expense.setElTotal(request.getParameter("elTotal")); // 총금액
-
-      if(!(request.getParameter("elItem1").equals(""))) { // item이 존재할 때
-        expense.setElNo(1); // 품목번호
-        expense.setElItem(request.getParameter("elItem1")); // 품목
-        expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity1"))); // 수량
-        expense.setElPrice(Integer.parseInt(request.getParameter("elPrice1"))); // 가격
-        expense.setElCost(request.getParameter("elCost1"));
-        
-        re = dao.insertExpenseList(expense);
-      }
-      if(!(request.getParameter("elItem2").equals(""))) {
-        expense.setElNo(2);
-        expense.setElItem(request.getParameter("elItem2"));
-        expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity2")));
-        expense.setElPrice(Integer.parseInt(request.getParameter("elPrice2")));
-        expense.setElCost(request.getParameter("elCost2"));
-        
-        re = dao.insertExpenseList(expense);
-      }
-      if(!(request.getParameter("elItem3").equals(""))) {
-        expense.setElNo(3);
-        expense.setElItem(request.getParameter("elItem3"));
-        expense.setElQuantity(Integer.parseInt(request.getParameter("elQuantity3")));
-        expense.setElPrice(Integer.parseInt(request.getParameter("elPrice3")));
-        expense.setElCost(request.getParameter("elCost3"));
+      
+      for(int i=1; i<=5; i++) { // item은 5개까지 작성 가능
+        String item = request.getParameter(("elItem"+i));
+        if(item == null || item.equals("")) { // item이 존재하지 않을 때
+          break;
+        }
+        expense.setElNo(i); // 품목번호
+        expense.setElItem(item); // 품목
+        expense.setElQuantity(Integer.parseInt(request.getParameter(("elQuantity"+i)))); // 수량
+        expense.setElPrice(Integer.parseInt(request.getParameter(("elPrice"+i)))); // 가격
+        expense.setElCost(request.getParameter(("elCost"+i))); // 소계
         
         re = dao.insertExpenseList(expense);
       }

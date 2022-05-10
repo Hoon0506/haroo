@@ -167,6 +167,26 @@ public class ApprovalDao {
     return list;
   }
   
+  // 전체문서함
+  public List<ApprovalVO> listAllApproval() { // 공개된 승인 처리 완료 전체 문서
+    List<ApprovalVO> list = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      list = sqlSession.getMapper(ApprovalMapper.class).listAllApproval();
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return list;
+  }
+  
   // 수신-문서 목록
   public List<ApprovalVO> receiveApproval(int emNo, int alStatus) { // 로그인 사원, 상태에 따라 분류를 위해 파라미터 설정
    List<ApprovalVO> list = null;
