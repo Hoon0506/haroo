@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.haroo.domain.AttendanceVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.mapper.AttendanceMapper;
 
 public class AttendanceDao {
@@ -156,12 +157,12 @@ public class AttendanceDao {
 	
 	
 	//휴가 데이터 입력
-	public int insertDayoff(AttendanceVO attendance) {
+	public int insertDayoff() {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		int re = -1;
 
 		try {
-			re = sqlSession.getMapper(AttendanceMapper.class).insertDayoff(attendance);
+			re = sqlSession.getMapper(AttendanceMapper.class).insertDayoff();
 			if (re > 0) {
 				sqlSession.commit();
 			} else {
@@ -209,6 +210,36 @@ public class AttendanceDao {
 			sqlSession.close();
 		}
 		return list;
+	}
+	
+	//로그인한 사람의 부서목록
+	public List<AttendanceVO> listDept(int emNo) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		List<AttendanceVO> list = null;
+
+		try {
+			list = sqlSession.getMapper(AttendanceMapper.class).listDept(emNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return list;
+	}
+	
+	//오늘날짜
+	public String printToday() {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		String str = null;
+
+		try {
+			str = sqlSession.getMapper(AttendanceMapper.class).printToday();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return str;
 	}
 
 }

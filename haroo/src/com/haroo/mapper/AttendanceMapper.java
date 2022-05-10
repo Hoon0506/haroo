@@ -3,6 +3,7 @@ package com.haroo.mapper;
 import java.util.List;
 
 import com.haroo.domain.AttendanceVO;
+import com.haroo.domain.EmployeeVO;
 
 public interface AttendanceMapper {
 	int insertStartTime(AttendanceVO attendance); //출근 입력 (현재날짜, 사번, 출근시간)
@@ -14,11 +15,13 @@ public interface AttendanceMapper {
 	
 	int updateState(int emNo); //근무상태 업데이트 (정상/지각)
 	
-	int insertDayoff(AttendanceVO attendance); //휴가인 사람 입력 (현재날짜, 사번, , 근무상태:4)
+	int insertDayoff(); //휴가인 사람 입력 (현재날짜, 사번, , 근무상태:4)
 	int updateNote(int emNo); //휴가 => 비고 값 업데이트
 	
 	
 	List<AttendanceVO> statusAttendance(AttendanceVO attendance); //일별 근태조회
+	List<AttendanceVO> listDept(int emNo); //로그인한 사람의 부서목록
+	String printToday(); //오늘날짜
 	
 	
 

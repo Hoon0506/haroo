@@ -16,9 +16,6 @@ public class ListAction implements Action {
 		DayoffService service = DayoffService.getInstance();
 		ActionForward forward = new ActionForward();
 		
-		HttpSession session = request.getSession();
-	    session.setAttribute("emNo", 45424411);
-	    session.setAttribute("daName", "백민주");
 		
 		DayoffVO dayoff = service.listDayoffService(request);
 		request.setAttribute("dayoff", dayoff);

@@ -17,13 +17,17 @@ public class StatusAttendanceAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AttendanceService service = AttendanceService.getInstance();
 		ActionForward forward = new ActionForward();
+
+		//오늘의 날짜 출력
+		String today = service.printTodayService(request);
+		request.setAttribute("today", today);
 		
-//		HttpSession session = request.getSession();
-//	    session.setAttribute("emNo", 45424411);
-//	    session.setAttribute("daName", "백민주");
+		//로그인한 사원의 부서 목록 출력
+		List<AttendanceVO> depts = service.listDeptService(request);
+		request.setAttribute("depts", depts);
 		
 		
-		
+		//출근한 사람 출력
 		List<AttendanceVO> list = service.statusAttendanceService(request);
 		request.setAttribute("list", list);
 		

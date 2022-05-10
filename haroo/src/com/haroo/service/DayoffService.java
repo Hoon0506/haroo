@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.haroo.domain.DayoffVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.repository.DayoffDao;
 
 public class DayoffService {
@@ -26,16 +27,16 @@ public class DayoffService {
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
 		      
-		      dayoff.setDaCnt(dao.updateUse(emNo)); //사용일수
-		      dayoff.setDaRemainder(dao.updateRemainder(emNo)); //잔여일수
-		      dayoff = dao.listDayoff(emNo);
+		    dayoff.setDaCnt(dao.updateUse(emNo)); //사용일수
+		    dayoff.setDaRemainder(dao.updateRemainder(emNo)); //잔여일수
+		    dayoff = dao.listDayoff(emNo);
 		}
 		
 		return dayoff;
-		//return null;
 	}
 	
 }

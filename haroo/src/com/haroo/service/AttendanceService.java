@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.haroo.domain.AttendanceVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.repository.AttendanceDao;
 
 
@@ -24,9 +25,10 @@ public class AttendanceService {
 		HttpSession session = request.getSession();
 		AttendanceVO attendance = new AttendanceVO();
 		
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
-		      attendance.setEmNo(emNo);
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
+		    attendance.setEmNo(emNo);
 		}
 
 		return dao.insertStartTime(attendance);
@@ -36,9 +38,10 @@ public class AttendanceService {
 	public int updateEndTimeService(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		int re = -1;
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
-	    	  re = dao.updateEndTime(emNo);
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
+	    	re = dao.updateEndTime(emNo);
 		      
 		}
 		return re;
@@ -49,24 +52,19 @@ public class AttendanceService {
 		HttpSession session = request.getSession();
 		AttendanceVO attendance = new AttendanceVO();
 		
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
-		      attendance.setEmNo(emNo);
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
+		    attendance.setEmNo(emNo);
 		}
 		
 		return dao.insertOutside(attendance);
 	}
 	
-	//휴가 데이터 입력 (현재날짜, 사번, 근무상태:4) ------------> 조회활 때 넣어지도록 ListAction에 넣기
+	//휴가 데이터 입력 (현재날짜, 사번, 근무상태:4) ------------> em_no null error............dhoskdksjalk
 	public int insertDayoffService(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		AttendanceVO attendance = new AttendanceVO();
 		
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
-		      attendance.setEmNo(emNo);
-		}
-		return dao.insertDayoff(attendance);
+		return dao.insertDayoff();
 	}
 	
 	
@@ -79,18 +77,42 @@ public class AttendanceService {
 		List<AttendanceVO> list = null;
 		
 		
-		if(session.getAttribute("emNo") != null) {
-		      int emNo = (int)session.getAttribute("emNo");
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
 		      
-		      AttendanceVO attendance = new AttendanceVO();
-		      attendance.setEmNo(emNo);
-		      attendance.setAtState(dao.updateState(emNo)); 
-		      attendance.setAtNote(dao.updateNote(emNo));
-		      
-		      list = dao.statusAttendance(attendance);
+			AttendanceVO attendance = new AttendanceVO();
+			attendance.setEmNo(emNo);
+			attendance.setAtState(dao.updateState(emNo));
+			attendance.setAtNote(dao.updateNote(emNo));
+
+			list = dao.statusAttendance(attendance);
 		      
 		}
 		return list;
+	}
+	
+	public List<AttendanceVO> listDeptService(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		List<AttendanceVO> list = null;
+		
+		
+		if(session.getAttribute("employeeVO") != null) {
+			EmployeeVO employee = (EmployeeVO)session.getAttribute("employeeVO");
+		    int emNo = employee.getEm_no();
+
+			list = dao.listDept(emNo);
+		      
+		}
+		return list;
+		
+	}
+	
+	
+	
+	//오늘날짜 출력
+	public String printTodayService(HttpServletRequest request) throws Exception {
+		return dao.printToday();
 	}
 				
 				

@@ -15,10 +15,6 @@ public class OutsideAttendanceAction implements Action {
 		AttendanceService service = AttendanceService.getInstance();
 		ActionForward forward = new ActionForward();
 		
-		HttpSession session = request.getSession();
-	    session.setAttribute("emNo", 45424411);
-	    session.setAttribute("emName", "백민주");
-		
 	    service.insertOutsideService(request);
 		
 	    forward.setPath("status");

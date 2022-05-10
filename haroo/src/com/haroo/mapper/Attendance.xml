@@ -66,10 +66,26 @@
     	where at_date = TO_char(sysdate, 'YYYY-MM-DD') and em_no = #{emNo} and at_state is null
 	</update>
 	
-	<!-- 휴가 가는 날은 근무 상태 4로 입력 ..-->
-	<insert id="insertDayoff" parameterType="AttendanceVO">
-		
- 	 	insert into attendance
+	<!-- 휴가 가는 날은 근무 상태 4로 입력 ..em_no => select문 결과가 null이면 어떡하죠..!-->
+	<insert id="insertDayoff">
+		insert into attendance 
+		select to_char(sysdate, 'yyyy-mm-dd'),
+ 			(select em_no 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS')),
+        	null, null, 4, 
+        	(select le_kind 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS'))
+		from dual 
+		where exists (select em_no 
+        		from leave 
+        		where le_status = 1 
+        		and TO_char(sysdate, 'YYYY-MM-DD') BETWEEN TO_DATE(le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(le_end, 'YYYY-MM-DD HH24:MI:SS'))
+ 	 	
+ 	 	<!-- insert into attendance
 			select
 				to_char(sysdate, 'yyyy-mm-dd'), ${emNo}, NULL, NULL, 4, NULL
            	from dual
@@ -80,8 +96,7 @@
                 and l.le_status = 1
                 and at_date BETWEEN TO_DATE(l.le_start, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(l.le_end, 'YYYY-MM-DD HH24:MI:SS')
                 and at_date = TO_char(sysdate, 'YYYY-MM-DD')
-                and l.em_no = ${emNo}
-            )  
+            ) -->  
           
 	</insert>
 	
@@ -121,6 +136,20 @@
     		and d.de_no = (select de_no from employee where em_no = #{emNo})
     		order by a.em_no
 	</select>
+	
+	<!-- 로그인한 사원의 부서목록 가져오기 -->
+	<select id="listDept" parameterType="int" resultType="AttendanceVO">
+		select e.em_no as emNo, e.em_name as emName, d.de_name as deName
+    		from employee e, department d
+    		where e.de_no = d.de_no
+    		and d.de_no = (select de_no from employee where em_no = #{emNo})
+	</select>
+	
+	<!-- 오늘 날짜 -->
+	<select id="printToday" resultType="String">
+		select TO_char(sysdate, 'YYYY-MM-DD') from dual
+	</select>
+	
 	
 	
 </mapper>
