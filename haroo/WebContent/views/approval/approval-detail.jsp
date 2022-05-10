@@ -6,68 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>문서보기</title>
-<!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <!-- editor -->
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-  <link rel="stylesheet" href="/haroo/css/approval-styles.css" />
+<script type="text/javascript">
+window.onload = function() {
+  const apRefreshPath = sessionStorage.getItem('apRefreshPath');
+  if(apRefreshPath != null && apRefreshPath != '/haroo/ap/main') {
+    location.href = '/haroo/ap/main';
+  } 
+}
+</script>
 </head>
 <body>
-  <div class="ap-form-container">
+  <div class="ap-form-container container row">
+    <div class="ap-report-body col-9">
     <table class="table table-bordered">
       <tbody>
         <tr>
           <th class="text-center fs-2" scope="col" colspan="2">${ap.foKind }</th>
         </tr>
-        <tr>
-           <td colspan="2">
-            <table class="table mb-0 table-bordered">
-              <tbody>
-                <tr>
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <th class="text-center">${apLine.emName} ${apLine.poName}(${apLine.deName })</th>
-                  </c:forEach>
-                </tr>
-                <tr>
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <td class="text-center">
-                      
-                      <c:choose>
-                        <c:when test="${apLine.alStatus == 0 }">
-                          <button class="ap-form-btn">진행중</button>
-                        </c:when>
-                        <c:when test="${apLine.alStatus == 1 }">
-                          <button class="ap-line-button ap-form-btn">승인</button>
-                        </c:when>
-                        <c:when test="${apLine.alStatus == 2 }">
-                          <button class="ap-line-button ap-form-btn">반려</button>
-                        </c:when>
-                      </c:choose>
-                    </td>
-                  </c:forEach>
-                </tr>
-                <tr class="ap-toggle ap-hidden">
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <c:if test="${apLine.alDate != null }">
-                      <td class="text-center">${apLine.alDate }</td>
-                    </c:if>
-                  </c:forEach>
-                </tr>
-                <tr class="ap-toggle ap-hidden">
-                  <c:forEach var="apLine" items="${ap.apLine }">
-                    <c:if test="${apLine.alComment != null }">
-                      <td class="text-center">${apLine.alComment}</td>
-                    </c:if>
-                  </c:forEach>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      
         <tr>
           <th scope="row">제목</th>
           <td>${ap.apTitle }</td>
@@ -106,14 +61,14 @@
             <td>${ap.leave.leStart } - ${ap.leave.leEnd } (${ap.leave.leDays }일 간)</td>
           </tr>
         </c:if>
-        <tr>
-          <th class="text-center" scope="row" colspan="2">내용</th>
-        </tr>
         <c:if test="${ap.expense != null }">
         <tr>
            <td colspan="2">
             <table class="table mb-0 table-bordered">
               <tbody>
+                <tr>
+                  <th class="text-center" scope="row" colspan="4">품의목록</th>
+                </tr>
                 <tr>
                   <th class="text-center">품목</th>
                   <th class="text-center">수량</th>
@@ -130,7 +85,7 @@
                 <c:set var="total" value="${ex.elTotal }"></c:set>
               </c:forEach>  
                 <tr>
-                  <td class="text-center" colspan="2">합계</td>
+                  <th class="text-center" colspan="2">합계</th>
                   <td class="text-center" colspan="2">${total }</td>
                 </tr>
               </tbody>
@@ -138,6 +93,9 @@
           </td>
         </tr>
         </c:if>
+        <tr>
+          <th class="text-center" scope="row" colspan="2">내용</th>
+        </tr>
         <tr>
           <td colspan="2">${ap.apContent }</td>
         </tr>
@@ -154,24 +112,87 @@
         </tr>
       </tbody>
     </table>
-    <c:if test="${ap.apStatus == 0 }">
-      <div class="ap-form-btns">
-      <form action="" method="post">
-        <input type="hidden" name="apNo" value="${ap.apNo }" />
-        <button class="ap-form-btn">상신취소</button>
-      </form>
-      </div>
-    </c:if>
-    <c:if test="${ap.apStatus == -1 }">
-      <div class="ap-form-btns">
-      <form action="/haroo/ap/re" method="post">
-        <input type="hidden" name="approval" value="${ap }" />
-        <button class="ap-form-btn">재상신</button>
-      </form>
-      </div>
-    </c:if>
+
+      <div class="text-end">
+        <c:if test="${ap.apStatus == 0 }">
+          <form action="/haroo/ap/process/${ap.apNo }" method="post">
+            <input type="hidden" name="apNo" value="${ap.apNo }" />
+            <button class="btn btn-outline-secondary btn-sm">상신취소</button>
+          </form>
+        </c:if>
+        <c:if test="${ap.apStatus == -1 }">
+          <form action="/haroo/ap/re" method="post">
+            <input type="hidden" name="approval" value="${ap }" />
+            <button class="btn btn-outline-secondary btn-sm">재상신</button>
+          </form>
+        </c:if>
+       </div>
+
+    </div>
+    <div class="ap-report-line col-3">
+      <table class="table mb-0 table-bordered">
+              <tbody>
+                <tr>
+                  <th class="text-center ap-line-table-1">결재</th>
+                </tr>
+                  <c:forEach var="apLine" items="${ap.apLine }">
+                  <tr>
+                    <th class="text-center">
+                    <span class="badge rounded-pill bg-light text-dark">${apLine.alOrder }</span>
+                    ${apLine.emName} ${apLine.poName}(${apLine.deName })</th>
+                  </tr>
+                  
+                    <c:if test="${ap.apStatus >=0 }">
+                    
+                      <c:choose>
+                        <c:when test="${apLine.alStatus == 0  and ap.apStatus == 0 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-outline-secondary btn-sm">진행중</button>
+                          </td>
+                         </tr>
+                        </c:when>
+                        <c:when test="${apLine.alStatus == 1 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            승인
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
+                          </td>
+                         </tr>
+                        </c:when>
+                        <c:when test="${apLine.alStatus == 2 }">
+                        <tr>
+                         <td class="text-center">
+                          <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#al-detail-${apLine.alOrder }" aria-expanded="false" aria-controls="collapseExample">
+                            반려
+                          </button>
+                          <div class="collapse" id="al-detail-${apLine.alOrder }">
+                            <c:if test="${apLine.alDate != null}">
+                              <div class="ap-line-sign-form">
+                                <div class="ap-line-date">${apLine.alDate }</div>
+                                ${apLine.alComment}
+                              </div>
+                            </c:if>
+                          </div>
+                          </td>
+                         </tr>
+                        </c:when>
+                      </c:choose>
+                    </c:if>
+                  </c:forEach>
+              </tbody>
+            </table>
+    </div>
+    
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/haroo/js/approval.js"></script>
 </body>
 </html>

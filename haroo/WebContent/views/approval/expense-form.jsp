@@ -5,88 +5,136 @@
 <head>
 <meta charset="UTF-8">
 <title>품의서 작성</title>
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <!-- editor -->
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-  <!-- bootstrap 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  -->
-  <link rel="stylesheet" href="/haroo/css/approval-styles.css" />
+<script type="text/javascript">
+window.onload = function() {
+  const apRefreshPath = sessionStorage.getItem('apRefreshPath');
+  if(apRefreshPath != null && apRefreshPath != '/haroo/ap/main') {
+    location.href = '/haroo/ap/main';
+  }
+}
+</script>
 </head>
 <body>
-  <div class="ap-container">
-    <h3 class="ap-form-title">품의서</h3>
-    <form class="ap-form" action="" method="post">
-      <input type="hidden" name="foNo" value="2" />
-      <div class="ap-form-container">
-        <div class="ap-form-input">
-          <label class="ap-form-label">기안자</label>
-          <input type="hidden" name="emNo" value="${emNo }" />${emName }
+  <div class="ap-form-container">
+  
+    <form class="ap-form row" action="/haroo/ap/form/2" method="post">
+    <div class="ap-report-body col-9">
+    <div class="text-center">
+      <h1 class="fs-2 ap-form-name">품의서</h1>
+    </div>
+    <input type="hidden" name="foNo" value="2" />
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th class="text-center" scope="row">기안자</th>
+          <td><input type="hidden" name="emNo" value="${employeeVO.em_no }" />${employeeVO.em_name }</td>
+        </tr>
+        <tr>
+          <th class="text-center" scope="row">제목</th>
+          <td><div class="input-group input-group-sm">
+            <input class="form-control" type="text" name="apTitle"/>
+          </div></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table mb-0 table-bordered">
+              <tbody>
+                <tr>
+                  <th class="text-center">품목
+                  <span class="btn-group btn-group-sm">
+                    <button type="button" id="ap-el-plus" class="btn btn-sm">+</button>
+                    <button type="button" id="ap-el-minus" class="btn btn-sm">-</button>
+                  </span>
+                  </th>
+                  <th class="text-center">수량</th>
+                  <th class="text-center">단가</th>
+                  <th class="text-center">소계</th>
+                </tr>
+                <tr class="ap-el">
+                  <td class="el-item">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elItem1"/>
+                    </div>
+                  </td>
+                  <td class="ap-quantity">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elQuantity1" placeholder="숫자만"/>
+                    </div>
+                  </td>
+                  <td class="ap-price">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="number" name="elPrice1" placeholder="숫자만"/>
+                    </div>
+                  </td>
+                  <td class="ap-cost">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" type="text" name="elCost1" readOnly/>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="el-total">
+                  <th class="text-center">합계</th>
+                  <td class="ap-total" colspan="3">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control" name="elTotal" type="text" readOnly/>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center" scope="row">내용</th>
+          <td><textarea id="summernote" name="editordata"></textarea></td>
+        </tr>
+        <tr>
+          <th class="text-center" scope="row">공개범위</th>
+          <td>
+            <input type="radio" name="apPublic" value="1" checked="checked"><span class="ap-form-radio-label">공개</span>
+            <input type="radio" name="apPublic" value="0"><span class="ap-form-radio-label">비공개</span>
+          </td>
+        </tr>
+      </tbody>   
+      </table> 
+      <div class="text-end">
+        <div class="btn-group-sm" role="group">
+          <button class="btn btn-outline-secondary" type="submit">상신하기</button>
+          <button class="btn btn-outline-secondary ap-form-reset" type="reset">다시작성</button>
         </div>
-        <div class="ap-form-input">
-          <label class="ap-form-label">제목</label>
-          <input class="ap-form-text" type="text" name="apTitle"/>
-        </div>
-        <div class="ap-form-input">
-          <label class="ap-form-label">품의목록</label>
-          <table class="ap-form-table">
-            <tr>
-              <th>품목</th>
-              <th>수량</th>
-              <th>단가</th>
-              <th>소계</th>
-            </tr>
-            <tr class="ap-el ap-toggle ap-hidden">
-              <td class="item"><input class="ap-form-text-3" type="text" name="elItem1"/></td>
-              <td class="ap-quantity"><input class="ap-form-text-3" type="number" name="elQuantity1" placeholder="숫자만"/></td>
-              <td class="ap-price"><input class="ap-form-text-3" type="number" name="elPrice1" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost1" readOnly/></td>
-            </tr>
-            <tr class="ap-el ap-toggle ap-hidden">
-              <td class="item"><input class="ap-form-text-3" type="text" name="elItem2"/></td>
-              <td class="ap-quantity"><input class="ap-form-text-3" type="number" name="elQuantity2" placeholder="숫자만"/></td>
-              <td class="ap-price"><input class="ap-form-text-3" type="number" name="elPrice2" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost2" readOnly/></td>
-            </tr>
-            <tr class="ap-el ap-toggle ap-hidden">
-              <td class="item"><input class="ap-form-text-3" type="text" name="elItem3"/></td>
-              <td class="ap-quantity"><input class="ap-form-text-3" type="number" name="elQuantity3" placeholder="숫자만"/></td>
-              <td class="ap-price"><input class="ap-form-text-3" type="number" name="elPrice3" placeholder="숫자만"/></td>
-              <td class="ap-cost"><input class="ap-form-text-3" type="text" name="elCost3" readOnly/></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>합계</td>
-              <td class="ap-total"><input class="ap-form-text-3" name="elTotal" type="text" readOnly/></td>
-            </tr>
-          </table>
-        </div>
-        <div class="ap-form-input">
-          <label class="ap-form-label">내용</label>
-          <textarea id="summernote" name="editordata"></textarea>
-        </div>
-        <div class="ap-form-input">
-          <label class="ap-form-label">결재선</label>
-            <button class="ap-form-btn ap-al-select">결재선 선택</button>
-            <div id="ap-list-selected"></div>
-        </div>
-        <div class="ap-form-input">
-          <label class="ap-form-label">공개범위</label>
-          <input type="radio" name="apPublic" value="1" checked="checked"><span class="ap-form-radio-label">공개</span>
-          <input type="radio" name="apPublic" value="0"><span class="ap-form-radio-label">비공개</span>
-        </div>
-      
-        <div class="ap-form-btns">
-          <button class="ap-form-btn" type="submit">상신하기</button>
-          <button class="ap-form-btn" type="reset">다시작성</button>
+      </div>
+      </div>
+      <div class="ap-report-line col-3">
+        <div class="card border-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-header">결재</div>
+          <div class="card-body text-dark">
+          <h5 class="card-title"><button class="btn btn-outline-secondary btn-sm ap-al-select">결재선 선택</button></h5>
+            <div class="ap-line-sign-form" id="ap-list-selected">
+              <p class="card-text">결재선 선택 버튼을 눌러 결재자를 지정해주세요.</p>
+           </div>
+          </div>
         </div>
       </div>
     </form>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/haroo/js/approval.js"></script>
+  <script type="text/javascript">
+  $slim(document).ready(function() {
+    $slim('#summernote').summernote({
+        height: 300,                 // 에디터 높이
+        minHeight: null,             // 최소 높이
+        maxHeight: null,             // 최대 높이
+        lang: "ko-KR",          // 한글 설정
+        toolbar: [
+          // [groupName, [list of button]]
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']]
+        ]
+    });
+  });
+  </script>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.haroo.domain.ApLineEmpVO;
 import com.haroo.domain.ApprovalLineVO;
 import com.haroo.domain.ApprovalVO;
+import com.haroo.domain.EmployeeVO;
 import com.haroo.domain.ExpenseListVO;
 import com.haroo.domain.LeaveVO;
 import com.haroo.mapper.ApprovalMapper;
@@ -154,6 +155,26 @@ public class ApprovalDao {
     
     try {
       list = sqlSession.getMapper(ApprovalMapper.class).detailExpenseList(apNo);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return list;
+  }
+  
+  // 전체문서함
+  public List<ApprovalVO> listAllApproval() { // 공개된 승인 처리 완료 전체 문서
+    List<ApprovalVO> list = null;
+    
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    
+    try {
+      list = sqlSession.getMapper(ApprovalMapper.class).listAllApproval();
       
     } catch (Exception e) {
       e.printStackTrace();
@@ -344,5 +365,23 @@ public class ApprovalDao {
     }
     
     return list;
+  }
+  
+  // 휴가번호 가져오기
+  public int getDaNo(EmployeeVO employee) {
+    SqlSession sqlSession = getSqlsessionFactory().openSession();
+    int daNo = 0;
+    
+    try {
+      daNo = sqlSession.getMapper(ApprovalMapper.class).getDaNo(employee);
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if(sqlSession != null) {
+        sqlSession.close();
+      }
+    }
+    
+    return daNo;
   }
 }

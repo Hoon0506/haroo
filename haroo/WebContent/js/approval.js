@@ -1,29 +1,5 @@
-// summernote 실행
-$(document).ready(function() {
-  $('#summernote').summernote({
-      height: 300,                 // 에디터 높이
-      minHeight: null,             // 최소 높이
-      maxHeight: null,             // 최대 높이
-      focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-      lang: "ko-KR",          // 한글 설정
-      toolbar: [
-        // [groupName, [list of button]]
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-      ]
-  });
-});
-
-// enter submit 방지
-$(':reset').click(function(){
-  $('#summernote').summernote('reset');
-});
-
-$(".ap-form input").keydown(function (event) {
+//enter submit 방지
+$(document).on('keydown', ".ap-form input", function (event) {
   if (event.keyCode == '13') {
     if (event) {
       event.preventDefault();
@@ -32,8 +8,37 @@ $(".ap-form input").keydown(function (event) {
   }
 });
 
+// 품의목록 추가하기
+let count = 2;
+$(document).on('click', '#ap-el-plus', function(){
+  if(count == 6) {
+    return;
+  }
+  let html = '<tr class="ap-el"><td class="el-item"><div class="input-group input-group-sm">';
+  html += '<input class="form-control" type="text" name="elItem'+count+'"/></div></td>';
+  html += '<td class="ap-quantity"><div class="input-group input-group-sm">';
+  html += '<input class="form-control" type="number" name="elQuantity'+count+'" placeholder="숫자만"/></div></td>';
+  html += '<td class="ap-price"><div class="input-group input-group-sm">';
+  html += '<input class="form-control" type="number" name="elPrice'+count+'" placeholder="숫자만"/></div></td>';
+  html += '<td class="ap-cost"><div class="input-group input-group-sm">';
+  html += '<input class="form-control" type="text" name="elCost'+count+'" readOnly/></div></td></tr>';
+  
+  $('#el-total').before(html);
+  count++;
+  
+})
+
+// 품의목록 삭제
+$(document).on('click', '#ap-el-minus', function(){
+  if(count==2) {
+    return;
+  }
+  $('#el-total').prev().remove();
+  count--;
+})
+
 // 품의 목록 금액 계산하기
-$('.ap-el input').change(function(){
+$(document).on('change', '.ap-el input', function(){
   let quantity = 0; // 물건 개수
   let price = 0; // 물건 가격
   let cost = 0; // 물건 총 금액
@@ -56,10 +61,10 @@ $('.ap-el input').change(function(){
 
 
 //결재선 선택 직원 목록
-$('.ap-al-select').click(function(event){
+$(document).on('click', '.ap-al-select', function(event){
   event.preventDefault();
   $('#ap-list-selected').empty();
-  window.open("line", "결재선 선택", "width=600, height=500, left=50, top=50");
+  window.open("/haroo/ap/form/line", "결재선 선택", "width=600, height=500, left=50, top=50");
 });
 
 //결재선 선택
@@ -79,16 +84,65 @@ $(document).on('click', '.ap-selected-name', function(event){
   $(this).remove();
 });
 
-let insertAlList = '<ol class="ap-al-list">';
-// 선택한 결재선 저장
+//선택한 결재선 저장
+let insertAlList = '<table class="table mb-0 table-bordered"><tbody>';
 $(document).on('click', '#ap-alist-selected-sticky .ap-form-btn', function(event){
   $('.ap-selected-name').each(function(index){
-    insertAlList += '<li>'+$(this).text();
+    insertAlList += '<tr><td>'+'<span class="badge rounded-pill bg-light text-dark">'+(index+1)+'</span>'+$(this).text();
     insertAlList += '<input type="hidden" name="alNo'+(index+1)+'" value="'+$(this).find('.ap-hidden-emNo').val()+'"/>'
-    insertAlList += '</li>'
+    insertAlList += '</td></tr>'
   })
-  insertAlList += '</ol>'
+  insertAlList += '</tbody></table>'
   $(opener.document).find('#ap-list-selected').html(insertAlList);
   window.close();
 })
 
+// form reset 될 때 선택한 결재선 삭제, summernote 내용 비우기
+$(document).on('click', '.ap-form-reset', function(){
+  $('#ap-list-selected').empty();
+  $('#summernote').summernote('reset');
+});
+
+// 메뉴선택 ajax로 불러오기
+let url='';
+$(document).on('click', 'a.ap-link', function(event){ // 링크를 클릭했을 때
+  event.preventDefault();
+  url = $(this).attr('href');
+  // console.log(url); url 확인
+  apChangeView(url);
+});
+
+// 뒤로가기 했을 때 url에 따라 contents 변경
+window.addEventListener('popstate', (e) => { // 뒤로가기 이벤트 발생
+  const apPathname = window.location.pathname
+  //console.log('[popstate]', window.location.pathname);
+  
+  if(apPathname == "/haroo/ap/main") {
+    location.href = apPathname;
+  } else {
+    apChangeView(apPathname);
+  }
+  
+});
+
+// 새로고침시 현재 url 세션에 저장하여 main으로 이동하기
+window.addEventListener('beforeunload', function(event){
+  event.preventDefault();
+  const apRefreshPath = window.location.pathname
+  
+  if(apRefreshPath != '/haroo/ap/main'){
+    sessionStorage.setItem('apRefreshPath', apRefreshPath);
+  }
+});
+
+// url로 이동하고 url 반영
+function apChangeView(url) {
+  $.ajax({
+    url: url,
+    dataType: 'html',
+    success: function(data){
+      $('#ap-contents').html(data);
+      window.history.pushState({}, null, url);
+    }
+  })
+}
