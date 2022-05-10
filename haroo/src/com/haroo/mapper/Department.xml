@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haroo.mapper.DepartmentMapper">
+	<cache />
+	
+	<!-- VO와 DB컬럼명이 상이하기에 Mapping -->
+	<resultMap type="DepartmentVO" id="departmentResult">
+	<result property="deNo" column="de_no"/>
+	<result property="deName" column="de_name"/>
+	</resultMap>
+	
+	<!-- 전체 부서 목록 출력을 위한 query -->
+	<select id="listDepartment" parameterType="DepartmentVO" resultType="DepartmentVO" resultMap="departmentResult">
+	
+	select *
+	from department
+	
+	</select>
+	
+</mapper>
+

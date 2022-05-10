@@ -1,3 +1,4 @@
+
 package com.haroo.action;
 
 public class ActionForward {
@@ -29,3 +30,4 @@ public class ActionForward {
 		this.path = path;
 	}
 }
+

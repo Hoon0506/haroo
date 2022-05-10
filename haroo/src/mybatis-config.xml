@@ -27,6 +27,8 @@
     <!-- 주영 -->
     <typeAlias type="com.haroo.domain.AttendanceVO" alias="AttendanceVO"/>
     <typeAlias type="com.haroo.domain.DayoffVO" alias="DayoffVO"/>
+    <!-- 지윤 -->
+    <typeAlias type="com.haroo.domain.DepartmentVO" alias="DepartmentVO" />
   </typeAliases>
 
   <environments default="development">
@@ -49,6 +51,8 @@
     <!-- 주영 -->
     <mapper resource="com/haroo/mapper/Attendance.xml"/>
     <mapper resource="com/haroo/mapper/Dayoff.xml"/>
+    <!-- 지윤 -->
+    <mapper resource="com/haroo/mapper/Department.xml" />
   </mappers>
 
 </configuration>
