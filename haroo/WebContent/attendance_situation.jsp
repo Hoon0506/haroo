@@ -32,8 +32,9 @@
 <title>haroo 그룹웨어-근태현황</title>
 
  <!-- jquery -->
- <script src="js/jquery.js" type="text/javascript"></script>
+<!-- <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/attendance.js"  type="text/javascript"></script> 
+ -->
 
 </head>
 <body>

@@ -62,14 +62,11 @@ public class BoardDao {
 	}// end insertBoard
 
 	// 게시판 목록 보기
-	public List<BoardVO> listBoard(SearchVO search) {
+	public List<BoardVO> listBoard(int startRow, SearchVO search) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		List<BoardVO> list = null;
 		try {
-			// list =
-			// sqlSession.selectList("kosta.mapper.BoardMapper.listBoard");//mapStatement(Board.xml에
-			// namespace랑id를 더한거다)
-			list = sqlSession.getMapper(BoardMapper.class).listBoard(search);// search를 먼저써야한다..!!
+			list = sqlSession.getMapper(BoardMapper.class).listBoard(search, new RowBounds(startRow, 10));// search를 먼저써야한다..!!
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

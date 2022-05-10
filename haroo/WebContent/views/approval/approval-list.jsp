@@ -1,18 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문서목록</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="/haroo/css/approval-styles.css" />
+<script type="text/javascript">
+window.onload = function() {
+  const apRefreshPath = sessionStorage.getItem('apRefreshPath');
+  if(apRefreshPath != null && apRefreshPath != '/haroo/ap/main') {
+    location.href = '/haroo/ap/main';
+  }
+}
+</script>
 </head>
 <body>
   <!-- 사이드메뉴 제외한 영역 -->
-  <div class="p-3 container-sm">
+  <c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
+  <c:choose>
+  <c:when test="${fn:contains(url, 'done')  }"><h3>완료 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'process') }"><h3>진행 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'takeback') }"><h3>취소 문서</h3></c:when>
+  <c:when test="${fn:contains(url, 'all') }"><h3>전체 문서</h3></c:when>
+  </c:choose>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -29,7 +42,7 @@
           <c:when test="${ap.apStatus == 0 }">
           <tr>
             <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="process/${ap.apNo }">${ap.apTitle }</a></td>
+            <td><a class="ap-list-title ap-link" href="/haroo/ap/process/${ap.apNo }">${ap.apTitle }</a></td>
             <td>${ap.emName }</td>
             <td>${ap.apDate }</td>
             <td>진행중</td>
@@ -38,7 +51,7 @@
           <c:when test="${ap.apStatus > 0 }">
           <tr>
             <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="done/${ap.apNo }">${ap.apTitle }</a></td>
+            <td><a class="ap-list-title ap-link" href="/haroo/ap/done/${ap.apNo }">${ap.apTitle }</a></td>
             <td>${ap.emName }</td>
             <td>${ap.apDate }</td>
             <c:if test="${ap.apStatus == 1 }">
@@ -52,7 +65,7 @@
           <c:when test="${ap.apStatus == -1 }">
           <tr>
             <th scope="row">${ap.foKind }</th>
-            <td><a class="ap-list-title" href="takeback/${ap.apNo }">${ap.apTitle }</a></td>
+            <td><a class="ap-list-title ap-link" href="/haroo/ap/takeback/${ap.apNo }">${ap.apTitle }</a></td>
             <td>${ap.emName }</td>
             <td>${ap.apDate }</td>
             <td>취소</td>
@@ -62,8 +75,5 @@
         </c:forEach>
       </tbody>
     </table>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/haroo/js/approval.js"></script>
 </body>
 </html>

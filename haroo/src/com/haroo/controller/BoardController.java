@@ -27,8 +27,9 @@ public class BoardController extends HttpServlet {
 	public BoardController() {
 		super();
 	}
+
 	
-	public void doProcess(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String requestURI = request.getRequestURI().trim(); // /haroo/board/list.do trim : 공백제거
 		String contextPath = request.getContextPath(); // /haroo
@@ -46,49 +47,72 @@ public class BoardController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("insertAction.do")) {
-			action = new InsertAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if(command.equals("listAction.do")) {
+		} else if (command.equals("listAction.do")) {
 			action = new ListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("detailAction.do")) {
+		} else if (command.equals("detailAction.do")) {
 			action = new DetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("updateForm.do")) {
+		} else if (command.equals("updateForm.do")) {
 			action = new UpdateFormAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("updateAction.do")) {
-			action = new UpdateAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if(command.equals("deleteAction.do")) {
+		} else if (command.equals("deleteAction.do")) {
 			action = new DeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("insertReplyAction.do")) {
+		}
+		// forward의 값이 들어간 경우
+		if (forward != null) {
+			if (forward.isRedirect()) {// redirect
+				response.sendRedirect(forward.getPath());
+			} else { // dispather
+				RequestDispatcher dispathcer = request.getRequestDispatcher(forward.getPath());
+				dispathcer.forward(request, response);
+			}
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String requestURI = request.getRequestURI().trim(); // /haroo/board/list.do trim : 공백제거
+		String contextPath = request.getContextPath(); // /haroo
+		String command = requestURI.substring(contextPath.length() + 7); // list.do만나오게 하려고
+		System.out.println(command);// list.do만나옴
+
+		Action action = null;
+		ActionForward forward = null;
+
+		if (command.equals("insertAction.do")) {
+			action = new InsertAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("updateAction.do")) {
+			action = new UpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}  else if (command.equals("insertReplyAction.do")) {
 			action = new insertReplyAction();
 			try {
 				forward = action.execute(request, response);
@@ -106,17 +130,6 @@ public class BoardController extends HttpServlet {
 				dispathcer.forward(request, response);
 			}
 		}
-
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request, response);
 	}
 
 }

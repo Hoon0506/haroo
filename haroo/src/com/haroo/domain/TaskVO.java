@@ -3,36 +3,44 @@ package com.haroo.domain;
 import java.io.Serializable;
 
 public class TaskVO implements Serializable {
-    private int no;
+    private int id;
+    private String groupId;
     private String title;
-    private String place;
-    private String friends;
+    private String writer;
+    private String content;
     private String start;
     private String end;
-    private String time;
-    private String contents;
-    private int emNo;
+    private boolean allday;
+    private String textColor;
+    private String backgroundColor;
+    private String borderColor;
+    private int em_no;
 
-    public TaskVO() {}
-
-    public TaskVO(int no, String title, String place, String friends, String start, String end, String time, String contents, int emNo) {
-        this.no = no;
-        this.title = title;
-        this.place = place;
-        this.friends = friends;
-        this.start = start;
-        this.end = end;
-        this.time = time;
-        this.contents = contents;
-        this.emNo = emNo;
+    public TaskVO() {
     }
 
-    public int getNo() {
-        return no;
+    public int getId() {
+        return id;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEm_no() {
+        return em_no;
+    }
+
+    public void setEm_no(int em_no) {
+        this.em_no = em_no;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public String getTitle() {
@@ -43,20 +51,20 @@ public class TaskVO implements Serializable {
         this.title = title;
     }
 
-    public String getPlace() {
-        return place;
+    public String getWriter() {
+        return writer;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 
-    public String getFriends() {
-        return friends;
+    public String getContent() {
+        return content;
     }
 
-    public void setFriends(String friends) {
-        this.friends = friends;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getStart() {
@@ -75,27 +83,53 @@ public class TaskVO implements Serializable {
         this.end = end;
     }
 
-    public String getTime() {
-        return time;
+    public boolean isAllday() {
+        return allday;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setAllday(boolean allday) {
+        this.allday = allday;
     }
 
-    public String getContents() {
-        return contents;
+    public String getTextColor() {
+        return textColor;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
     }
 
-    public int getEmNo() {
-        return emNo;
+    public String getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setEmNo(int emNo) {
-        this.emNo = emNo;
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public String getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(String borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskVO{" +
+                "id=" + id +
+                ", groupId='" + groupId + '\'' +
+                ", title='" + title + '\'' +
+                ", writer='" + writer + '\'' +
+                ", content='" + content + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                ", allday=" + allday +
+                ", textColor='" + textColor + '\'' +
+                ", backgroundColor='" + backgroundColor + '\'' +
+                ", borderColor='" + borderColor + '\'' +
+                ", em_no=" + em_no +
+                '}';
     }
 }

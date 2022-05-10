@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.haroo.action.Action;
 import com.haroo.action.ActionForward;
 import com.haroo.domain.BoardVO;
+import com.haroo.domain.ListModel;
 import com.haroo.service.BoardService;
 
 public class ListAction implements Action {
@@ -17,10 +18,10 @@ public class ListAction implements Action {
 		BoardService service = BoardService.getInstance();
 		ActionForward forward = new ActionForward();
 		
-		//ListModel listModel = service.listBoardService(request);
-		List<BoardVO> list = service.listBoardService(request);
-		request.setAttribute("list", list);
-		//request.setAttribute("listModel", listModel);
+		ListModel listModel = service.listBoardService(request);
+		//List<BoardVO> list = service.listBoardService(request);
+		//request.setAttribute("list", list);
+		request.setAttribute("listModel", listModel);
 		
 		forward.setPath("/list.jsp");
 		forward.setRedirect(false);
