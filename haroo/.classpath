@@ -12,42 +12,14 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-beanutils.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-collections-3.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-lang-2.4.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-logging-1.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/ezmorph-1.0.6.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/json_simple-1.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/json-lib-2.3-jdk13.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chlgn/Documents/카카오톡 받은 파일/json/json-lib-2.3-jdk13.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
