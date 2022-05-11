@@ -19,6 +19,7 @@ public class DetailAction implements Action {
 		ActionForward forward = new ActionForward();
 		
 		int bdNo = Integer.parseInt(request.getParameter("bdNo"));
+		service.hitCountService(bdNo);
 		BoardVO board = service.detailBoardService(bdNo);
 		
 		List<ReplyVO> replys = service.listReplyService(request);

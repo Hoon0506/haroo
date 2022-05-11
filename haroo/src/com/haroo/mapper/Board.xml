@@ -69,4 +69,9 @@
 		select re_no as reNo, bd_no as bdNo, re_contents as reContents, re_writer as reWriter, re_regdate as reRegdate
 		from reply where bd_no=#{bdNo}
 	</select>
+	<update id="hitCount" parameterType="int">
+		update board
+		set bd_hitcount = bd_hitcount + 1
+		where bd_no = #{bdNo}
+	</update>
 </mapper>

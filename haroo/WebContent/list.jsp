@@ -173,65 +173,12 @@ a, a:hover {
 		<!-- sidebar -->
 		<!-- 사이드메뉴 -->
 		<div class="p-3 bg-white" style="width: 280px;">
-			<a href="/"
+			<a href="/haroo/board/listAction.do"
 				class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 				<svg class="bi me-2" width="30" height="24">
-					<use xlink:href="#bootstrap"></use></svg> <span class="fs-5 fw-semibold">Collapsible</span>
+					<use xlink:href="#bootstrap"></use></svg> <span class="fs-5 fw-semibold">게시판</span>
 			</a>
-			<ul class="list-unstyled ps-0">
-				<li class="mb-1">
-					<button class="btn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#home-collapse"
-						aria-expanded="false">Home</button>
-					<div class="collapse" id="home-collapse" style="">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">Overview</a></li>
-							<li><a href="#" class="link-dark rounded">Updates</a></li>
-							<li><a href="#" class="link-dark rounded">Reports</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="mb-1">
-					<button class="btn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-						aria-expanded="false">Dashboard</button>
-					<div class="collapse" id="dashboard-collapse" style="">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">Overview</a></li>
-							<li><a href="#" class="link-dark rounded">Weekly</a></li>
-							<li><a href="#" class="link-dark rounded">Monthly</a></li>
-							<li><a href="#" class="link-dark rounded">Annually</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="mb-1">
-					<button class="btn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-						aria-expanded="false">Orders</button>
-					<div class="collapse" id="orders-collapse" style="">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">New</a></li>
-							<li><a href="#" class="link-dark rounded">Processed</a></li>
-							<li><a href="#" class="link-dark rounded">Shipped</a></li>
-							<li><a href="#" class="link-dark rounded">Returned</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="border-top my-3"></li>
-				<li class="mb-1">
-					<button class="btn btn-toggle align-items-center rounded collapsed"
-						data-bs-toggle="collapse" data-bs-target="#account-collapse"
-						aria-expanded="false">Account</button>
-					<div class="collapse" id="account-collapse" style="">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">New...</a></li>
-							<li><a href="#" class="link-dark rounded">Profile</a></li>
-							<li><a href="#" class="link-dark rounded">Settings</a></li>
-							<li><a href="#" class="link-dark rounded">Sign out</a></li>
-						</ul>
-					</div>
-				</li>
-			</ul>
+			
 		</div>
 
 		<!-- body 영역 -->
@@ -265,33 +212,33 @@ a, a:hover {
 
 				<a href="insertForm.do" class="btn btn-primary float-end">글쓰기</a> <br>
 				<div class="container" style="text-align: center;">
-				<c:if test="${listModel.startPage >= 6}">
-					<a href="listAction.do?pageNum=${listModel.startPage - 1}">[이전]</a>
-				</c:if>
-
-				<!-- 페이지 목록 출력 -->
-				<c:forEach var="pageNo" begin="${listModel.startPage}"
-					end="${listModel.endPage}">
-					<c:if test="${listModel.requestPage == pageNo}">
-						<b>
+					<c:if test="${listModel.startPage >= 6}">
+						<a href="listAction.do?pageNum=${listModel.startPage - 1}">[이전]</a>
 					</c:if>
-					<a href="listAction.do?pageNum=${pageNo }">[${pageNo}]</a>
-					<c:if test="${listModel.requestPage == pageNo}">
-						</b>
+
+					<!-- 페이지 목록 출력 -->
+					<c:forEach var="pageNo" begin="${listModel.startPage}"
+						end="${listModel.endPage}">
+						<c:if test="${listModel.requestPage == pageNo}">
+							<b>
+						</c:if>
+						<a href="listAction.do?pageNum=${pageNo }">[${pageNo}]</a>
+						<c:if test="${listModel.requestPage == pageNo}">
+							</b>
+						</c:if>
+					</c:forEach>
+
+					<!-- 이후영역 -->
+					<c:if test="${listModel.endPage<listModel.totalPageCount}">
+						<a href="listAction.do?pageNum=${listModel.endPage + 1}">[이후]</a>
 					</c:if>
-				</c:forEach>
 
-				<!-- 이후영역 -->
-				<c:if test="${listModel.endPage<listModel.totalPageCount}">
-					<a href="listAction.do?pageNum=${listModel.endPage + 1}">[이후]</a>
-				</c:if>
-
-				<form action="listAction.do" method="get">
-					<input type="checkbox" name="area" value="bd_title"> 제목 <input
-						type="checkbox" name="area" value="bd_writer"> 작성자 <input
-						type="text" name="searchKey" size="10"> <input
-						type="submit" value="검색">
-				</form>
+					<form action="listAction.do" method="get">
+						<input type="checkbox" name="area" value="bd_title"> 제목 <input
+							type="checkbox" name="area" value="bd_writer"> 작성자 <input
+							type="text" name="searchKey" size="10"> <input
+							type="submit" value="검색">
+					</form>
 				</div>
 			</div>
 		</div>

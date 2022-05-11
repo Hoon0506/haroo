@@ -21,14 +21,14 @@ public class BoardDao {
 		return dao;
 	}
 
-	// sqlsessionfactory¸¦ °¡Á®¿À´Â ¹æ¹ý
+	// sqlsessionfactoryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public SqlSessionFactory getSqlSessionFactory() {
-		// mybatis-config.xml => SqlsessionFactory º¯È¯
+		// mybatis-config.xml => SqlsessionFactory ï¿½ï¿½È¯
 		String resource = "mybatis-config.xml";
 		InputStream in = null;
 
 		try {
-			in = Resources.getResourceAsStream(resource); // Resources´Â ibatis·Î
+			in = Resources.getResourceAsStream(resource); // Resourcesï¿½ï¿½ ibatisï¿½ï¿½
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,16 +36,16 @@ public class BoardDao {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 
-	// °Ô½ÃÆÇ ±Û µî·Ï
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int insertBoard(BoardVO board) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		int re = -1;
 
 		try {
-			// re = sqlSession.insert("kosta.mapper.BoardMapper.insertBoard", board); //rowÀÇ
-			// °¹¼ö¸¦ ¸®ÅÏ
+			// re = sqlSession.insert("kosta.mapper.BoardMapper.insertBoard", board); //rowï¿½ï¿½
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			re = sqlSession.getMapper(BoardMapper.class).insertBoard(board);
-			if (re > 0) { // insert, update, delete¶§ Æ®·£Àè¼Ç Ã³¸®¸¦ ÇØ¾ßÇÑ´Ù. spring¿¡¼­´Â ¸»°í ¿©±â¼­
+			if (re > 0) { // insert, update, deleteï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. springï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­
 				sqlSession.commit();
 			} else {
 				sqlSession.rollback();
@@ -61,12 +61,12 @@ public class BoardDao {
 		return re;
 	}// end insertBoard
 
-	// °Ô½ÃÆÇ ¸ñ·Ï º¸±â
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<BoardVO> listBoard(int startRow, SearchVO search) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		List<BoardVO> list = null;
 		try {
-			list = sqlSession.getMapper(BoardMapper.class).listBoard(search, new RowBounds(startRow, 10));// search¸¦ ¸ÕÀú½á¾ßÇÑ´Ù..!!
+			list = sqlSession.getMapper(BoardMapper.class).listBoard(search, new RowBounds(startRow, 10));// searchï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½..!!
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -79,7 +79,7 @@ public class BoardDao {
 	}// end listBoard
 
 	public BoardVO detailBoard(int bdNo) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession(); // ÀÌ°Å´Â ÇÊ¼ö
+		SqlSession sqlSession = getSqlSessionFactory().openSession(); // ï¿½Ì°Å´ï¿½ ï¿½Ê¼ï¿½
 		BoardVO board = null;
 		try {
 			board = sqlSession.getMapper(BoardMapper.class).detailBoard(bdNo);
@@ -99,7 +99,7 @@ public class BoardDao {
 
 		try {
 			re = sqlSession.getMapper(BoardMapper.class).updateBoard(board);
-			if (re > 0) { // insert, update, delete¶§ Æ®·£Àè¼Ç Ã³¸®¸¦ ÇØ¾ßÇÑ´Ù. spring¿¡¼­´Â ¸»°í ¿©±â¼­
+			if (re > 0) { // insert, update, deleteï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. springï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­
 				sqlSession.commit();
 			} else {
 				sqlSession.rollback();
@@ -115,11 +115,11 @@ public class BoardDao {
 	}// end updateBoard
 	
 	public int deleteBoard(int bdNo) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession(); // ÀÌ°Å´Â ÇÊ¼ö
+		SqlSession sqlSession = getSqlSessionFactory().openSession(); // ï¿½Ì°Å´ï¿½ ï¿½Ê¼ï¿½
 		int re = -1;
 		try {
 			re = sqlSession.getMapper(BoardMapper.class).deleteBoard(bdNo);
-			if (re > 0) { // insert, update, delete¶§ Æ®·£Àè¼Ç Ã³¸®¸¦ ÇØ¾ßÇÑ´Ù. spring¿¡¼­´Â ¸»°í ¿©±â¼­
+			if (re > 0) { // insert, update, deleteï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. springï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­
 				sqlSession.commit();
 			} else {
 				sqlSession.rollback();
@@ -155,7 +155,7 @@ public class BoardDao {
 		int re = -1;
 		try {
 			re = sqlSession.getMapper(BoardMapper.class).insertReply(reply);
-			if(re>0) { //insert, update, delete¶§ Æ®·£Àè¼Ç Ã³¸®¸¦ ÇØ¾ßÇÑ´Ù. spring¿¡¼­´Â ¸»°í ¿©±â¼­
+			if(re>0) { //insert, update, deleteï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. springï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­
 				sqlSession.commit();
 			} else {
 				sqlSession.rollback();
@@ -171,7 +171,7 @@ public class BoardDao {
 		return re;
 	}// end insertReply
 	public List<ReplyVO> listReply(int bdNo) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession(); //ÀÌ°Å´Â ÇÊ¼ö
+		SqlSession sqlSession = getSqlSessionFactory().openSession(); //ï¿½Ì°Å´ï¿½ ï¿½Ê¼ï¿½
 		List<ReplyVO> list = null;
 		try {
 			list = sqlSession.getMapper(BoardMapper.class).listReply(bdNo);
@@ -185,4 +185,24 @@ public class BoardDao {
 		
 		return list;
 	}// end listReply
+	
+	public int hitCount(int bdNo) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession(); // ï¿½Ì°Å´ï¿½ ï¿½Ê¼ï¿½
+		int re = -1;
+		try {
+			re = sqlSession.getMapper(BoardMapper.class).hitCount(bdNo);
+			if (re > 0) { // insert, update, deleteï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½. springï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return re;
+	}// hitCount
 }

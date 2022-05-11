@@ -98,9 +98,9 @@ public class BoardService {
 		return dao.updateBoard(board);
 	}
 
-	public int deleteBoardService(int seq) throws Exception {
+	public int deleteBoardService(int bdNo) throws Exception {
 
-		return dao.deleteBoard(seq);
+		return dao.deleteBoard(bdNo);
 	}
 
 	public int insertReplyService(HttpServletRequest request) throws Exception {
@@ -119,4 +119,9 @@ public class BoardService {
 		// List<Reply> list = dao.listReply(seq);
 		return dao.listReply(bdNo);
 	}// end listReplyService
+	
+	public int hitCountService(int bdNo) throws Exception {
+
+		return dao.hitCount(bdNo);
+	}
 }

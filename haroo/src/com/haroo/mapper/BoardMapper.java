@@ -14,6 +14,7 @@ public interface BoardMapper {
 	BoardVO detailBoard(int bdNo);
 	int updateBoard(BoardVO board);
 	int deleteBoard(int bdNo);
+	int hitCount(int bdNo);
 	int countBoard(SearchVO search);
 	int insertReply(ReplyVO reply);
 	List<ReplyVO> listReply(int bdNo);
