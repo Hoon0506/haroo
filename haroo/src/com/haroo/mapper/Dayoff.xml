@@ -35,15 +35,9 @@
          	else da_cnt 
          	end 
     	from leave, dayoff 
-    	where leave.da_no = dayoff.da_no and leave.em_no = #{emNo} group by da_cnt, le_status 
+    	where leave.da_no = dayoff.da_no and leave.em_no = #{emNo} and TO_char(sysdate, 'YYYY-MM-DD') between le_start and le_end group by da_cnt, le_status 
     	)
-    	where exists (select 
-    		case when leave.le_status = 0 then 0
-		 	when leave.le_status = 1 then SUM(le_end - le_start) + 1 
-         	else da_cnt 
-         	end 
-    	from leave, dayoff 
-    	where leave.da_no = dayoff.da_no and leave.em_no = #{emNo} group by da_cnt, le_status)
+    	where em_no = #{emNo}
 	</update> 
 	
 	<!-- <update id="updateUse" parameterType="int" >

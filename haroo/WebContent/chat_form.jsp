@@ -23,7 +23,7 @@
         }
     </style>
     	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<link rel="stylesheet"	href="css/custom.css"></link>
+	<link rel="stylesheet"	href="/haroo/css/custom.css"></link>
 	
 	<script type="text/javascript">
 	$(function(){
