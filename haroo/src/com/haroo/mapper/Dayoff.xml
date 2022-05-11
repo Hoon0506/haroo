@@ -26,7 +26,7 @@
 		select * from dayoff where em_no = #{emNo}
 	</select>
 	
-	<!-- 사용일수 -->
+	<!-- 사용일수 --> 
 	<update id="updateUse" parameterType="int" >
 		update dayoff set da_cnt = (
 			select 
